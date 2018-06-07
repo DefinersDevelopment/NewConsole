@@ -15,7 +15,7 @@ class CreateTableCategoryPost extends Migration
     {
         //
         Schema::create('category_post', function (Blueprint $table) {
-            $table->increments('post_id');
+            $table->integer('post_id');
             $table->integer('category_id'); // user that created post
      
             $table->timestamps();

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class usergroups_category_table_seeder extends Seeder
+class category_users_seeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,5 +12,9 @@ class usergroups_category_table_seeder extends Seeder
     public function run()
     {
         //
+        DB::table('category_user')->insert([
+        	'user_id' => 1,
+            'category_id' => 1
+        ]);
     }
 }

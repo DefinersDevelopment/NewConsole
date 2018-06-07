@@ -12,5 +12,24 @@ class users_table_seeder extends Seeder
     public function run()
     {
         //
+        DB::table('users')->insert([
+            'name' => 'ben-client',
+            'email' => 'bbrown@definerscorp.com',
+            'password' => bcrypt('password'),
+        ]);
+        //
+        DB::table('users')->insert([
+            'name' => 'marc-client',
+            'email' => 'mhess@definerscorp.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        //
+        DB::table('users')->insert([
+            'name' => 'john-client',
+            'email' => 'jfowler@definerscorp.com',
+            'password' => bcrypt('password'),
+        ]);
+        
     }
 }
