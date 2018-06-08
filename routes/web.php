@@ -15,5 +15,5 @@
 
 Auth::routes();
 
-Route::get('/', 'BenTestController@test')->name('test');
+Route::get('/', 'MasterController@index')->name('index');
 Route::get('/home', 'HomeController@index')->name('home');

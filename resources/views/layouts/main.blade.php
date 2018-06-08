@@ -19,9 +19,8 @@
     </head>
     <body>
         <div class="bodyWrap flex">
-
-
-
+            
+            @yield('body')
 
 
             <footer>
