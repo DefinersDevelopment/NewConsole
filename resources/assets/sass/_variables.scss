@@ -1,8 +1,31 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800');
 
-// Body
-$body-bg: #f5f8fa;
+/* Convert px to rem */
+@function calculateRem($size) {
+  $remSize: $size / 16px; @return $remSize * 1rem;
+}
+@mixin font-size($size) {
+  font-size: $size; font-size: calculateRem($size);
+}
+@mixin line-height($size) {
+  line-height: $size; line-height: calculateRem($size);
+}
 
-// Typography
-$font-family-sans-serif: "Raleway", sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+// Custom Variables
+$dark: #55565A;
+$medium: #DEDEDE;
+$light: #F5F6F6;
+$bottomIcons: #bbbbbd;
+$yellow: #FFCE00;
+$navigationUl: #46474A;
+$red: #C91F00;
+
+
+// Default Variables
+$mainFont: "Montserrat", sans-serif; /* main font family */
+$selection: rgba(0,0,0,.6); /* rgba color with opacity */
+$screenWidth: 1280px; /* main width of wrapper */
+$inputColor: #000; /* sets text color for input fields */
+$gridColumns: 12; /* sets the number of columns in the grid */
+$columnPadding: 10px; /* sets padding for columns */
