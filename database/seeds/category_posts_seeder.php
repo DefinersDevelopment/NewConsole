@@ -16,5 +16,20 @@ class category_posts_seeder extends Seeder
         	'category_id' => 1,
             'post_id' => 1
         ]);
+
+        DB::table('category_post')->insert([
+        	'category_id' => 2,
+            'post_id' => 2
+        ]);
+
+        DB::table('category_post')->insert([
+        	'category_id' => 3,
+            'post_id' => 3
+        ]);
+
+        DB::table('category_post')->insert([
+        	'category_id' => 1,
+            'post_id' => 3
+        ]);
     }
 }
