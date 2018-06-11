@@ -1,5 +1,5 @@
 <div id="logo">
 	<a href="">
-		<img src="assets/images/Logo-White.svg" alt="">
+		<img src="/images/{{env('APP_THEME')}}.svg" alt="">
 	</a>
 </div>

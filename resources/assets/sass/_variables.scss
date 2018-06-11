@@ -12,20 +12,8 @@
   line-height: $size; line-height: calculateRem($size);
 }
 
-// Custom Variables
-$dark: #55565A;
-$medium: #DEDEDE;
-$light: #F5F6F6;
-$bottomIcons: #bbbbbd;
-$yellow: #FFCE00;
-$navigationUl: #46474A;
-$red: #C91F00;
-
-
 // Default Variables
 $mainFont: "Montserrat", sans-serif; /* main font family */
 $selection: rgba(0,0,0,.6); /* rgba color with opacity */
 $screenWidth: 1280px; /* main width of wrapper */
 $inputColor: #000; /* sets text color for input fields */
-$gridColumns: 12; /* sets the number of columns in the grid */
-$columnPadding: 10px; /* sets padding for columns */

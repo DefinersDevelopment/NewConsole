@@ -1,11 +1,8 @@
 
-// Fonts
-//@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-
-// Variables
+// Imports
+@import 'reset';
 @import "variables";
-
-@import 'reset.scss';
+@import "themes";
 
 /* Default Styles */
 html {height:100%;}
@@ -59,18 +56,47 @@ a  {text-decoration:none;}
 }
 .entry {
 	h2 {@include font-size(16px); @include line-height(22px);}
+	p {@include font-size(14px); @include line-height(18px);}
+}
+.entry.active {
+	@include themify($themes) {
+		background:themed('entryActiveBackground');
+	}
+	h2 {
+		font-weight:700;
+	}
 }
 
 .transition {transition:.2s ease;}
 .button {cursor:pointer;}
-.btn {border-radius:3px; @extend .button; background:$dark; height:35px; min-width:35px; box-sizing:border-box; text-align:center;
+.btn {border-radius:3px; @extend .button; height:35px; min-width:35px; box-sizing:border-box; text-align:center;
+	@include themify($themes) {
+		background:themed('buttonColors');
+	}
 	.far,.fal,.fas {color:#fff; line-height:35px; font-size:16px;}
 }
-.circle {@extend .button; width:36px; min-width:36px; max-width:36px; height:36px; min-height:36px; max-height:36px; border-radius:36px; background:#fff; text-align:center; box-shadow:0px 3px 6px rgba(0, 0, 0, 0.4);
-	.far,.fal,.fas {position:relative; color:$dark; font-size:30px; line-height:36px;}
+
+.circle {@extend .button; width:36px; min-width:36px; max-width:36px; height:36px; min-height:36px; max-height:36px; border-radius:36px; text-align:center; box-shadow:0px 3px 6px rgba(0, 0, 0, 0.4);
+	@include themify($themes) {
+		background:themed('uiButtonColor');
+	}
+	.far,.fal,.fas {position:relative; font-size:30px; line-height:36px;
+		@include themify($themes) {
+			color:themed('uiIconColor');
+		}
+	}
 }
-.yellow {background:$yellow; border:1px solid $dark;
-	.far,.fal,.fas {color:$dark;}
+
+.yellow { border:1px solid;
+	@include themify($themes) {
+		background:themed('middleColumnSearchBackground');
+		border-color:themed('dark');
+	}
+	.far,.fal,.fas {
+		@include themify($themes) {
+			color:themed('middleColumnSearchIconColor');
+		}
+	}
 }
 
 /* Input Styles */
@@ -82,46 +108,88 @@ input::-moz-placeholder {color:$inputColor; opacity:1;}
 input:-ms-input-placeholder {color:$inputColor;}
 input:placeholder-shown {color:$inputColor;}
 
-header#navigation {width:250px; min-width:250px; max-width:250px; background:$dark; @extend .flexColumn; @extend .flex; flex-wrap:wrap; flex-flow:column; box-sizing:border-box; position:relative; z-index:9999;
+
+//Left Column Styles
+header#navigation {width:250px; min-width:250px; max-width:250px; @extend .flexColumn; @extend .flex; flex-wrap:wrap; flex-flow:column; box-sizing:border-box; position:relative; z-index:9999;
+	@include themify($themes) {
+		background:themed('navigationBackground');
+	}
 	#logo {width:100%; flex: 0 0 100%; max-height:100px; text-align:left; margin-bottom:30px; box-sizing:border-box; padding:20px 20px 0 20px;
-		img {width:auto; height:100%;}
+		img {width:auto; max-width:100%; height:100%;}
 	}
 	#mainNav {width:100%; margin-top:0; overflow-y:scroll; margin-bottom:auto; max-height:calc(100vh - 230px);
 		ul {box-sizing:border-box; padding:0 20px;
 			li {position:relative;
 				a {@extend .flex; color:#fff; align-items:center; height:50px;}
 				.icon {padding-right:10px;
-					.fas, .far, .fal {font-size:6px; line-height:50px;}
+					.fas, .far, .fal {font-size:6px; line-height:50px;
+						@include themify($themes) {
+							color:themed('navigationInactiveIconColor');
+						}
+					}
 				}
-				.text {@include font-size(14px); padding-right:10px;}
+				.text {@include font-size(14px); padding-right:10px; font-weight:300;}
 				.unreadNumber {display:none; @include font-size(14px);}
 			}
 			li.active {
 				.icon {
-					.fas, .far, .fal {color:$yellow;}
+					.fas, .far, .fal {
+						@include themify($themes) {
+							color:themed('navigationActiveColor');
+						}
+					}
 				}
-				.text {color:$yellow; font-weight:700;}
-				.unreadNumber {color:$yellow;}
+				.text {font-weight:700;
+					@include themify($themes) {
+						color:themed('navigationActiveColor');
+					}
+				}
+				.unreadNumber {
+					@include themify($themes) {
+						color:themed('navigationActiveColor');
+					}
+				}
 			}
 			li {
-				ul {background:$navigationUl; position:relative; left:-20px; width:calc(100% + 40px);
+				ul {position:relative; left:-20px; width:calc(100% + 40px);
+					@include themify($themes) {
+						background:themed('navigationUl');
+					}
 					li {}	
 				}
 			}
 			
 		}
 	}
-	#bottomNav {width:calc(100% - 40px); height:65px; min-height:65px; max-height:65px; box-sizing:border-box; padding:0 0px 20px 0px; margin:0 20px 0 20px; border-top:1px solid $bottomIcons; @extend .flex; align-items:center;
+	#bottomNav {width:calc(100% - 40px); height:65px; min-height:65px; max-height:65px; box-sizing:border-box; padding:0 0px 20px 0px; margin:0 20px 0 20px; border-top:1px solid; @extend .flex; align-items:center;
+		@include themify($themes) {
+			border-color:themed('bottomNavIconColor');
+		}
 		ul {@extend .flex; flex: 0 0 100%; margin-top:20px; justify-content:space-between;
 			li {
-				a {color:$bottomIcons;}
+				a {
+					@include themify($themes) {
+						color:themed('bottomNavIconColor');
+					}
+				}
 				.fas, .far, .fal {font-size:25px;}
+			}
+			li.active {
+				a {
+					@include themify($themes) {
+						color:themed('bottomNavIconActiveColor');
+					}
+				}
 			}
 		}
 	}
 }
 
-section#middleColumn {width:440px; min-width:440px; max-width:440px; background:$light; @extend .transition; @extend .flexColumn; @extend .flex; @extend .transition; flex-wrap:wrap; position:relative; z-index:99; -webkit-box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.4); box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.4);
+// Middle Column Styles
+section#middleColumn {width:440px; min-width:440px; max-width:440px; @extend .transition; @extend .flexColumn; @extend .flex; @extend .transition; flex-wrap:wrap; position:relative; z-index:99; -webkit-box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.4); box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.4);
+	@include themify($themes) {
+		background:themed('light');
+	}
 	.middleButton {position:absolute; z-index:9999; right:0; width:0px; height:100%; @extend .flex; align-items:center;
 		.circle {position:relative; left:-18px;
 			.far, .fal, .fas {left:-2px;}
@@ -129,16 +197,41 @@ section#middleColumn {width:440px; min-width:440px; max-width:440px; background:
 	}
 	.middleSurround {overflow:hidden; width:100%;}
 	.stabilize {width:440px;}
-	input {width:100%; height:35px; border:1px solid $dark; box-sizing:border-box; padding:0 10px; border-radius:3px;}
-	#search {width:100%; height:100px; min-height:100px; max-height:100px; box-sizing:border-box; border-bottom:1px solid $dark; padding:20px 20px 0 20px;
+	input {width:100%; height:35px; border:1px solid; box-sizing:border-box; padding:0 10px; border-radius:3px;
+		@include themify($themes) {
+			border-color:themed('dark');
+		}
+	}
+	#search {width:100%; height:100px; min-height:100px; max-height:100px; box-sizing:border-box; border-bottom:1px solid; padding:20px 20px 0 20px;
+		@include themify($themes) {
+			border-color:themed('dark');
+		}
+		.top {
+			.btn.search {
+				@include themify($themes) {
+					background:themed('middleColumnSearchBackground');
+				}
+			}
+		}
 		.top, .bottom {@extend .flex; align-items:center;}
 		.top {margin-bottom:15px;}	
 		.bottom {
 			span {@include font-size(8px); @include line-height(13px); font-weight:500; text-transform:uppercase;}
-			.fal, .far, .fas {font-size:13px; color:$dark; padding-right:10px;}
+			.fal, .far, .fas {font-size:13px; padding-right:10px;
+				@include themify($themes) {
+					color:themed('dark');
+				}
+			}
 			.left {margin-right:auto; @extend .flex; @extend .button; align-items:center;}
-			.right {color:$red; max-width:65%;
-				.fal, .far, .fas {color:$red;}
+			.right {max-width:65%;
+				@include themify($themes) {
+					color:themed('redColor');
+				}
+				.fal, .far, .fas {
+					@include themify($themes) {
+						color:themed('redColor');
+					}
+				}
 			}
 		}
 		input {border-top-right-radius:0; border-bottom-right-radius:0;}
@@ -146,36 +239,62 @@ section#middleColumn {width:440px; min-width:440px; max-width:440px; background:
 		.btn:last-child {margin-right:0;}
 		.search {border-top-left-radius:0; border-bottom-left-radius:0;}
 	}
-	#advancedSearch {display:none; position:absolute; top:100px; background:$medium; z-index:999; width:100%; height:calc(100% - 100px);
-		.scroll {position:absolute; top:0; left:0; width:100%; height:100%; background:pink; overflow-y:scroll;
-			
+	#advancedSearch {display:none; position:absolute; top:100px; z-index:999; width:100%; height:calc(100% - 100px);
+		@include themify($themes) {
+			background:themed('medium');
+		}
+		.scroll {position:absolute; top:0; left:0; width:100%; height:100%; overflow-y:scroll;
+			@include themify($themes) {
+				background:themed('medium');
+			}
 		}
 	}
 
 	#entries {@extend .flex; flex-wrap:wrap; flex-flow:column; height:calc(100vh - 100px); overflow-y:scroll; flex: 0 0 100%;
 		.entryGroup {
-			.entryGroupTitle {@extend .flex; align-items:center; height:30px; position:sticky; top:0; background:$yellow; box-sizing:border-box; padding:0 20px; border-bottom:1px solid $dark;
-				span {text-transform:uppercase; color:$dark; @include font-size(10px); font-weight:700;  }
+			.entryGroupTitle {@extend .flex; align-items:center; height:30px; position:sticky; top:0; box-sizing:border-box; padding:0 20px; border-bottom:1px solid;
+				@include themify($themes) {
+					background-color:themed('entryGroupTitleBackground');
+					border-color:themed('dark');
+				}
+				span {text-transform:uppercase; @include font-size(10px); font-weight:700;
+					@include themify($themes) {
+						color:themed('entryGroupTitleTextColor');
+					}
+				}
 			}
 			&:last-child {
 				.entry:last-child {border-bottom:0;}
 			}
 		}
-		.entry {border-bottom:1px solid $dark;
-			.entryContent {box-sizing:border-box; padding:20px;
-				a {color:$dark;}
+		.entry {border-bottom:1px solid;
+			@include themify($themes) {
+				border-color:themed('dark');
 			}
-			.bar {box-sizing:border-box; background:$medium; padding:8px 20px; @extend .flex; align-items:center;
+			.entryContent {box-sizing:border-box; padding:20px;
+				a {
+					@include themify($themes) {
+						color:themed('dark');
+					}
+				}
+			}
+			.bar {box-sizing:border-box; padding:8px 20px; @extend .flex; align-items:center;
+				@include themify($themes) {
+					background:themed('entryActiveBackground');
+				}
 				.text {margin-right:auto; @include font-size(10px);}
 				.buttons {
 					.button {margin-left:5px;
-						.fas,.fal,.far {font-size:13px; color:$dark;}
+						.fas,.fal,.far {font-size:13px;
+							@include themify($themes) {
+								color:themed('dark');
+							}
+						}
 					}
 					.button:first-child {margin-left:0;}
 				}
 			}
 		}
-		.entry.active {background:$medium;}
 	}
 }
 section#middleColumn.closed {width:20px; min-width:20px; max-width:20px; @extend .transition;
@@ -184,21 +303,37 @@ section#middleColumn.closed {width:20px; min-width:20px; max-width:20px; @extend
 	}
 }
 
+// Right Column Styles
 section#rightColumn {width:100%; background:#fff; @extend .flexColumn; @extend .flex; flex-wrap:wrap; flex-flow:column;
-	#topBar {width:100%; height:75px; min-height:75px; max-height:75px; @extend .flex; align-items:center; background:$medium; box-sizing:border-box; padding:0 20px; border-bottom:1px solid $dark;
+	#topBar {width:100%; height:75px; min-height:75px; max-height:75px; @extend .flex; align-items:center; box-sizing:border-box; padding:0 20px; border-bottom:1px solid;
+		@include themify($themes) {
+			background:themed('rightColumnTopBarBackground');
+			border-color:themed('dark');
+		}
 		.left {margin-right:auto;
-			#title {margin-right:20px; color:$dark; @include font-size(15px);}
+			#title {margin-right:20px; @include font-size(15px);
+				@include themify($themes) {
+					color:themed('rightColumnTopBarIconColor');
+				}
+			}
 			.button {margin-right:15px;}
 		}
 		.right {
 			.button {margin-left:15px;}
 		}
 		.button	{
-			.fal,.far,.fas {font-size:20px; color:$dark;}
+			.fal,.far,.fas {font-size:20px;
+				@include themify($themes) {
+					color:themed('rightColumnTopBarIconColor');
+				}
+			} 
 		}
 	}
 	#mainContent {width:100%; height:auto; flex:1; background:#fff; position:relative;
-		#content {width:100%; height:100%; position:absolute; top:0; left:0; box-sizing:border-box; overflow-y:scroll; padding:20px;}
+		#content {width:100%; height:100%; position:absolute; top:0; left:0; box-sizing:border-box; overflow-y:scroll; padding:20px;
+			
+		}
+		.circle {position:absolute; bottom:20px; right:20px;}
 	}
 }
 

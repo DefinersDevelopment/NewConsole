@@ -1,0 +1,126 @@
+$themes: (
+	iss: (
+		dark: #55565A,
+		medium: #DEDEDE,
+		light: #F5F6F6,
+		bottomIcons: #bbbbbd,
+		yellowColor: pink,
+		redColor: #C91F00,
+
+		uiButtonColor: #fff,
+		uiIconColor: #BD3F40,
+
+		buttonColors: #183957,
+
+
+		// Left Column
+		navigationBackground: #487CA0,
+		navigationUl: #3F6C8B,
+		navigationInactiveIconColor: #183957,
+		navigationActiveColor: #fff,
+
+		bottomNavIconColor: rgba(256,256,256,.6),
+		bottomNavIconActiveColor: rgba(256,256,256,1),
+
+		// Middle Column
+		middleColumnSearchBackground: #487CA0,
+		middleColumnSearchIconColor: #fff,
+
+		entryGroupTitleBackground: #BD3F40,
+		entryGroupTitleTextColor: #fff,
+
+		entryActiveBackground: #D3DCE2,
+		
+		// Right Column
+		rightColumnTopBarBackground: #BD3F40,
+		rightColumnTopBarIconColor: #fff,
+
+		
+	),
+	ar: (
+		dark: #55565A,
+		medium: #DEDEDE,
+		light: #F5F6F6,
+		yellowColor: #FFCE00,
+		redColor: #C91F00,
+
+		uiButtonColor: #fff,
+		uiIconColor: #55565A,
+
+		buttonColors: #55565A,
+
+		// Left Column
+		navigationBackground: #55565A,
+		navigationUl: #46474A,
+		navigationInactiveIconColor: #fff,
+		navigationActiveColor: #FFCE00,
+
+		bottomNavIconColor: #bbbbbd,
+		bottomNavIconActiveColor: #FFCE00,
+
+		// Middle Column
+		middleColumnSearchBackground: #55565A,
+		middleColumnSearchIconColor: #fff,
+
+		entryGroupTitleBackground: #FFCE00,
+		entryGroupTitleTextColor: #55565A,
+
+		entryActiveBackground: #DEDEDE,
+		
+		// Right Column
+		rightColumnTopBarBackground: #DEDEDE,
+		rightColumnTopBarIconColor: #55565A,
+	),
+	definers: (
+		dark: #55565A,
+		medium: #DEDEDE,
+		light: #F5F6F6,
+		yellowColor: #FFCE00,
+		redColor: #C91F00,
+
+		uiButtonColor: #fff,
+		uiIconColor: #05223F,
+
+		buttonColors: #55565A,
+
+		// Left Column
+		navigationBackground: #05223F,
+		navigationUl: #303E57,
+		navigationInactiveIconColor: #fff,
+		navigationActiveColor: #87E1D1,
+
+		bottomNavIconColor: #fff,
+		bottomNavIconActiveColor: #87E1D1,
+
+		// Middle Column
+		middleColumnSearchBackground: #55565A,
+		middleColumnSearchIconColor: #fff,
+
+		entryGroupTitleBackground: #87E1D1,
+		entryGroupTitleTextColor: #55565A,
+
+		entryActiveBackground: #DEDEDE,
+		
+		// Right Column
+		rightColumnTopBarBackground: #DEDEDE,
+		rightColumnTopBarIconColor: #55565A,
+	)
+);
+
+@mixin themify($themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge($theme-map, ($key: $value)) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+	@return map-get($theme-map, $key);
+}
