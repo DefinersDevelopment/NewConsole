@@ -9,13 +9,8 @@
 
                 <div class="card-body">
                    @foreach ($posts as $p)
-                        <p>{{ $p->title }}<br>
-                         With Categories: 
-                            <ul>
-                            @foreach ($p->category as $cat)
-                                <li>    {{$cat->name}}</li>
-                            @endforeach
-                            </ul>
+                        <p>Title:   {{ $p->title }}<br>
+
                         </p>    
                    @endforeach
 

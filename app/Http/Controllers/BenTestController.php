@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\User;
 
 class BenTestController extends Controller
 {
@@ -14,7 +15,8 @@ class BenTestController extends Controller
 
     public function test()
     {
-        $posts = Post::with('category')->get();
+
+        $posts = User::getUserPosts(1,'F');
 
         return view('benTest', ['posts'=>$posts]);
 

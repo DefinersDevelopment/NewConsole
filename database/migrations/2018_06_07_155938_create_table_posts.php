@@ -24,8 +24,8 @@ class CreateTablePosts extends Migration
             $table->text('short_description')->nullable();
             $table->longText('body')->nullable();
             
-
             $table->integer('user_id_created'); // user that created post
+
             $table->char('status', 2);
             $table->timestamps();
             $table->softDeletes();
