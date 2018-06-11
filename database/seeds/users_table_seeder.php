@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
+
 class users_table_seeder extends Seeder
 {
     /**
@@ -11,25 +12,48 @@ class users_table_seeder extends Seeder
      */
     public function run()
     {
+    	  
         //
         DB::table('users')->insert([
-            'name' => 'ben-client',
+        	'id'=> 1,
+            'first_name' => 'ben',
+            'last_name' => 'client',
+            'title' => 'test title',
+            'company' => 'awesome paper',
+            'city' => 'Whalla Whalla',
+            'state' => 'washington',
+            'phone' => '999-555-5555',
             'email' => 'bbrown@definerscorp.com',
             'password' => bcrypt('password'),
         ]);
-        //
+
         DB::table('users')->insert([
-            'name' => 'marc-client',
+        	'id'=> 2,
+            'first_name' => 'marc',
+            'last_name' => 'client',
+            'title' => 'test title',
+            'company' => 'awesome paper',
+            'city' => 'Whalla Whalla',
+            'state' => 'washington',
+            'phone' => '999-555-5555',
             'email' => 'mhess@definerscorp.com',
             'password' => bcrypt('password'),
         ]);
 
-        //
         DB::table('users')->insert([
-            'name' => 'john-client',
+        	'id'=> 3,
+            'first_name' => 'john',
+            'last_name' => 'client',
+            'title' => 'test title',
+            'company' => 'awesome paper',
+            'city' => 'Whalla Whalla',
+            'state' => 'washington',
+            'phone' => '999-555-5555',
             'email' => 'jfowler@definerscorp.com',
             'password' => bcrypt('password'),
         ]);
-        
+        //
+       
+
     }
 }
