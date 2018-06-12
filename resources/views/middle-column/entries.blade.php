@@ -1,8 +1,8 @@
                 
-                
-                        <div id="entries">
+                        @if (isset($posts) && count($posts) > 0)
 
-                            <div class="entryGroup">
+                        <div id="entries">
+                            {{-- <div class="entryGroup"> --}}
                                 @foreach ($posts as $p)
                                {{--  <div class="entryGroupTitle">
                                     <span>Alerts from 1 Days Ago</span>
@@ -38,17 +38,15 @@
                                 </div>
                                 @endforeach
                                     
-                            </div>
+                            {{-- </div> --}}
                         </div>
                             
                        
                         @else 
                         "No Articles Found"
                         @endif
-                    </div>
-                </div>
+                 
 
-                                </div><!-- /.entry -->
-                            </div><!-- /.entryGroup -->
+                             
 
            
