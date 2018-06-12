@@ -17,19 +17,19 @@
                                     <div class="bar">
                                         <span class="text">Updated: {{$p->updated_at}}</span>
                                         <span class="buttons">
-                                            <span class="button" title="">
+                                            <span class="button" title="Delete Entry">
                                                 <i class="fas fa-trash"></i>
                                             </span>
-                                            <span class="button" title="">
+                                            <span class="button" title="Approved | True/False">
                                                 <i class="fas fa-thumbs-up"></i>
                                             </span>
-                                            <span class="button" title="">
+                                            <span class="button" title="Emailed | True/False">
                                                 <i class="fas fa-envelope"></i>
                                             </span>
-                                            <span class="button" title="">
+                                            <span class="button" title="Favorite this Entry">
                                                 <i class="fas fa-heart"></i>
                                             </span>
-                                            <span class="button" title="">
+                                            <span class="button" title="Mark Entry as Read/Unread">
                                                 <i class="fas fa-check-circle"></i>
                                             </span>
                                         </span>

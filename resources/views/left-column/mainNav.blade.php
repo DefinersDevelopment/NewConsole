@@ -1,7 +1,7 @@
                 <nav id="mainNav">
                     <ul>
                         <li>
-                            <a href="/browse/1">
+                            <span>
                                 <span class="icon">
                                     <i class="fas fa-circle"></i>
                                 </span>
@@ -9,7 +9,7 @@
                                     News
                                 </span>
                                 <span class="unreadNumber">50</span>
-                            </a>
+                            </span>
                             <ul>
                                 <li class="active">
                                     <a href="/browse/4">
@@ -103,7 +103,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/browse/3">
+                            <span>
                                 <span class="icon">
                                     <i class="fas fa-circle"></i>
                                 </span>
@@ -111,7 +111,7 @@
                                    Opinion
                                 </span>
                                 <span class="unreadNumber">50</span>
-                            </a>
+                            </span>
                             <ul>
                                 <li>
                                     <a href="/browse/11">
