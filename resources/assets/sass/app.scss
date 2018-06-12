@@ -46,11 +46,20 @@ body {height:100%; font-family:$mainFont;}
 /* Typography */
 a  {text-decoration:none;}
 .view {
-	h1 {@include font-size(40px); @include line-height(45px);} 
-	h2 {@include font-size(30px); @include line-height(35px);}
-	h3 {@include font-size(20px); @include line-height(25px);}
-	h4 {@include font-size(18px); @include line-height(23px);}
-	p  {@include font-size(16px); @include line-height(21px);}
+	@include themify($themes){
+		color:themed('textColor');
+	}
+	a {
+		@include themify($themes) {
+			color:themed('linkColor');
+		}
+	}
+	p.meta {@include line-height(30px); margin-bottom:25px;}
+	h1 {@include font-size(24px); @include line-height(30px); font-weight:700; margin-bottom:10px;} 
+	h2 {@include font-size(22px); @include line-height(28px); margin-bottom:25px;}
+	h3 {@include font-size(18px); @include line-height(24px); margin-bottom:25px;}
+	h4 {@include font-size(16px); @include line-height(22px); margin-bottom:25px;}
+	p  {@include font-size(16px); @include line-height(22px); margin-bottom:25px;}
 	ul {
 		li {}
 	}
@@ -103,6 +112,8 @@ a  {text-decoration:none;}
 	}
 }
 
+.noEntries {margin:20px 0;}
+
 /* Input Styles */
 form {box-sizing:border-box;}
 input {@extend form;}
@@ -124,8 +135,7 @@ header#navigation {width:250px; min-width:250px; max-width:250px; @extend .flexC
 	#mainNav {width:100%; margin-top:0; overflow-y:scroll; margin-bottom:auto; max-height:calc(100vh - 230px);
 		ul {box-sizing:border-box; padding:0 20px;
 			li {position:relative; @extend .button; 
-				span {@extend .flex; color:#fff; align-items:center; height:50px;}
-				a {@extend .flex; color:#fff; align-items:center; height:50px;}
+				a, span {@extend .flex; color:#fff; align-items:center; height:50px;}
 				.icon {padding-right:10px;
 					.fas, .far, .fal {font-size:6px; line-height:50px;
 						@include themify($themes) {
@@ -152,6 +162,11 @@ header#navigation {width:250px; min-width:250px; max-width:250px; @extend .flexC
 				.unreadNumber {
 					@include themify($themes) {
 						color:themed('navigationActiveColor');
+					}
+				}
+				&:after {content:''; position:absolute; top:0; right:-20px; width:5px; height:100%;
+					@include themify($themes) {
+						background:themed('navigationActiveColor');
 					}
 				}
 			}
@@ -310,12 +325,12 @@ section#middleColumn.closed {width:20px; min-width:20px; max-width:20px; @extend
 
 // Right Column Styles
 section#rightColumn {width:100%; background:#fff; @extend .flexColumn; @extend .flex; flex-wrap:wrap; flex-flow:column;
-	#topBar {width:100%; height:75px; min-height:75px; max-height:75px; @extend .flex; align-items:center; box-sizing:border-box; padding:0 20px; border-bottom:1px solid;
+	#topBar {width:100%; height:75px; min-height:75px; max-height:75px; @extend .flex; align-items:center; box-sizing:border-box; padding:0 20px; border-bottom:1px solid; position:relative;
 		@include themify($themes) {
 			background:themed('rightColumnTopBarBackground');
 			border-color:themed('dark');
 		}
-		.left {margin-right:auto;
+		.left {margin-right:auto; min-width:40%;
 			#title {margin-right:20px; @include font-size(15px);
 				@include themify($themes) {
 					color:themed('rightColumnTopBarIconColor');
@@ -323,7 +338,7 @@ section#rightColumn {width:100%; background:#fff; @extend .flexColumn; @extend .
 			}
 			.button {margin-right:15px;}
 		}
-		.right {
+		.right {min-width:60%; overflow-y:scroll; text-align:right;
 			.button {margin-left:15px;}
 		}
 		.button	{
@@ -333,9 +348,16 @@ section#rightColumn {width:100%; background:#fff; @extend .flexColumn; @extend .
 				}
 			} 
 		}
+		#scrollBar {position:absolute; bottom:-6px; left:0; width:100%; height:5px; z-index:9;
+			#color {position:absolute; top:0; left:0; height:5px;
+				@include themify($themes) {
+					background:themed('scrollBarColor');
+				}
+			}
+		}
 	}
 	#mainContent {width:100%; height:auto; flex:1; background:#fff; position:relative;
-		#content {width:100%; height:100%; position:absolute; top:0; left:0; box-sizing:border-box; overflow-y:scroll; padding:20px;
+		#content {width:100%; height:100%; position:absolute; top:0; left:0; box-sizing:border-box; overflow-y:scroll; padding:25px 20px 20px 20px;
 			.inputContainer {@extend .flex; flex-wrap:wrap; margin-bottom:20px;
 				label {flex: 0 0 100%; padding-bottom:10px; text-transform:uppercase; @include font-size(16px); @include line-height(19px); font-weight:400;
 					span {text-transform:none;}
@@ -351,7 +373,7 @@ section#rightColumn {width:100%; background:#fff; @extend .flexColumn; @extend .
 				}
 			}
 		}
-		.circle {position:absolute; bottom:20px; right:20px;
+		.circle {position:absolute; bottom:20px; right:20px; opacity:.5;
 			.fal, .far, .fas {top:-2px;}
 		}
 	}

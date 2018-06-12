@@ -28,4 +28,7 @@
                             <i class="far fa-heart"></i>
                         </span>
                     </div>
+                    <div id="scrollBar">
+                        <div id="color"></div>
+                    </div>
                 </div>

@@ -1,7 +1,7 @@
                 <nav id="mainNav">
                     <ul>
                         <li>
-                            <span>
+                            <span class="toggleNav">
                                 <span class="icon">
                                     <i class="fas fa-circle"></i>
                                 </span>
@@ -12,7 +12,7 @@
                             </span>
                             <ul>
                                 <li class="active">
-                                    <a href="/browse/4">
+                                    <span>
                                         <span class="icon">
                                             <i class="fas fa-circle"></i>
                                         </span>
@@ -20,7 +20,7 @@
                                             Politics
                                         </span>
                                         <span class="unreadNumber">50</span>
-                                    </a>
+                                    </span>
                                 </li>
                                 <li>
                                     <a href="/browse/5">
@@ -103,7 +103,7 @@
                             </a>
                         </li>
                         <li>
-                            <span>
+                            <span class="toggleNav">
                                 <span class="icon">
                                     <i class="fas fa-circle"></i>
                                 </span>
