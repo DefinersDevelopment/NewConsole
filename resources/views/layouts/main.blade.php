@@ -18,7 +18,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     </head>
     <body>
-        <div class="bodyWrap flex theme-{{env('APP_THEME')}}">
+        <div id="app" class="bodyWrap flex theme-{{env('APP_THEME')}}">
             
             @yield('body')
 

@@ -137,8 +137,6 @@ table {
 
 /* main font family */
 
-/* rgba color with opacity */
-
 /* main width of wrapper */
 
 /* sets text color for input fields */
@@ -159,12 +157,28 @@ body {
   position: relative;
 }
 
-::-moz-selection {
-  background: rgba(0, 0, 0, 0.6);
+.theme-iss ::-moz-selection {
+  background: rgba(189, 63, 64, 0.6);
 }
 
-::selection {
-  background: rgba(0, 0, 0, 0.6);
+.theme-iss ::selection {
+  background: rgba(189, 63, 64, 0.6);
+}
+
+.theme-ar ::-moz-selection {
+  background: rgba(255, 206, 0, 0.6);
+}
+
+.theme-ar ::selection {
+  background: rgba(255, 206, 0, 0.6);
+}
+
+.theme-definers ::-moz-selection {
+  background: rgba(135, 225, 209, 0.6);
+}
+
+.theme-definers ::selection {
+  background: rgba(135, 225, 209, 0.6);
 }
 
 .wrap {
@@ -1437,9 +1451,15 @@ section#rightColumn #mainContent .circle {
   right: 20px;
 }
 
+section#rightColumn #mainContent .circle .fal,
+section#rightColumn #mainContent .circle .far,
+section#rightColumn #mainContent .circle .fas {
+  top: -2px;
+}
+
 /* Mobile Styles */
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 730px) {
   .desktop {
     display: none;
   }
@@ -1456,6 +1476,31 @@ section#rightColumn #mainContent .circle {
 
   .linebreak br:after {
     content: ' ';
+  }
+
+  header#navigation,
+  section#middleColumn,
+  section#rightColumn,
+  section#middleColumn.closed {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    height: 100%;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 100%;
+            flex: 0 0 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  section#middleColumn .stabilize {
+    width: 100%;
+  }
+
+  section#middleColumn .middleButton,
+  .theme-iss section#rightColumn #topBar .left #title {
+    display: none;
   }
 }
 
