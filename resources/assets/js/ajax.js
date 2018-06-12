@@ -1,4 +1,22 @@
 
+/*********************************
+Event Listeners
+**********************************/
+function addPostClick(){
+	console.log('add post click events');
+	// TODO should i add a class/id hiearchy here??
+	$(".postClick").on('click', getPost);
+}	
+
+function addCatClick(){
+	// TODO should i add a class/id hiearchy here??
+	$(".catClick").on('click', getMiddleWithCategory);
+}
+
+
+
+
+
 
 /*
 Generic Ajax function, may not work in all cases
@@ -38,11 +56,7 @@ successFunc is a call back function
 		});
 	}
 
-	function addPostClick(){
-		console.log('add post click events');
-		// TODO should i add a class/id hiearchy here??
-		$(".postClick").on('click', getPost);
-	}	
+	
 
 	// Function that is run when a category is clicked
 	function getMiddleWithCategory(){
@@ -83,7 +97,7 @@ successFunc is a call back function
 
 		// register the nav links to show cats
 		// in middle col when clicked
-		$(".catClick").on('click', getMiddleWithCategory);
+		addCatClick();
 
 	 });
 

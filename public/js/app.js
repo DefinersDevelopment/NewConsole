@@ -118,6 +118,14 @@ $(".cover").click(function () {
 	nav = nav + 1;
 });
 
+// Open SubNavigation
+$('#mainNav li').click(function () {
+	$('#mainNav li ul').slideUp();
+	if ($(this).find('ul').is(':hidden') == true) {
+		$(this).find('ul').slideDown();
+	}
+});
+
 // Close/Open Middle Column
 $('#toggleMiddle').click(function () {
 	$('#middleColumn').toggleClass('closed');
@@ -172,6 +180,19 @@ function addPostClick() {
 /***/ (function(module, exports) {
 
 
+/*********************************
+Event Listeners
+**********************************/
+function addPostClick() {
+	console.log('add post click events');
+	// TODO should i add a class/id hiearchy here??
+	$(".postClick").on('click', getPost);
+}
+
+function addCatClick() {
+	// TODO should i add a class/id hiearchy here??
+	$(".catClick").on('click', getMiddleWithCategory);
+}
 
 /*
 Generic Ajax function, may not work in all cases
@@ -204,12 +225,6 @@ function makeAjaxCall(endPoint, method, data, successFunc) {
 			/* TODO show user a nice error code somewhere */
 		}
 	});
-}
-
-function addPostClick() {
-	console.log('add post click events');
-	// TODO should i add a class/id hiearchy here??
-	$(".postClick").on('click', getPost);
 }
 
 // Function that is run when a category is clicked
@@ -250,7 +265,7 @@ $(document).ready(function () {
 
 	// register the nav links to show cats
 	// in middle col when clicked
-	$(".catClick").on('click', getMiddleWithCategory);
+	addCatClick();
 });
 
 /***/ }),

@@ -10,6 +10,14 @@ $(".cover").click(function() {
     nav = nav + 1;
 });
 
+// Open SubNavigation
+$('#mainNav li').click(function(){
+	$('#mainNav li ul').slideUp();
+	if ($(this).find('ul').is(':hidden') == true) {
+		$(this).find('ul').slideDown();
+	}
+});
+
 
 // Close/Open Middle Column
 $('#toggleMiddle').click(function(){
