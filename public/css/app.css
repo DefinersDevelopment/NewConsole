@@ -287,7 +287,8 @@ section#middleColumn #entries,
 section#middleColumn #entries .entryGroup .entryGroupTitle,
 section#middleColumn #entries .entry .bar,
 section#rightColumn,
-section#rightColumn #topBar {
+section#rightColumn #topBar,
+section#rightColumn #mainContent #content .inputContainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1443,6 +1444,68 @@ section#rightColumn #mainContent #content {
           box-sizing: border-box;
   overflow-y: scroll;
   padding: 20px;
+}
+
+section#rightColumn #mainContent #content .inputContainer {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+section#rightColumn #mainContent #content .inputContainer label {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 100%;
+          flex: 0 0 100%;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 19px;
+  line-height: 1.1875rem;
+  font-weight: 400;
+}
+
+section#rightColumn #mainContent #content .inputContainer label span {
+  text-transform: none;
+}
+
+.theme-iss section#rightColumn #mainContent #content .inputContainer label {
+  color: #55565A;
+}
+
+.theme-ar section#rightColumn #mainContent #content .inputContainer label {
+  color: #55565A;
+}
+
+.theme-definers section#rightColumn #mainContent #content .inputContainer label {
+  color: #55565A;
+}
+
+section#rightColumn #mainContent #content .inputContainer input {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 100%;
+          flex: 0 0 100%;
+  border: 1px solid;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0 10px;
+  line-height: 35px;
+  border-radius: 3px;
+}
+
+.theme-iss section#rightColumn #mainContent #content .inputContainer input {
+  border-color: #55565A;
+  background: #F5F6F6;
+}
+
+.theme-ar section#rightColumn #mainContent #content .inputContainer input {
+  border-color: #55565A;
+  background: #F5F6F6;
+}
+
+.theme-definers section#rightColumn #mainContent #content .inputContainer input {
+  border-color: #55565A;
+  background: #F5F6F6;
 }
 
 section#rightColumn #mainContent .circle {

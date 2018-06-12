@@ -335,7 +335,20 @@ section#rightColumn {width:100%; background:#fff; @extend .flexColumn; @extend .
 	}
 	#mainContent {width:100%; height:auto; flex:1; background:#fff; position:relative;
 		#content {width:100%; height:100%; position:absolute; top:0; left:0; box-sizing:border-box; overflow-y:scroll; padding:20px;
-			
+			.inputContainer {@extend .flex; flex-wrap:wrap; margin-bottom:20px;
+				label {flex: 0 0 100%; padding-bottom:10px; text-transform:uppercase; @include font-size(16px); @include line-height(19px); font-weight:400;
+					span {text-transform:none;}
+					@include themify($themes) {
+						color:themed('dark');
+					}
+				} 
+				input {flex: 0 0 100%; border:1px solid; box-sizing:border-box; padding:0 10px; line-height:35px; border-radius:3px;
+					@include themify($themes) {
+						border-color:themed('dark');
+						background:themed('light');
+					}
+				}
+			}
 		}
 		.circle {position:absolute; bottom:20px; right:20px;
 			.fal, .far, .fas {top:-2px;}
