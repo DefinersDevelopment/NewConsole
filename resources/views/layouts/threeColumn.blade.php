@@ -19,7 +19,9 @@
                     <div class="stabilize">
 
 						@include('middle-column.search')
-						@include('middle-column.entries')
+						<div id="entries">
+							@include('middle-column.entries')
+						</div>
 
 					</div>
                 </div>

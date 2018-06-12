@@ -1,7 +1,7 @@
                 
                         @if (isset($posts) && count($posts) > 0)
 
-                        <div id="entries">
+
                             {{-- <div class="entryGroup"> --}}
                                 @foreach ($posts as $p)
                                {{--  <div class="entryGroupTitle">
@@ -39,7 +39,6 @@
                                 @endforeach
                                     
                             {{-- </div> --}}
-                        </div>
                             
                        
                         @else 
