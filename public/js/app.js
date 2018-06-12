@@ -68,7 +68,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
-module.exports = __webpack_require__(3);
+module.exports = __webpack_require__(4);
 
 
 /***/ }),
@@ -143,8 +143,11 @@ $('#openAdvancedSearch').click(function () {
 	}
 });
 
+var john = 'test';
+
 /***/ }),
-/* 3 */
+/* 3 */,
+/* 4 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

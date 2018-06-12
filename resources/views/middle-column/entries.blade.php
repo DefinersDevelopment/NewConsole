@@ -1,35 +1,7 @@
-                <div class="middleSurround">
-                    <div class="stabilize">
-                        <form action="">
-                            <div id="search">
-                                <div class="top">
-                                    <input type="text">
-                                    <div class="btn search" title="Search">
-                                        <i class="fas fa-search"></i>
-                                    </div>
-                                    <div class="btn" title="Keyword Search Assistant">
-                                        <i class="fas fa-question"></i>
-                                    </div>
-                                    <div class="btn yellow" title="Close Search">
-                                        <i class="fas fa-chevron-circle-left"></i>
-                                    </div>
-                                </div>
-                                <div class="bottom">
-                                    <div class="left" id="openAdvancedSearch" title="Open Advanced Search">
-                                        <i class="fas advanced fa-chevron-circle-down"></i><span>Advanced Search</span>
-                                    </div>
-                                    <div class="right">
-                                        <i class="fas fa-exclamation-circle"></i><span>You are logged in!</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="advancedSearch">
-                                <div class="scroll">
-                                    
-                                </div>
-                            </div>
-                        </form>
+                
+                        
                         <div id="entries">
+
                             <div class="entryGroup">
                                 <div class="entryGroupTitle">
                                     <span>Alerts from 1 Days Ago</span>
@@ -60,7 +32,7 @@
                                             </span>
                                         </span>
                                     </div>
-                                </div>
+                                </div><!-- /.entry -->
                                 <div class="entry active">
                                     <div class="entryContent">
                                         <a href="">
@@ -87,8 +59,9 @@
                                             </span>
                                         </span>
                                     </div>
-                                </div>
-                            </div>
+                                </div><!-- /.entry -->
+                            </div><!-- /.entryGroup -->
+
                             <div class="entryGroup">
                                 <div class="entryGroupTitle">
                                     <span>Alerts from 2 Days Ago</span>
@@ -119,7 +92,7 @@
                                             </span>
                                         </span>
                                     </div>
-                                </div>
+                                </div><!-- /.entry -->
                                 <div class="entry">
                                     <div class="entryContent">
                                         <a href="">
@@ -146,7 +119,7 @@
                                             </span>
                                         </span>
                                     </div>
-                                </div>
+                                </div><!-- /.entry -->
                                 <div class="entry">
                                     <div class="entryContent">
                                         <a href="">
@@ -173,7 +146,7 @@
                                             </span>
                                         </span>
                                     </div>
-                                </div>
+                                </div><!-- /.entry -->
                                 <div class="entry">
                                     <div class="entryContent">
                                         <a href="">
@@ -200,7 +173,7 @@
                                             </span>
                                         </span>
                                     </div>
-                                </div>
+                                </div><!-- /.entry -->
                                 <div class="entry">
                                     <div class="entryContent">
                                         <a href="">
@@ -227,7 +200,7 @@
                                             </span>
                                         </span>
                                     </div>
-                                </div>
+                                </div><!-- /.entry -->
                                 <div class="entry">
                                     <div class="entryContent">
                                         <a href="">
@@ -254,7 +227,7 @@
                                             </span>
                                         </span>
                                     </div>
-                                </div>
+                                </div><!-- /.entry -->
                                 <div class="entry">
                                     <div class="entryContent">
                                         <a href="">
@@ -281,8 +254,9 @@
                                             </span>
                                         </span>
                                     </div>
-                                </div>
-                            </div>
+                                </div><!-- /.entry -->
+                            </div><!-- /.entryGroup -->
+
                             <div class="entryGroup">
                                 <div class="entryGroupTitle">
                                     <span>Alerts from 3 Days Ago</span>
@@ -313,7 +287,7 @@
                                             </span>
                                         </span>
                                     </div>
-                                </div>
+                                </div><!-- /.entry -->
                                 <div class="entry">
                                     <div class="entryContent">
                                         <a href="">
@@ -340,7 +314,7 @@
                                             </span>
                                         </span>
                                     </div>
-                                </div>
+                                </div><!-- /.entry -->
                                 <div class="entry">
                                     <div class="entryContent">
                                         <a href="">
@@ -367,7 +341,7 @@
                                             </span>
                                         </span>
                                     </div>
-                                </div>
+                                </div><!-- /.entry -->
                                 <div class="entry">
                                     <div class="entryContent">
                                         <a href="">
@@ -394,7 +368,7 @@
                                             </span>
                                         </span>
                                     </div>
-                                </div>
+                                </div><!-- /.entry -->
                                 <div class="entry">
                                     <div class="entryContent">
                                         <a href="">
@@ -421,7 +395,7 @@
                                             </span>
                                         </span>
                                     </div>
-                                </div>
+                                </div><!-- /.entry -->
                                 <div class="entry">
                                     <div class="entryContent">
                                         <a href="">
@@ -448,9 +422,8 @@
                                             </span>
                                         </span>
                                     </div>
-                                </div>
-                            </div>
+                                </div><!-- /.entry -->
+                            </div><!-- /.entryGroup -->
                             
-                        </div>
-                    </div>
-                </div>
+                        </div><!-- /#entries -->
+                    

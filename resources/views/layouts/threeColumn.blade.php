@@ -15,10 +15,14 @@
                         <i class="fas fa-caret-left"></i>
                     </div>
                 </div>
+                <div class="middleSurround">
+                    <div class="stabilize">
 
-				@include('middle-column.search')
-				@include('middle-column.entries')
+						@include('middle-column.search')
+						@include('middle-column.entries')
 
+					</div>
+                </div>
 			</section>
 
 			<section id="rightColumn">

@@ -38,6 +38,8 @@ $('#openAdvancedSearch').click(function(){
 	}
 });
 
+var john = 'test';
+
 
 
 
