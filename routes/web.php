@@ -19,3 +19,10 @@ Route::get('/', 'MasterController@index')->name('index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/ben', 'BenTestController@test')->name('benTest');
 
+Route::get('/browse/{cat_id}', 'MasterController@browseByCategory')->name('browseByCategory');
+Route::get('/show/{post_id}', 'MasterController@showPost')->name('showPost');
+
+/* AJAX CALLS, TODO use another file....???? */
+Route::get('/a/getMiddleByCat/{cat_id}', 'MasterController@getMiddleByCat')->name('getMiddleByCat');
+
+
