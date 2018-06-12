@@ -8,6 +8,9 @@
 //require('./bootstrap');
 
 require('./user-interface');
+require('./events');
+require('./ajax');
+
 
 
 //window.Vue = require('vue');

@@ -38,7 +38,11 @@ successFunc is a call back function
 		});
 	}
 
-	
+	function addPostClick(){
+		console.log('add post click events');
+		// TODO should i add a class/id hiearchy here??
+		$(".postClick").on('click', getPost);
+	}	
 
 	// Function that is run when a category is clicked
 	function getMiddleWithCategory(){
@@ -51,9 +55,10 @@ successFunc is a call back function
 	// the AJAX call will have stripped out
 	// response codes and such and just passes html to here
 	function loadMiddleHTML(html){
-
 		if (html){
 			document.getElementById("entries").innerHTML = html;
+			console.log('trying to add post clicks'); 
+			addPostClick();
 		}
 	}
 
@@ -69,15 +74,16 @@ successFunc is a call back function
 	// the AJAX call will have stripped out
 	// response codes and such and just passes html to here
 	function loadRightHTML(html){
-		document.getElementById("mainContent").innerHTML = html;
+		if (html){
+			document.getElementById("mainContent").innerHTML = html;
+		}
 	}
-	
-	addCatClick();
-	
+
 	$(document).ready(function() { 
 
 		// register the nav links to show cats
-		// in middle col when clicked	
+		// in middle col when clicked
+		$(".catClick").on('click', getMiddleWithCategory);
 
 	 });
 

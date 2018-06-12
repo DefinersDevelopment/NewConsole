@@ -9,10 +9,7 @@
                                 </div> --}}
                                 <div class="entry postClick" postId="{{$p->id}}">
                                     <div class="entryContent">
-
-                                        <a href="/show/{{$p->id}}">
-                                            <h2>{{$p->title}}</h2>
-                                        </a>
+                                        <h2>{{$p->title}}</h2>
                                     </div>
                                     <div class="bar">
                                         <span class="text">Updated: {{$p->updated_at}}</span>
@@ -34,10 +31,10 @@
                                             </span>
                                         </span>
                                     </div>
-
                                 </div>
                                 @endforeach
-                                    
+                                {{-- add the event listeners for the post items --}}
+                                <script>console.log('trying to add post clicks'); addPostClick();</script>    
                             {{-- </div> --}}
                             
                        
