@@ -24,5 +24,6 @@ Route::get('/show/{post_id}', 'MasterController@showPost')->name('showPost');
 
 /* AJAX CALLS, TODO use another file....???? */
 Route::get('/a/getMiddleByCat/{cat_id}', 'MasterController@getMiddleByCat')->name('getMiddleByCat');
+Route::get('/a/getPost/{post_id}', 'MasterController@getPost')->name('getPost');
 
 

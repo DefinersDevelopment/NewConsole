@@ -7,7 +7,7 @@
                                {{--  <div class="entryGroupTitle">
                                     <span>Alerts from 1 Days Ago</span>
                                 </div> --}}
-                                <div class="entry">
+                                <div class="entry postClick" postId="{{$p->id}}">
                                     <div class="entryContent">
 
                                         <a href="/show/{{$p->id}}">

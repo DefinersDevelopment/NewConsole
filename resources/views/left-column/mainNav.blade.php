@@ -1,7 +1,7 @@
                 <nav id="mainNav">
                     <ul>
                         <li>
-                            <a href="/browse/1">
+                            <a href="">
                                 <span class="icon">
                                     <i class="fas fa-circle"></i>
                                 </span>
@@ -11,8 +11,8 @@
                                 <span class="unreadNumber">50</span>
                             </a>
                             <ul>
-                                <li class="active">
-                                    <a href="/browse/4">
+                                <li class="active catClick" catId='4'>
+                                    
                                         <span class="icon">
                                             <i class="fas fa-circle"></i>
                                         </span>
@@ -20,7 +20,7 @@
                                             Politics
                                         </span>
                                         <span class="unreadNumber">50</span>
-                                    </a>
+                                    
                                 </li>
                                 <li>
                                     <a href="/browse/5">
