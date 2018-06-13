@@ -14,7 +14,7 @@
                             </span>
                             <ul>
 
-                                <li class="active isCat">
+                                <li class="active isCat" catId='4'>
                                     <span>
 
                                         <span class="icon">
@@ -28,8 +28,8 @@
                                     </span>
 
                                 </li>
-                                <li>
-                                    <a href="/browse/5">
+                                <li class="isCat" catId='5'>
+                                    <span>
                                         <span class="icon">
                                             <i class="fas fa-circle"></i>
                                         </span>
@@ -37,7 +37,7 @@
                                             Technology
                                         </span>
                                         <span class="unreadNumber">50</span>
-                                    </a>
+                                    </span>
                                 </li>
                                 <li>
                                     <a href="/browse/6">

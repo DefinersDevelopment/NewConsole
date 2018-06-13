@@ -11,12 +11,14 @@ function LogIt($message, $status = '', $level = 'debug')
 		Log::$level("*************** START $pid ***************\n");
 	}
 
+	
+
+	Log::$level($pid  . " ".$message);
+
 	if($status == 'end')
 	{	
 
 		Log::$level("\n");
 		Log::$level("*************** END $pid ***************\n");
 	}
-
-	Log::$level($pid  . " ".$message);
 }

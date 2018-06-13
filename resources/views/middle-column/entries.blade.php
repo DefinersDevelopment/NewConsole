@@ -26,8 +26,8 @@
                                             <span class="button" title="">
                                                 <i class="fas fa-heart"></i>
                                             </span>
-                                            <span class="button" title="">
-                                                <i class="fas fa-check-circle"></i>
+                                            <span class="button editPostClick" postId='{{$p->id}}' title="">
+                                                <i class="fas fa-edit"></i>
                                             </span>
                                         </span>
                                     </div>
@@ -38,7 +38,7 @@
                             
                        
                         @else 
-                        <span class="noEntries textCenter">"No Articles Found"</span>
+                        "No Articles Found"
                         @endif
                  
 

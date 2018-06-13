@@ -17,12 +17,14 @@ class CreateTablePosts extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('title');
-            $table->string('slug');
+            $table->string('title',500);
+            $table->string('slug',550);
             $table->string('author', 200)->nullable(); // this should be an author ID TODO
-            $table->string('url', 1000)->nullable();
-            $table->text('short_description')->nullable();
-            $table->longText('body')->nullable();
+            $table->string('author_bio', 2000)->nullable(); // this should be an author ID TODO
+            $table->string('publication', 2000)->nullable();
+            $table->string('url', 2000)->nullable();
+            $table->string('short_description',4000)->nullable();  // for ISS this is 'byline'
+            $table->mediumText('body')->nullable();
             
             $table->integer('user_id_created'); // user that created post
 

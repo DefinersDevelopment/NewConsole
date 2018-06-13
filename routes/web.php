@@ -26,4 +26,8 @@ Route::get('/show/{post_id}', 'MasterController@showPost')->name('showPost');
 Route::get('/a/getMiddleByCat/{cat_id}', 'MasterController@getMiddleByCat')->name('getMiddleByCat');
 Route::get('/a/getPost/{post_id}', 'MasterController@getPost')->name('getPost');
 
+// FORMS
+Route::get('/admin/showForm/{form_type}', 'AdminController@showForm')->name('showForm');
+Route::post('/admin/savePost', 'AdminController@savePost')->name('savePost');
+Route::get('/admin/editPost', 'AdminController@editPost')->name('editPost');
 

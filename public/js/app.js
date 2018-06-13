@@ -217,6 +217,11 @@ scrollBar();
 /* 4 */
 /***/ (function(module, exports) {
 
+/********************************
+Globals
+
+*********************************/
+_log = 'dev';
 
 /*********************************
 Event Listeners
@@ -230,7 +235,6 @@ Event Listeners
 
 **********************************/
 function addPostClick() {
-	console.log('add post click events');
 	// TODO should i add a class/id hiearchy here??
 	$(".isPost").on('click', postClick);
 }
@@ -245,6 +249,18 @@ function addPrevClick() {
 function addNextClick() {
 	// TODO should i add a class/id hiearchy here??
 	$(".nextClick").on('click', nextClick);
+}
+function addShowPostCreateFormClick() {
+	// TODO should i add a class/id hiearchy here??
+	$(".showPostCreateFormClick").on('click', showPostCreateFormClick);
+}
+function addFormSaveClick() {
+	// TODO should i add a class/id hiearchy here??
+	$(".formSaveClick").on('click', formSaveClick);
+}
+function addEditPostClick() {
+	// TODO should i add a class/id hiearchy here??
+	$(".editPostClick").on('click', editPostClick);
 }
 
 /******** END EVENT LISTNER SECTION ******************/
@@ -270,10 +286,10 @@ function makeAjaxCall(endPoint, method, data, successFunc) {
 
 			// TODO check error code here!
 			temp = JSON.parse(response);
-			//console.log(temp);
+
 			if (temp.error > 0) {
 				// TODO handle this better
-				console.log('we got a graceful error from the system');
+				logIt('we got a graceful error from the system');
 			}
 
 			successFunc(temp.data);
@@ -313,7 +329,7 @@ function categoryClick() {
 function loadMiddleHTML(html) {
 	if (html) {
 		document.getElementById("entries").innerHTML = html;
-		console.log('trying to add post clicks');
+		logIt('trying to add post clicks');
 		addPostClick();
 	}
 }
@@ -324,7 +340,7 @@ function postClick() {
 	data = new Object();
 	postId = this.getAttribute('postId');
 	endPoint = '/a/getPost/' + postId;
-	console.log("this is endpoint " + endPoint);
+	logIt("this is endpoint " + endPoint);
 	makeAjaxCall(endPoint, 'GET', data, loadRightHTML);
 	setCurrentPostId(postId);
 }
@@ -332,6 +348,9 @@ function postClick() {
 function loadRightHTML(html) {
 	if (html) {
 		document.getElementById("mainContent").innerHTML = html;
+		// HACK Alert! this is for FORMS not posts
+		// there is no saveClick class for posts!
+		addFormSaveClick();
 	}
 }
 
@@ -340,7 +359,7 @@ finds current active post and loads the next one in the div of entries
 */
 function nextClick() {
 
-	console.log('next clicked');
+	logIt('next clicked');
 
 	// TODO make this a function getCurPostId();
 	curPostId = getCurrentPostId();
@@ -374,7 +393,7 @@ function nextClick() {
 
 function prevClick() {
 
-	console.log('prev clicked');
+	logIt('prev clicked');
 
 	// TODO make this a function getCurPostId();
 	curPostId = getCurrentPostId();
@@ -406,6 +425,34 @@ function prevClick() {
 	prevPost.click();
 }
 
+function showPostCreateFormClick() {
+	logIt('show form clicked');
+	data = new Object();
+	endPoint = '/admin/showForm/article';
+	logIt("this is endpoint " + endPoint);
+	makeAjaxCall(endPoint, 'GET', data, loadRightHTML);
+}
+
+function formSaveClick() {
+	logIt('form save click');
+	// TODO, make this dynamic not hard coded form
+	// name
+	data = new Object();
+	data.formData = $("#theForm").serializeArray();
+	//logIt(data); return;
+	makeAjaxCall('/admin/savePost', 'POST', data, loadRightHTML);
+}
+
+function editPostClick() {
+	logIt('edit post click');
+	// TODO, make this dynamic not hard coded form
+	// name
+	data = new Object();
+	//logIt(data); return;
+	endpoint = '/admin/editPost' + this.getAttribute('postId');
+	makeAjaxCall(endpoint, 'GET', data, loadRightHTML);
+}
+
 /*********************************************
 Helpers
                                                   
@@ -425,6 +472,12 @@ function getCurrentPostId() {
 function setCurrentPostId(postId) {
 	document.getElementById('currentPost').setAttribute('value', postId);
 }
+function logIt(msg, status) {
+	// status not null means log in prod
+	if (_log == 'dev' || status == 'prod') {
+		console.log(msg);
+	}
+}
 
 $(document).ready(function () {
 
@@ -436,6 +489,7 @@ $(document).ready(function () {
 	// that are top of right area
 	addPrevClick();
 	addNextClick();
+	addShowPostCreateFormClick();
 });
 
 /***/ }),
