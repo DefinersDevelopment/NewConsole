@@ -1,10 +1,10 @@
                 <div id="topBar">
                     <div class="left">
                         <span id="title">Print Alert</span>
-                        <span class="button" title="Previous Entry">
+                        <span class="button prevClick" title="Previous Entry">
                             <i class="fas fa-step-backward"></i>
                         </span>
-                        <span class="button" title="Next Entry">
+                        <span class="button nextClick" title="Next Entry">
                             <i class="fas fa-step-forward"></i>
                         </span>
                     </div>

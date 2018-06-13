@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\View;
 
 class MasterController extends Controller
 {
@@ -20,17 +21,36 @@ class MasterController extends Controller
     	return view("layouts.threeColumn", ['posts'=>$posts]);
 
     }
+    
     public function getMiddleByCat($cat_id){
 
     	// TODO wrap in try catch?? not a ton could go wrong
     	// but......
     	$posts = Post::getByCategory($cat_id);
 
+    	$returnVal = new \stdClass;
+
+    	$returnVal->error = 0;
+    	 
+    	$returnVal->data = View::make('middle-column.entries')->with(['posts'=>$posts])->render();
+
+    	return json_encode($returnVal);
+
+    }
+
+    public function getPost($post_id){
+
+    	// TODO wrap in try catch?? not a ton could go wrong
+    	// but......
+    	$post = Post::getPost($post_id);
+
     	
     	$returnVal = new \stdClass;
 
     	$returnVal->error = 0;
-    	$returnVal->data = view('middle-column.entries',['posts'=>$posts]);
+    	 
+
+    	 $returnVal->data = View::make('right-column.mainContent')->with(['post'=>$post])->render();
 
     	return json_encode($returnVal);
 

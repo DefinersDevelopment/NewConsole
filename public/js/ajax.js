@@ -7,12 +7,13 @@ data is a JS object
 successFunc is a call back function
 */
 
-	function makeAjaxCall(endPoint, data, successFunc){
+	function makeAjaxCall(endPoint, method, data, successFunc){
 		
+
 		data._token = document.getElementById("token");
 		
 		$.ajax({
-			method: 'GET',
+			method: method,
 			url:    endPoint,
 			data: data,
 			beforeSend: function(){	
@@ -23,8 +24,10 @@ successFunc is a call back function
 			},
 			success: function(response){
 
+				// TODO check error code here!
 				temp = JSON.parse(response);
-				successFunc(response);
+				//console.log(temp.data);
+				successFunc(temp.data);
 			},
 			error: function(jqXHR, textStatus, errorThrown){
 				console.log("Ajax Error");
@@ -35,23 +38,46 @@ successFunc is a call back function
 		});
 	}
 
-	// the AJAX call will have stripped out
-	// response codes and such and just passes html to here
-	function loadMiddleHTML(html){
-		
-	}
+	
 
 	// Function that is run when a category is clicked
 	function getMiddleWithCategory(){
-		
 		data = new Object;
-		makeAjaxCall('/a/getMiddleByCat/1',data, loadMiddle);
+		//console.log("my object: %o", this);
+		endPoint = '/a/getMiddleByCat/' + this.getAttribute('catId');
+		console.log("this is endpoint " + endPoint)
+		makeAjaxCall(endPoint,'GET',data, loadMiddleHTML);
+	}
+	// the AJAX call will have stripped out
+	// response codes and such and just passes html to here
+	function loadMiddleHTML(html){
 
+		if (html){
+			document.getElementById("entries").innerHTML = html;
+		}
 	}
 
+
+	// Function that is run when a post is clicked in middle col
+	// to populate the right area
+	function getPost(){
+		data = new Object;
+		endPoint = '/a/getPost/' + this.getAttribute('postId');
+		console.log("this is endpoint " + endPoint)	
+		makeAjaxCall(endPoint, 'GET',data, loadRightHTML);
+	}
+	// the AJAX call will have stripped out
+	// response codes and such and just passes html to here
+	function loadRightHTML(html){
+		document.getElementById("mainContent").innerHTML = html;
+	}
+	
+	addCatClick();
+	
 	$(document).ready(function() { 
-		
-		getMiddleWithCategory();
+
+		// register the nav links to show cats
+		// in middle col when clicked	
 
 	 });
 

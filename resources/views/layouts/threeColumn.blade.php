@@ -19,7 +19,7 @@
                     <div class="stabilize">
 
 						@include('middle-column.search')
-						<div id="entries">
+						<div id='entries'>
 							@include('middle-column.entries')
 						</div>
 
@@ -29,7 +29,9 @@
 
 			<section id="rightColumn">
 				@include('right-column.topBar')
-				@include('right-column.mainContent')
+				<div id="mainContent">
+					@include('right-column.mainContent')
+				</div>
 			</section>
 
 @stop

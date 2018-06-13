@@ -1,5 +1,10 @@
-				<div id="mainContent">
-                    <div id="content" class="view" >
+
+                    <div id="content" class="view">
+
+                        @if (isset($post))
+                            Ben Makes Ugly Pages:
+                            Title: {{$post->title}}<br>
+                        @endif
                         
                         <h1>The Great, Overlooked Tax Policy For Getting People To Work</h1>
                         <p class="meta">The Atlantic | Annie Lowrey | January 2, 2017 - 9:52AM</p>
@@ -24,8 +29,6 @@
                     	<i class="fas fa-caret-up"></i>
                     </div>
                     
-                    @if (isset($post))
-                    Ben Makes Ugly Pages:
-                    Title: {{$post->title}}<br>
-                    @endif
-                </div>
+                    
+
+

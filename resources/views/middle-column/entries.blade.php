@@ -7,42 +7,38 @@
                                {{--  <div class="entryGroupTitle">
                                     <span>Alerts from 1 Days Ago</span>
                                 </div> --}}
-                                <div class="entry">
+                                <div class="entry postContainer" >
                                     <div class="entryContent">
-
-                                        <a href="/show/{{$p->id}}">
-                                            <h2>{{$p->title}}</h2>
-                                        </a>
+                                        <h2 class="isPost" postId="{{$p->id}}" id="{{$p->id}}">{{$p->title}}</h2>
                                     </div>
                                     <div class="bar">
                                         <span class="text">Updated: {{$p->updated_at}}</span>
                                         <span class="buttons">
-                                            <span class="button" title="Delete Entry">
+                                            <span class="button" title="">
                                                 <i class="fas fa-trash"></i>
                                             </span>
-                                            <span class="button" title="Approved | True/False">
+                                            <span class="button" title="">
                                                 <i class="fas fa-thumbs-up"></i>
                                             </span>
-                                            <span class="button" title="Emailed | True/False">
+                                            <span class="button" title="">
                                                 <i class="fas fa-envelope"></i>
                                             </span>
-                                            <span class="button" title="Favorite this Entry">
+                                            <span class="button" title="">
                                                 <i class="fas fa-heart"></i>
                                             </span>
-                                            <span class="button" title="Mark Entry as Read/Unread">
-                                                <i class="fas fa-check-circle"></i>
+                                            <span class="button editPostClick" postId='{{$p->id}}' title="">
+                                                <i class="fas fa-edit"></i>
                                             </span>
                                         </span>
                                     </div>
-
                                 </div>
                                 @endforeach
-                                    
+                                
                             {{-- </div> --}}
                             
                        
                         @else 
-                        <span class="noEntries textCenter">"No Articles Found"</span>
+                        "No Articles Found"
                         @endif
                  
 
