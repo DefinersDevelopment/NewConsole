@@ -38,7 +38,7 @@
                             
                        
                         @else 
-                        "No Articles Found"
+                        <span class="noEntries textCenter">"No Articles Found"</span>
                         @endif
                  
 

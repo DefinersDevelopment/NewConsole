@@ -275,8 +275,8 @@ em {
 
 .flex,
 header#navigation,
-header#navigation #mainNav ul li span,
 header#navigation #mainNav ul li a,
+header#navigation #mainNav ul li span,
 header#navigation #bottomNav,
 header#navigation #bottomNav ul,
 section#middleColumn,
@@ -314,39 +314,75 @@ a {
   text-decoration: none;
 }
 
+.theme-iss .view {
+  color: #55565A;
+}
+
+.theme-ar .view {
+  color: #55565A;
+}
+
+.theme-definers .view {
+  color: #55565A;
+}
+
+.theme-iss .view a {
+  color: #487CA0;
+}
+
+.theme-ar .view a {
+  color: #2D8CEB;
+}
+
+.theme-definers .view a {
+  color: #2D8CEB;
+}
+
+.view p.meta {
+  line-height: 30px;
+  line-height: 1.875rem;
+  margin-bottom: 25px;
+}
+
 .view h1 {
-  font-size: 40px;
-  font-size: 2.5rem;
-  line-height: 45px;
-  line-height: 2.8125rem;
+  font-size: 24px;
+  font-size: 1.5rem;
+  line-height: 30px;
+  line-height: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
 .view h2 {
-  font-size: 30px;
-  font-size: 1.875rem;
-  line-height: 35px;
-  line-height: 2.1875rem;
+  font-size: 22px;
+  font-size: 1.375rem;
+  line-height: 28px;
+  line-height: 1.75rem;
+  margin-bottom: 25px;
 }
 
 .view h3 {
-  font-size: 20px;
-  font-size: 1.25rem;
-  line-height: 25px;
-  line-height: 1.5625rem;
+  font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 24px;
+  line-height: 1.5rem;
+  margin-bottom: 25px;
 }
 
 .view h4 {
-  font-size: 18px;
-  font-size: 1.125rem;
-  line-height: 23px;
-  line-height: 1.4375rem;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 22px;
+  line-height: 1.375rem;
+  margin-bottom: 25px;
 }
 
 .view p {
   font-size: 16px;
   font-size: 1rem;
-  line-height: 21px;
-  line-height: 1.3125rem;
+  line-height: 22px;
+  line-height: 1.375rem;
+  margin-bottom: 25px;
 }
 
 .entry h2 {
@@ -511,6 +547,10 @@ section#middleColumn #search .bottom .left {
   color: #fff;
 }
 
+.noEntries {
+  margin: 20px 0;
+}
+
 /* Input Styles */
 
 form,
@@ -606,15 +646,8 @@ header#navigation #mainNav ul li {
   position: relative;
 }
 
+header#navigation #mainNav ul li a,
 header#navigation #mainNav ul li span {
-  color: #fff;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  height: 50px;
-}
-
-header#navigation #mainNav ul li a {
   color: #fff;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -708,6 +741,27 @@ header#navigation #mainNav ul li.active .text {
 
 .theme-definers header#navigation #mainNav ul li.active .unreadNumber {
   color: #87E1D1;
+}
+
+header#navigation #mainNav ul li.active:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -20px;
+  width: 5px;
+  height: 100%;
+}
+
+.theme-iss header#navigation #mainNav ul li.active:after {
+  background: #fff;
+}
+
+.theme-ar header#navigation #mainNav ul li.active:after {
+  background: #FFCE00;
+}
+
+.theme-definers header#navigation #mainNav ul li.active:after {
+  background: #87E1D1;
 }
 
 header#navigation #mainNav ul li ul {
@@ -1336,6 +1390,7 @@ section#rightColumn #topBar {
           box-sizing: border-box;
   padding: 0 20px;
   border-bottom: 1px solid;
+  position: relative;
 }
 
 .theme-iss section#rightColumn #topBar {
@@ -1355,6 +1410,7 @@ section#rightColumn #topBar {
 
 section#rightColumn #topBar .left {
   margin-right: auto;
+  min-width: 40%;
 }
 
 section#rightColumn #topBar .left #title {
@@ -1383,6 +1439,12 @@ header#navigation #mainNav ul section#rightColumn #topBar .left li,
 section#rightColumn #topBar .left section#middleColumn #search .bottom .left,
 section#middleColumn #search .bottom section#rightColumn #topBar .left .left {
   margin-right: 15px;
+}
+
+section#rightColumn #topBar .right {
+  min-width: 60%;
+  overflow-y: scroll;
+  text-align: right;
 }
 
 section#rightColumn #topBar .right .button,
@@ -1491,6 +1553,34 @@ section#middleColumn #search .bottom .theme-definers section#rightColumn #topBar
   color: #55565A;
 }
 
+section#rightColumn #topBar #scrollBar {
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  z-index: 9;
+}
+
+section#rightColumn #topBar #scrollBar #color {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5px;
+}
+
+.theme-iss section#rightColumn #topBar #scrollBar #color {
+  background: #487CA0;
+}
+
+.theme-ar section#rightColumn #topBar #scrollBar #color {
+  background: #FFCE00;
+}
+
+.theme-definers section#rightColumn #topBar #scrollBar #color {
+  background: #05223F;
+}
+
 section#rightColumn #mainContent {
   width: 100%;
   height: auto;
@@ -1510,7 +1600,7 @@ section#rightColumn #mainContent #content {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   overflow-y: scroll;
-  padding: 20px;
+  padding: 25px 20px 20px 20px;
 }
 
 section#rightColumn #mainContent #content .inputContainer {
@@ -1579,6 +1669,7 @@ section#rightColumn #mainContent .circle {
   position: absolute;
   bottom: 20px;
   right: 20px;
+  opacity: .5;
 }
 
 section#rightColumn #mainContent .circle .fal,

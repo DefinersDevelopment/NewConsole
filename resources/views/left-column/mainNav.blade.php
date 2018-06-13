@@ -2,7 +2,7 @@
                     <ul>
                         <li>
 
-                            <span>
+                            <span class="toggleNav">
 
                                 <span class="icon">
                                     <i class="fas fa-circle"></i>
@@ -13,8 +13,10 @@
                                 <span class="unreadNumber">50</span>
                             </span>
                             <ul>
-                                <li class="active isCat" catId='4'>
-                                    
+
+                                <li class="active isCat">
+                                    <span>
+
                                         <span class="icon">
                                             <i class="fas fa-circle"></i>
                                         </span>
@@ -22,7 +24,9 @@
                                             Politics
                                         </span>
                                         <span class="unreadNumber">50</span>
-                                    
+
+                                    </span>
+
                                 </li>
                                 <li>
                                     <a href="/browse/5">
@@ -105,7 +109,7 @@
                             </a>
                         </li>
                         <li>
-                            <span>
+                            <span class="toggleNav">
                                 <span class="icon">
                                     <i class="fas fa-circle"></i>
                                 </span>

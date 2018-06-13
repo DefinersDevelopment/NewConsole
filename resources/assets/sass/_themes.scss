@@ -13,7 +13,9 @@ $themes: (
 		buttonColors: #183957,
 
 		selectionColor: rgba(#BD3F40, .6),
-
+		
+		textColor: #55565A,
+		linkColor: #487CA0,
 
 		// Left Column
 		navigationBackground: #487CA0,
@@ -37,6 +39,8 @@ $themes: (
 		rightColumnTopBarBackground: #BD3F40,
 		rightColumnTopBarIconColor: #fff,
 
+		scrollBarColor: #487CA0
+
 		
 	),
 	ar: (
@@ -52,6 +56,9 @@ $themes: (
 		buttonColors: #55565A,
 
 		selectionColor: rgba(#FFCE00, .6),
+
+		textColor: #55565A,
+		linkColor: #2D8CEB,
 
 		// Left Column
 		navigationBackground: #55565A,
@@ -74,6 +81,8 @@ $themes: (
 		// Right Column
 		rightColumnTopBarBackground: #DEDEDE,
 		rightColumnTopBarIconColor: #55565A,
+
+		scrollBarColor: #FFCE00
 	),
 	definers: (
 		dark: #55565A,
@@ -88,6 +97,9 @@ $themes: (
 		buttonColors: #55565A,
 
 		selectionColor: rgba(#87E1D1, .6),
+
+		textColor: #55565A,
+		linkColor: #2D8CEB,
 
 		// Left Column
 		navigationBackground: #05223F,
@@ -110,6 +122,8 @@ $themes: (
 		// Right Column
 		rightColumnTopBarBackground: #DEDEDE,
 		rightColumnTopBarIconColor: #55565A,
+
+		scrollBarColor: #05223F
 	)
 );
 
