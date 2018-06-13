@@ -7,34 +7,33 @@
                                {{--  <div class="entryGroupTitle">
                                     <span>Alerts from 1 Days Ago</span>
                                 </div> --}}
-                                <div class="entry postClick" postId="{{$p->id}}">
+                                <div class="entry postContainer" >
                                     <div class="entryContent">
-                                        <h2>{{$p->title}}</h2>
+                                        <h2 class="isPost" postId="{{$p->id}}" id="{{$p->id}}">{{$p->title}}</h2>
                                     </div>
                                     <div class="bar">
                                         <span class="text">Updated: {{$p->updated_at}}</span>
                                         <span class="buttons">
-                                            <span class="button" title="Delete Entry">
+                                            <span class="button" title="">
                                                 <i class="fas fa-trash"></i>
                                             </span>
-                                            <span class="button" title="Approved | True/False">
+                                            <span class="button" title="">
                                                 <i class="fas fa-thumbs-up"></i>
                                             </span>
-                                            <span class="button" title="Emailed | True/False">
+                                            <span class="button" title="">
                                                 <i class="fas fa-envelope"></i>
                                             </span>
-                                            <span class="button" title="Favorite this Entry">
+                                            <span class="button" title="">
                                                 <i class="fas fa-heart"></i>
                                             </span>
-                                            <span class="button" title="Mark Entry as Read/Unread">
+                                            <span class="button" title="">
                                                 <i class="fas fa-check-circle"></i>
                                             </span>
                                         </span>
                                     </div>
                                 </div>
                                 @endforeach
-                                {{-- add the event listeners for the post items --}}
-                                <script>console.log('trying to add post clicks'); addPostClick();</script>    
+                                
                             {{-- </div> --}}
                             
                        

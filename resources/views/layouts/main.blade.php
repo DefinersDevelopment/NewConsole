@@ -18,6 +18,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     </head>
     <body>
+        <input type="hidden" id="token" name="token" value="{{ csrf_token() }}">
+        <input type="hidden" id="currentContext" value="">
+        <input type="hidden" id="currentPost"  value="">
         <div class="bodyWrap flex theme-{{env('APP_THEME')}}">
             
             @yield('body')
@@ -27,7 +30,7 @@
 
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
                 <script src="/js/app.js"></script>
-                
+
             </footer>
         </div><!-- /.bodyWrap -->
     </body>

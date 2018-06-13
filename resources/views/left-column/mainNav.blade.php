@@ -13,7 +13,7 @@
                                 <span class="unreadNumber">50</span>
                             </span>
                             <ul>
-                                <li class="active catClick" catId='4'>
+                                <li class="active isCat" catId='4'>
                                     
                                         <span class="icon">
                                             <i class="fas fa-circle"></i>

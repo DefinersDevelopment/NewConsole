@@ -17,6 +17,7 @@ class CreateTableCategory extends Migration
         Schema::create('category', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('parent_id');
+            $table->smallInteger('order')->nullable();
             $table->string('name');
             $table->string('slug');
             $table->integer('user_id_created'); // user that created category
