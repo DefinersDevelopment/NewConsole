@@ -358,6 +358,7 @@ a {
   font-size: 1.375rem;
   line-height: 28px;
   line-height: 1.75rem;
+  font-weight: 700;
   margin-bottom: 25px;
 }
 
@@ -366,7 +367,8 @@ a {
   font-size: 1.125rem;
   line-height: 24px;
   line-height: 1.5rem;
-  margin-bottom: 25px;
+  font-weight: 700;
+  margin-bottom: 20px;
 }
 
 .view h4 {
@@ -374,7 +376,8 @@ a {
   font-size: 1rem;
   line-height: 22px;
   line-height: 1.375rem;
-  margin-bottom: 25px;
+  font-weight: 700;
+  margin-bottom: 15px;
 }
 
 .view p {

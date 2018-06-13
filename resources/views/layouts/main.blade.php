@@ -5,7 +5,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title> 
         <link rel="icon" href="/assets/images/">
         <meta name="author" content="">
-        <link rel="stylesheet" type="text/css" href="/css/app.css">
+        <link rel="stylesheet" type="text/css" href="/css/app.css?{{time()}}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta property="og:title" content="" />
         <meta property="og:site_name" content="" />
