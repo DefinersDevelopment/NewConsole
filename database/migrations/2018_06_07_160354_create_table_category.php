@@ -18,10 +18,10 @@ class CreateTableCategory extends Migration
             $table->increments('id');
             $table->integer('parent_id');
             $table->smallInteger('order')->nullable();
+            $table->smallInteger('postable');
             $table->string('name');
             $table->string('slug');
             $table->integer('user_id_created'); // user that created category
-            
             $table->timestamps();
             $table->softDeletes();
         });

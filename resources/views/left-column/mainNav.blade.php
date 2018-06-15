@@ -39,8 +39,8 @@
                                         <span class="unreadNumber">50</span>
                                     </span>
                                 </li>
-                                <li>
-                                    <a href="/browse/6">
+                                <li class="isCat" catId='6'>
+                                    <span>
                                         <span class="icon">
                                             <i class="fas fa-circle"></i>
                                         </span>
@@ -48,10 +48,10 @@
                                             Business
                                         </span>
                                         <span class="unreadNumber">50</span>
-                                    </a>
+                                    </span>
                                 </li>
-                                <li>
-                                    <a href="/browse/7">
+                                <li class="isCat" catId='7'>
+                                    <span>
                                         <span class="icon">
                                             <i class="fas fa-circle"></i>
                                         </span>
@@ -59,10 +59,10 @@
                                             Education
                                         </span>
                                         <span class="unreadNumber">50</span>
-                                    </a>
+                                    </span>
                                 </li>
-                                <li>
-                                    <a href="/browse/8">
+                                <li class="isCat" catId='8'>
+                                    <span>
                                         <span class="icon">
                                             <i class="fas fa-circle"></i>
                                         </span>
@@ -70,10 +70,10 @@
                                             Health
                                         </span>
                                         <span class="unreadNumber">50</span>
-                                    </a>
+                                    </span>
                                 </li>
-                                <li>
-                                    <a href="/browse/9">
+                                <li class="isCat" catId='9'>
+                                    <span>
                                         <span class="icon">
                                             <i class="fas fa-circle"></i>
                                         </span>
@@ -81,10 +81,10 @@
                                             Energy
                                         </span>
                                         <span class="unreadNumber">50</span>
-                                    </a>
+                                    </span>
                                 </li>
-                                <li>
-                                    <a href="/browse/10">
+                                <li class="isCat" catId='10'>
+                                    <span>
                                         <span class="icon">
                                             <i class="fas fa-circle"></i>
                                         </span>
@@ -92,13 +92,13 @@
                                             International
                                         </span>
                                         <span class="unreadNumber">50</span>
-                                    </a>
+                                    </span>
                                 </li>
 
                             </ul>
                         </li>
-                        <li>
-                            <a href="/browse/2">
+                        <li class="isCat" catId='2'>
+                            <span>
                                 <span class="icon">
                                     <i class="fas fa-circle"></i>
                                 </span>
@@ -106,9 +106,9 @@
                                    News Analysis
                                 </span>
                                 <span class="unreadNumber">50</span>
-                            </a>
+                            </span>
                         </li>
-                        <li>
+                        <li class="isCat" catId='3'>
                             <span class="toggleNav">
                                 <span class="icon">
                                     <i class="fas fa-circle"></i>
@@ -119,8 +119,8 @@
                                 <span class="unreadNumber">50</span>
                             </span>
                             <ul>
-                                <li>
-                                    <a href="/browse/11">
+                                <li class="isCat" catId='11'>
+                                    <span>
                                         <span class="icon">
                                             <i class="fas fa-circle"></i>
                                         </span>
@@ -128,10 +128,10 @@
                                             Domestic Policy
                                         </span>
                                         <span class="unreadNumber">50</span>
-                                    </a>
+                                    </span>
                                 </li>
-                                <li>
-                                    <a href="/browse/12">
+                                <li class="isCat" catId='12'>
+                                    <span>
                                         <span class="icon">
                                             <i class="fas fa-circle"></i>
                                         </span>
@@ -139,10 +139,10 @@
                                             Foreign Policy
                                         </span>
                                         <span class="unreadNumber">50</span>
-                                    </a>
+                                    </span>
                                 </li>
-                                <li>
-                                    <a href="/browse/13">
+                                <li class="isCat" catId='13'>
+                                    <span>
                                         <span class="icon">
                                             <i class="fas fa-circle"></i>
                                         </span>
@@ -150,7 +150,7 @@
                                             Point-Counter Point
                                         </span>
                                         <span class="unreadNumber">50</span>
-                                    </a>
+                                    </span>
                                 </li>
 
                             </ul>

@@ -24,7 +24,8 @@
                                                 <i class="fas fa-envelope"></i>
                                             </span>
                                             <span class="button" title="">
-                                                <i class="fas fa-heart"></i>
+                                                <i class="fas fa-heart toggleFavPostClick highlightOff" id='fav-{{$p->id}}' 
+                                                    postId='{{$p->id}}'></i>
                                             </span>
                                             <span class="button editPostClick" postId='{{$p->id}}' title="">
                                                 <i class="fas fa-edit"></i>

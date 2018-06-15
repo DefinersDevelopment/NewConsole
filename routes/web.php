@@ -29,5 +29,5 @@ Route::get('/a/getPost/{post_id}', 'MasterController@getPost')->name('getPost');
 // FORMS
 Route::get('/admin/showForm/{form_type}', 'AdminController@showForm')->name('showForm');
 Route::post('/admin/savePost', 'AdminController@savePost')->name('savePost');
-Route::get('/admin/editPost', 'AdminController@editPost')->name('editPost');
+Route::get('/admin/editPost/{post_id}', 'AdminController@editPost')->name('editPost');
 

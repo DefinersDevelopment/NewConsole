@@ -29,20 +29,29 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function category()
-    {
-        return $this->belongsToMany('App\Models\Category');
-    }
+    // public function category()
+    // {
+    //     return $this->belongsToMany('App\Models\Category');
+    // }  
 
-  
+    /******************************
+    NOTE on favorites and unreads (and other types in the future).
+    Eloquent models can handle one M2M table defining diferent 
+    relationships with the withPivot('column').  However, I found the select
+    SQL a little funky, and then you get issues with query limits, etc...
+    I did not look into it much, but going straight SQL for favs/unreads made
+    the most sense
+    *******************************/
+
 
     public static function getUserPosts($user_id, $type){
 
         /*******************
-        Tried the eloquent way, the SQL was awful
+        Tried the eloquent way, the SQL was awful, and the 
+        return was total bloat 
         ******************/
-
-        $posts = DB::select('select p.id, p.title, p.slug, p.author, p.url, p.short_description, p.created_at, p.updated_at from posts p, user_posts up where p.status = "A" and p.id = up.post_id and up.user_id = ? and up.type = ?', [$user_id, $type]);
+        // TODO need to chunk this in groups of ~50?? 100??
+        $posts = DB::select('select p.id, p.title, p.slug, p.author, p.url, p.short_description, p.created_at, p.updated_at from posts p, user_posts up where p.status = "A" and deleted_at IS NULL and p.id = up.post_id and up.user_id = ? and up.type = ?', [$user_id, $type]);
 
         return $posts;       
 
