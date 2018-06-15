@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
+use App\Helpers\Logging;
 
 class Post extends Model
 {
@@ -32,9 +34,12 @@ class Post extends Model
         return $posts;       
     }
 
+    // made this a function in case we want to 
+
     public static function getPost($id){
 
     	$post = Post::find($id);
+
     	return $post;
     }
 
@@ -73,10 +78,7 @@ class Post extends Model
     		return null;
     	}
     	
-    	
-
 
     }
-
 
 }

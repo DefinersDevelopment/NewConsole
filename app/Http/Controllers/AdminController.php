@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\View;
 use App\Helpers\Logging;
 use App\Helpers\Misc;
 use App\Models\Post;
+use App\Models\Category;
+
 
 class AdminController extends Controller
 {
@@ -16,10 +18,10 @@ class AdminController extends Controller
     	switch ($formType) {
 	    
 		    case 'article':
-
+		    	$allCats = Category::getAllCategories();
 		    	$returnVal = new \stdClass;
     			$returnVal->error = 0;
-    			$returnVal->data = View::make('forms.article')->render();
+    			$returnVal->data = View::make('forms.article', ['allCats'=>$allCats, 'bentest'=>'testing'])->render();
     			return json_encode($returnVal);
 		        break;
 		}
@@ -37,12 +39,18 @@ makes a post, fills it, saves it.
 
 ***************************************/
     public function savePost(Request $r) {
-    	$returnVal = new \stdClass;
+    	
+        LogIt('savePost','start');
 
-    	LogIt('savePost','start');
+        // this is the obj that we will
+        // JSON and return
+        $returnVal = new \stdClass;
+
     	$inputs = ($r->input('formData'));
     	$data;
     	$cats;
+    	// parse data from ajax call,
+    	// we have post data and category data
     	foreach ($inputs as $i){
     		if ($i['name'] == 'category'){
     			$cats[] = $i['value'];
@@ -55,28 +63,48 @@ makes a post, fills it, saves it.
     	$data['status'] = 'A';
     	$data['slug'] = makeSlug($data['title']);
 
-    	$post = new Post;
+    	// If this is an update, get the old post
+    	if (isset($data['id']) && $data['id'] != ''){
+    		$post = Post::find($data['id']);
+    	} else { // or create a new one.
+    		$post = new Post;	
+    	}
+
   		$post->fill($data);
 
   		unset($data);
-    	// validate
 
+  		// validate
     	$errors = $post->validate();
     	// at least one category is required
     	if (!isset($cats) || count($cats) < 1){
     		$errors['category'] = 'At least one category is required';		
     	}   	
  
+    	/***
+    	The function could return (error or success) from here down
+    	and when it does, it needs all the categories for 
+    	display purposes
+    	***/
+    	// returns a "tree" of categories, parents on top
+    	// each parent contains their children
+    	$allCats = Category::getAllCategories();
+    	
     	if (isset($errors) && count($errors) > 0){
     		$returnVal->error = 1;
-    		$returnVal->data = View::make('forms.article',['post'=>$post,'theErrors'=>$errors])->render();
+    		$returnVal->data = View::make('forms.article',['post'=>$post,'theErrors'=>$errors, 
+    			'postCats'=>$cats, 'allCats'=>$allCats])->render();
     		return json_encode($returnVal);
     	}
 
-
     	try {
 	    	
-	    	$post->save();
+	    	$post->save(); // save or update
+
+	    	// remove all cats
+	    	$post->category()->detach(); 
+
+	    	// then add new cat relations
 	    	if (count($cats) > 0){
 	    		$post->category()->attach($cats);
 	    	}
@@ -90,7 +118,8 @@ makes a post, fills it, saves it.
             // });
             $errors['topMessage'] = "Error " . $e->getMessage();
             $returnVal->error = 1;
-    		$returnVal->data = View::make('forms.article',['post'=>$post,'theErrors'=>$errors])->render();
+    		$returnVal->data = View::make('forms.article',['post'=>$post,
+    			'theErrors'=>$errors, 'postCats'=>$cats, 'allCats'=>$allCats])->render();
     		return json_encode($returnVal);
         }
         catch(\Exception $e)
@@ -102,18 +131,41 @@ makes a post, fills it, saves it.
             // });
             $errors['topMessage'] = "Error " . $e->getMessage();
             $returnVal->error = 1;
-    		$returnVal->data = View::make('forms.article',['post'=>$post,'theErrors'=>$errors])->render();
+    		$returnVal->data = View::make('forms.article',['post'=>$post,
+    			'theErrors'=>$errors, 'postCats'=>$cats, 'allCats'=>$allCats])->render();
     		return json_encode($returnVal);
         }
+
+        /******************
+        If we are here, everything went OK
+        *******************/
 
     	
     	$errors['topMessage'] = 'Post Created/Updated as Post ID ' . $post->id;
     	LogIt('Post Created as Post ID ' . $post->id, 'end');
     	$returnVal->error = 0;
-    	$returnVal->data = View::make('forms.article',['post'=>$post,'theErrors'=>$errors])->render();
+    	$returnVal->data = View::make('forms.article',['post'=>$post,
+    		'theErrors'=>$errors, 'postCats'=>$cats, 'allCats'=>$allCats])->render();
     	//$returnVal->data = print_r($data,TRUE);
     	return json_encode($returnVal);
 	
+    }
+
+    function editPost($postId){
+
+    	$returnVal = new \stdClass;
+    	$post = Post::with('category')->find($postId);
+    	$postCats = [];
+    	foreach ($post->category as $cat){
+    		$postCats[] = $cat->id;
+    	}
+    	LogIt('cats from post ' . print_r($post->category,TRUE));
+    	$allCats = Category::getAllCategories();  // display
+    	$returnVal->error = 0;
+    	$returnVal->data = View::make('forms.article',['post'=>$post, 'allCats'=>$allCats, 'postCats'=>$postCats])->render();
+
+    	return json_encode($returnVal);
+
     }
 
 

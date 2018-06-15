@@ -15,9 +15,9 @@ Event Listeners
                                    
 
 **********************************/
-function addPostClick(){
+function addViewPostClick(){
 	// TODO should i add a class/id hiearchy here??
-	$(".isPost").on('click', postClick);
+	$(".isPost").on('click', viewPostClick);
 }	
 function addCatClick(){
 	// TODO should i add a class/id hiearchy here??
@@ -42,6 +42,10 @@ function addFormSaveClick(){
 function addEditPostClick(){
 	// TODO should i add a class/id hiearchy here??
 	$(".editPostClick").on('click', editPostClick);
+}
+function toggleFavPostClick(){
+	// TODO should i add a class/id hiearchy here??
+	$(".toggleFavPostClick").on('click', toggleFavPostClick);
 }
   
 /******** END EVENT LISTNER SECTION ******************/
@@ -110,18 +114,9 @@ NAVIGATION STUFF
 		document.getElementById('currentContext').setAttribute('value', 'categoryBrowse');
 	}
 
-	// Success callback for loading posts in middle col
-	function loadMiddleHTML(html){
-		if (html){
-			document.getElementById("entries").innerHTML = html;
-			logIt('trying to add post clicks'); 
-			addPostClick();
-		}
-	}
-
 	// Function that is run when a post is clicked in middle col
 	// to populate the right area
-	function postClick(){
+	function viewPostClick(){
 		data = new Object;
 		postId = this.getAttribute('postId');
 		endPoint = '/a/getPost/' + postId;
@@ -129,15 +124,7 @@ NAVIGATION STUFF
 		makeAjaxCall(endPoint, 'GET',data, loadRightHTML);
 		setCurrentPostId(postId);
 	}
-	// Success callback for loading a post in right main area
-	function loadRightHTML(html){
-		if (html){
-			document.getElementById("mainContent").innerHTML = html;
-			// HACK Alert! this is for FORMS not posts
-			// there is no saveClick class for posts!
-			addFormSaveClick();
-		}
-	}
+	
 
 	/*
 	finds current active post and loads the next one in the div of entries
@@ -234,10 +221,78 @@ NAVIGATION STUFF
 		// name
 		data = new Object;
 		//logIt(data); return;
-		endpoint = '/admin/editPost' + this.getAttribute('postId');
+		endpoint = '/admin/editPost/' + this.getAttribute('postId');
+		logIt("endpoint " + endpoint);
 		makeAjaxCall(endpoint, 'GET',data, loadRightHTML);
 
 	}
+	function toggleFavPostClick(){
+		logIt('edit post click');
+		data= new Object;
+		
+		if (this.hasClass('highlightOff')){
+			onOff = 'on';
+		} else {
+			ofOff = 'off'
+		}
+
+		endpoint = 'admin/toggleFavorite/' + onOff +'/' + this.getAttribute('postId');
+		
+		logIt("endpoint " + endpoint);
+		makeAjaxCall(endpoint, 'GET',data, handleToggleFav);
+			 
+	}
+
+/***
+ *                  .---.                             
+ *                  |   |                             
+ *                  '---'                             
+ *                  .---.                             
+ *                  |   |                             
+ *        __        |   |    __     ____     _____    
+ *     .:--.'.      |   | .:--.'.  `.   \  .'    /    
+ *    / |   \ |     |   |/ |   \ |   `.  `'    .'     
+ *    `" __ | |     |   |`" __ | |     '.    .'       
+ *     .'.''| |     |   | .'.''| |     .'     `.      
+ *    / /   | |_ __.'   '/ /   | |_  .'  .'`.   `.    
+ *    \ \._,\ '/|      ' \ \._,\ '/.'   /    `.   `.  
+ *     `--'  `" |____.'   `--'  `"'----'       '----' 
+ *
+ *                  _  _  _                   _         
+ *                 | || || |                 | |        
+ *       ___  __ _ | || || |__    __ _   ___ | | __ ___ 
+ *      / __|/ _` || || || '_ \  / _` | / __|| |/ // __|
+ *     | (__| (_| || || || |_) || (_| || (__ |   < \__ \
+ *      \___|\__,_||_||_||_.__/  \__,_| \___||_|\_\|___/
+ *                                                      
+ *                                                      
+ */
+
+	// Success callback for loading posts in middle col
+	function loadMiddleHTML(html){
+		if (html){
+			document.getElementById("entries").innerHTML = html;
+			logIt('trying to add post clicks'); 
+			addViewPostClick();
+			addEditPostClick();
+		}
+	}
+
+	// Success callback for loading a post in right main area
+	function loadRightHTML(html){
+		if (html){
+			document.getElementById("mainContent").innerHTML = html;
+			// HACK Alert! this is for FORMS not posts
+			// there is no saveClick class for posts!
+			addFormSaveClick();
+		}
+	}
+
+	function handleToggleFav (response){
+
+
+	}
+
 
 
 /*********************************************

@@ -36,8 +36,31 @@
 	<div class="inputContainer">
 		<div class='formError'>{{$theErrors['category'] or ""}}</div>
 		<label for="category">Categories:</label><br>
-		<input type="checkbox" name='category' value='4'>Polotics<br>
-		<input type="checkbox" name='category' value='5'> Technology
+
+		@if (isset($allCats))
+			@foreach ($allCats as $cat)
+				@if ($cat->postable == 1)
+					<input type='checkbox' name='category' value='{{$cat->id}}' @if (in_array($cat->id,$postCats)) CHECKED @endif>
+				@else
+					-- 
+				@endif 
+				{{ $cat->name }} <br>
+					<?php 
+					$children = $cat->getChildren(); 
+					?>
+					@if(isset($children))
+						@foreach($children as $child)
+							@if ($child->postable == 1)
+								&nbsp;&nbsp;<input type='checkbox' name='category' value='{{$child->id}}' @if (in_array($child->id,$postCats)) CHECKED @endif>
+							@else
+								&nbsp;&nbsp;-- 
+							@endif 
+							{{ $child->name }} <br>
+						@endforeach
+
+					@endif
+			@endforeach
+		@endif
 	</div>
 
 	<div class='formSaveClick'>
