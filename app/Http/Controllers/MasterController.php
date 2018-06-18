@@ -56,16 +56,15 @@ class MasterController extends Controller
     }
 
     public function getFavorites(){
-    	LogIt(' getting favorites ') ;
+    	LogIt(' getting favorites ', 'start') ;
     	// TODO do not hard code user
     	$user_id = 1;
 
-    	$posts = Post::getUserPosts($user_id, 'F');
+    	$posts = Post::getUserPostsOfTypeWithUnreads($user_id, 'F');
     	$returnVal = new \stdClass;
     	$returnVal->error = 0;
-    	 
     	$returnVal->data = View::make('middle-column.entries')->with(['posts'=>$posts])->render();
-
+        LogIt(' getting favorites done ', 'end') ;
     	return json_encode($returnVal);
     }
  

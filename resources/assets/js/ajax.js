@@ -87,18 +87,18 @@ successFunc is a call back function
 				
 			},
 			success: function(response){
-
 				// TODO check error code here!
 				temp = JSON.parse(response);
-				
+				logIt(temp.data);
+
 				if (temp.error > 0){
 					// TODO handle this better
 					logIt('we got a graceful error from the system');
 					if (temp.message){
 						logIt(temp.message);
 					}
-
 				}
+				//logIt(temp.data);
 
 				successFunc(temp);
 			},
@@ -266,12 +266,9 @@ NAVIGATION STUFF
 		} else {
 			onOff = 'off'
 		}
-
 		endpoint = '/admin/toggleFavorite/' + onOff +'/' + this.getAttribute('postId');
-		
 		logIt("endpoint " + endpoint);
 		makeAjaxCall(endpoint, 'GET',data, handleToggleFav);
-			 
 	}
 
 	function getFavsClick(){
@@ -310,9 +307,9 @@ NAVIGATION STUFF
 	// Success callback for loading posts in middle col
 
 	function loadMiddleHTML(response){
+		scrollToTop('#search');
 		if (response.data){
 			document.getElementById("entries").innerHTML = response.data;
-			scrollToTop('#search');
 			logIt('trying to add post clicks'); 
 			addViewPostClick();
 			addEditPostClick();
@@ -332,6 +329,7 @@ NAVIGATION STUFF
 			logIt('adding formSaveClick listener from load right')
 			addFormSaveClick();
 		} 
+
 		if (response.postId){
 			logIt('load right setting cur post id ' + response.postId);
 			setCurrentPostId(response.postId);

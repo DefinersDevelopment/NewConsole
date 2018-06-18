@@ -11,9 +11,9 @@
                             </a>
                         </li>
                         <li title="View your Favorite alerts">
-                            <a href="">
+                            <span>
                                 <i class="fas fa-heart getFavsClick" aria-hidden="true"></i>
-                            </a>
+                            </span>
                         </li>
                         <li title="Log out">
                             <a href="">
