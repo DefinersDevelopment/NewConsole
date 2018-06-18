@@ -31,12 +31,14 @@ class AdminController extends Controller
     }
 /*****************************************
 
-Simple Function. Takes input all in one 
-from ajax call in "formData"
-makes an array
-validates
+Fairly Simple Function. 
+Takes input all in one data element
+from ajax call in "formData" (made by jquery searializeArray() )
+makes a hash
+validates data 
 returns if errors
-makes a post, fills it, saves it.
+makes a post object, fills it, saves it, save category relations
+
 
 ***************************************/
     public function savePost(Request $r) {
@@ -49,7 +51,8 @@ makes a post, fills it, saves it.
 
     	$inputs = ($r->input('formData'));
     	$data;
-    	$cats;
+    	$cats = []; // empty but set.
+        
     	// parse data from ajax call,
     	// we have post data and category data
     	foreach ($inputs as $i){
@@ -59,6 +62,7 @@ makes a post, fills it, saves it.
     			$data[$i['name']] = $i['value'];
     		}
     	}
+        
 
 		$data['user_id_created'] = 1;
     	$data['status'] = 'A';

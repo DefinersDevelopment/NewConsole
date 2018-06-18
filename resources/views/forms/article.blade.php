@@ -36,50 +36,38 @@
 	<div class="inputContainer">
 		<div class='formError'>{{$theErrors['category'] or ""}}</div>
 		<label for="category">Categories:</label><br>
-	</div>
 
 		@if (!isset($postCats))
 			<?php $postCats = []; ?>
 		@endif
-		
+
 		@if (isset($allCats))
 			@foreach ($allCats as $cat)
 				@if ($cat->postable == 1)
-					<div class="inputContainer">
-						<input type='checkbox' name='category' value='{{$cat->id}}' @if (in_array($cat->id,$postCats)) CHECKED @endif>
-					</div>
+					<input type='checkbox' name='category' value='{{$cat->id}}' @if (in_array($cat->id,$postCats)) CHECKED @endif>
 				@else
 					-- 
 				@endif 
-				
-				<h2>{{ $cat->name }}</h2>
-
-				<div class="columns">
+				{{ $cat->name }} <br>
 					<?php 
 					$children = $cat->getChildren(); 
 					?>
 					@if(isset($children))
 						@foreach($children as $child)
-							<div class="inputContainer">
-								<label for="">
 							@if ($child->postable == 1)
-								
-									<input type='checkbox' name='category' value='{{$child->id}}' @if (in_array($child->id,$postCats)) CHECKED @endif>
-								
+								&nbsp;&nbsp;<input type='checkbox' name='category' value='{{$child->id}}' @if (in_array($child->id,$postCats)) CHECKED @endif>
 							@else
 								&nbsp;&nbsp;-- 
 							@endif 
-									<span>{{ $child->name }}</span>
-								</label>
-							</div>
+							{{ $child->name }} <br>
 						@endforeach
 
 					@endif
-				</div>
 			@endforeach
 		@endif
+	</div>
 
-	<div class='formSaveClick'>
-		push this thing over -----><i class="fas fa-save"></i>
+	<div>
+		push this thing over -----><i class="fas fa-save formSaveClick"></i>
 	</div>
 </form>

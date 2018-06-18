@@ -10,6 +10,7 @@
                                 <div class="entry postContainer" >
                                     <div class="entryContent">
                                         <h2 class="isPost" postId="{{$p->id}}" id="{{$p->id}}">{{$p->title}}</h2>
+                                        <p>{{-- @if ($p->unread == 'U') Unread @endif --}}{{$p->created_at}}</p>
                                     </div>
                                     <div class="bar">
                                         <span class="text">Updated: {{$p->updated_at}}</span>
@@ -17,14 +18,16 @@
                                             <span class="button" title="">
                                                 <i class="fas fa-trash"></i>
                                             </span>
+                                            {{-- 
+                                                <span class="button" title="">
+                                                    <i class="fas fa-thumbs-up"></i>
+                                                </span> 
+                                            --}}
                                             <span class="button" title="">
-                                                <i class="fas fa-thumbs-up"></i>
-                                            </span>
-                                            <span class="button" title="">
-                                                <i class="fas fa-envelope"></i>
-                                            </span>
-                                            <span class="button" title="">
-                                                <i class="fas fa-heart toggleFavPostClick highlightOff" id='fav-{{$p->id}}' 
+                                                <i class="fa-heart toggleFavPostClick 
+                                                    @if($p->favorite == 'F')  fas @else far @endif
+                                                    "        
+                                                    id='fav-{{$p->id}}' 
                                                     postId='{{$p->id}}'></i>
                                             </span>
                                             <span class="button editPostClick" postId='{{$p->id}}' title="">

@@ -26,8 +26,8 @@ class MasterController extends Controller
 
     	// TODO wrap in try catch?? not a ton could go wrong
     	// but......
-    	$posts = Post::getByCategory($cat_id);
-
+    	$posts = Post::getByCategoryWithFavAndUnreads($cat_id,1,50,null);
+    	LogIt(' did we get posts ' . print_r($posts,true));
     	$returnVal = new \stdClass;
 
     	$returnVal->error = 0;
@@ -48,9 +48,9 @@ class MasterController extends Controller
     	$returnVal = new \stdClass;
 
     	$returnVal->error = 0;
-    	 
+    	$returnVal->postId = $post->id; 
 
-    	 $returnVal->data = View::make('right-column.mainContent')->with(['post'=>$post])->render();
+    	$returnVal->data = View::make('right-column.mainContent')->with(['post'=>$post])->render();
 
     	return json_encode($returnVal);
 

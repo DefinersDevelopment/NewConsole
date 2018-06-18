@@ -19,6 +19,9 @@ class Post extends Model
     }
 
 
+    /*****************************
+    	Simple Func. Probably will not be used except maybe as admin
+    *****************************/
 
     public static function getByCategory($cat_id){
 
@@ -34,14 +37,66 @@ class Post extends Model
         return $posts;       
     }
 
-    public static function getByCategoryWithFavorites($cat_id,$user_id){
+    /*********************************
+    	The standard func call that will be used, 
+    	returns all posts in a cat
+    	WITH the user_posts info (favorite or unread currently)
+    	$last_time 
+    ************************/
 
+    public static function getByCategoryWithFavAndUnreads($cat_id,$user_id,$limit,$last_time = ''){
+
+    	LogIt('Getting cats with suer posts');
+    	
     	/*
     	This can be done with eloquent relations, I am pretty sure
     	but it was more straight forward to do this IMO
+    	
+
+    	NOTE: 	I hard code this to get the favorites, then run a seperate query
+    			for unreads.  I didnt want to get duplicates;
     	*/
-    	$posts = DB::select("select p.title,p.slug,p.author,p.author_bio,p.publication,p.url, up.type 
-    							from posts p join category_post cp on (p.id=cp.post_id and cp.category_id = $cat_id) left join user_posts up on (p.id = up.post_id and up.type='F' and up.user_id = $user_id) ");
+
+    	$sql = 'select p.id, p.title,p.slug,p.author,p.author_bio,p.publication,p.url, ';
+    	$sql .= 'p.updated_at,p.created_at, up.type as favorite, " " as unread ';
+    	$sql .= "from posts p inner join category_post cp on p.id = cp.post_id and cp.category_id = $cat_id ";
+    	$sql .= "left join user_posts up on p.id = up.post_id and up.user_id = $user_id and up.type = 'F'";
+    	
+
+    	LogIt("this is sql $sql");
+
+    	$posts = DB::select($sql);
+
+    	if (count($posts) < 1){
+    		return $posts;
+    	}
+
+
+    	/**********************
+			Now, go back to the user_posts and get the other 
+			types (currently just Unreads, could be more later)
+    	***********************/
+    	
+    	$ids = ''; // string; CSV of post ids
+    	$id_map = []; // a hash where id_map[ post id ] = *pointer to that post
+    	foreach ($posts as $p){
+    		$ids .= $p->id . ',';
+    		$id_map[$p->id] = $p;
+    	}
+
+    	$ids = rtrim($ids,',');
+
+    	$sql = "select post_id, type from user_posts where post_id in ($ids)";
+    	LogIt("this is sql $sql");
+    	$user_posts = DB::select($sql);
+
+
+    	foreach ($user_posts as $up){
+    		$post = $id_map[$up->post_id];
+    		if (isset($post)){
+    			$post->unread = 'U';
+    		}
+    	}
 
         return $posts;       
     }

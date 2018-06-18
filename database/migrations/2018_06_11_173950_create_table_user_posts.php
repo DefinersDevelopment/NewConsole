@@ -20,7 +20,7 @@ class CreateTableUserPosts extends Migration
             $table->char('type', 2);
             $table->timestamps();
             
-            $table->primary(['post_id', 'user_id']);
+            $table->primary(['post_id', 'user_id', 'type']);
         });
     }
 

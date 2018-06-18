@@ -12,7 +12,7 @@
                         <span class="button formSaveClick" title="Save">
                             <i class="fas fa-save"></i>
                         </span>
-                        <span class="button" title="Edit">
+                        <span class="button editPostClick" title="Edit">
                             <i class="fas fa-edit"></i>
                         </span>
                         <span class="button" title="Increase Font Size">
@@ -21,15 +21,7 @@
                         <span class="button" title="Decrease Font Size">
                             <i class="fas fa-search-minus"></i>
                         </span>
-                        <span class="button" title="Email Directly">
-                            <i class="fas fa-envelope"></i>
-                        </span>
-                        <span class="button" title="Print">
-                            <i class="fas fa-print"></i>
-                        </span>
-                        <span class="button" title="Favorite">
-                            <i class="far fa-heart"></i>
-                        </span>
+                        
                     </div>
                     <div id="scrollBar">
                         <div id="color"></div>
