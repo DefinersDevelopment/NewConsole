@@ -21,6 +21,15 @@ function scrollToTop(topDiv) {
 	    scrollTop: $(topDiv).offset().top
 	}, '500');
 }
+function setCatActive(that){
+	$('.isCat').removeClass('active');
+	$(that).closest('.isCat').addClass('active');
+}
+function setEntryActive(that){
+	$('.entry').removeClass('active');
+	$(that).closest('.entry').addClass('active');
+}
+
 
 function addViewPostClick(){
 	// TODO should i add a class/id hiearchy here??
@@ -58,6 +67,9 @@ function addToggleFavPostClick(){
 	// TODO should i add a class/id hiearchy here??
 	addUniqueEvent(".toggleFavPostClick", toggleFavPostClick);
 }
+function addGetFavsClick(){
+	addUniqueEvent(".getFavsClick", getFavsClick);	
+}
   
 /******** END EVENT LISTNER SECTION ******************/
 
@@ -83,7 +95,6 @@ function makeAjaxCall(endPoint, method, data, successFunc){
 			
 		},
 		success: function(response){
-			console.log('john');
 			// TODO check error code here!
 			temp = JSON.parse(response);
 			
@@ -94,7 +105,6 @@ function makeAjaxCall(endPoint, method, data, successFunc){
 					logIt(temp.message);
 				}
 			}
-			logIt('success');
 			successFunc(temp);
 		},
 		error: function(jqXHR, textStatus, errorThrown){
@@ -122,6 +132,7 @@ NAVIGATION STUFF
 // Function that is run when a category is clicked
 function categoryClick(){		
 	data = new Object;
+	setCatActive(this);
 	//console.log("my object: %o", this);
 	endPoint = '/a/getMiddleByCat/' + this.getAttribute('catId');
 	console.log("this is endpoint " + endPoint)
@@ -135,8 +146,7 @@ function categoryClick(){
 function viewPostClick(){
 	data = new Object;
 	postId = this.getAttribute('postId');
-	$('.entry').removeClass('active');
-	$(this).closest('.entry').addClass('active');
+	setEntryActive(this);
 	endPoint = '/a/getPost/' + postId;
 	logIt("this is endpoint " + endPoint)	
 	makeAjaxCall(endPoint, 'GET',data, loadRightHTML);
@@ -235,6 +245,7 @@ function formSaveClick(){
 
 function editPostClick(){
 	logIt('edit post click');
+	setEntryActive(this);
 	// TODO, make this dynamic not hard coded form
 	// name
 	data = new Object;
@@ -247,7 +258,10 @@ function editPostClick(){
 		postId = getCurrentPostId(); // edit bttn on top bar
 	}
 
-	if (! postId) { logIt('edit could not find any post ID'); return; }
+	if (! postId) { 
+		logIt('edit could not find any post ID'); 
+		return; 
+	}
 
 	endpoint = '/admin/editPost/' + postId;
 	logIt("endpoint " + endpoint);
@@ -272,6 +286,14 @@ function toggleFavPostClick(){
 	makeAjaxCall(endpoint, 'GET',data, handleToggleFav);
 		 
 }
+
+	function getFavsClick(){
+		logIt('get favs click');
+		data= new Object;
+		endpoint = '/a/getFavorites/';
+		logIt("endpoint " + endpoint);
+		makeAjaxCall(endpoint, 'GET',data, loadMiddleHTML);
+	}
 
 /***
  *                  .---.                             
@@ -417,9 +439,10 @@ $(document).ready(function() {
 	// that are top of right area
 	addPrevClick();
 	addNextClick();
+
 	addShowPostCreateFormClick();
 	addEditPostClick();
-
+	// fav bttn in bottom nav
+	addGetFavsClick();
 });
-
 	

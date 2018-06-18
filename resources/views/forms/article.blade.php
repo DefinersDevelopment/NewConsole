@@ -36,7 +36,7 @@
 	<div class="inputContainer">
 		<div class='formError'>{{$theErrors['category'] or ""}}</div>
 		<label for="category">Categories:</label><br>
-
+	</div>
 		@if (!isset($postCats))
 			<?php $postCats = []; ?>
 		@endif
@@ -46,26 +46,31 @@
 				@if ($cat->postable == 1)
 					<input type='checkbox' name='category' value='{{$cat->id}}' @if (in_array($cat->id,$postCats)) CHECKED @endif>
 				@else
-					-- 
+					--
 				@endif 
-				{{ $cat->name }} <br>
+					<h2>{{ $cat->name }}</h2>
 					<?php 
 					$children = $cat->getChildren(); 
 					?>
 					@if(isset($children))
+						<div class="columns">
 						@foreach($children as $child)
+							
+							<div class="inputContainer">
+								<label>
 							@if ($child->postable == 1)
-								&nbsp;&nbsp;<input type='checkbox' name='category' value='{{$child->id}}' @if (in_array($child->id,$postCats)) CHECKED @endif>
+									<input type='checkbox' name='category' value='{{$child->id}}' @if (in_array($child->id,$postCats)) CHECKED @endif>
 							@else
-								&nbsp;&nbsp;-- 
+								--
 							@endif 
-							{{ $child->name }} <br>
+									<span>{{ $child->name }}</span>
+								</label>
+							</div>
 						@endforeach
-
+						</div>
 					@endif
 			@endforeach
 		@endif
-	</div>
 
 	<div>
 		push this thing over -----><i class="fas fa-save formSaveClick"></i>

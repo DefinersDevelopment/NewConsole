@@ -205,7 +205,8 @@ body {
   text-align: left;
 }
 
-.textCenter {
+.textCenter,
+.noEntries {
   text-align: center;
 }
 
@@ -390,6 +391,18 @@ a {
   margin-bottom: 25px;
 }
 
+.theme-iss .entry {
+  color: #55565A;
+}
+
+.theme-ar .entry {
+  color: #55565A;
+}
+
+.theme-definers .entry {
+  color: #55565A;
+}
+
 .entry h2 {
   font-size: 16px;
   font-size: 1rem;
@@ -416,7 +429,8 @@ a {
   background: #DEDEDE;
 }
 
-.entry.active h2 {
+.entry.active h2,
+.entry.active p {
   font-weight: 700;
 }
 
@@ -826,15 +840,18 @@ header#navigation #bottomNav ul {
           justify-content: space-between;
 }
 
-.theme-iss header#navigation #bottomNav ul li a {
+.theme-iss header#navigation #bottomNav ul li a,
+.theme-iss header#navigation #bottomNav ul li span {
   color: rgba(255, 255, 255, 0.6);
 }
 
-.theme-ar header#navigation #bottomNav ul li a {
+.theme-ar header#navigation #bottomNav ul li a,
+.theme-ar header#navigation #bottomNav ul li span {
   color: #bbbbbd;
 }
 
-.theme-definers header#navigation #bottomNav ul li a {
+.theme-definers header#navigation #bottomNav ul li a,
+.theme-definers header#navigation #bottomNav ul li span {
   color: #fff;
 }
 
@@ -844,15 +861,18 @@ header#navigation #bottomNav ul li .fal {
   font-size: 25px;
 }
 
-.theme-iss header#navigation #bottomNav ul li.active a {
+.theme-iss header#navigation #bottomNav ul li.active a,
+.theme-iss header#navigation #bottomNav ul li.active span {
   color: white;
 }
 
-.theme-ar header#navigation #bottomNav ul li.active a {
+.theme-ar header#navigation #bottomNav ul li.active a,
+.theme-ar header#navigation #bottomNav ul li.active span {
   color: #FFCE00;
 }
 
-.theme-definers header#navigation #bottomNav ul li.active a {
+.theme-definers header#navigation #bottomNav ul li.active a,
+.theme-definers header#navigation #bottomNav ul li.active span {
   color: #87E1D1;
 }
 

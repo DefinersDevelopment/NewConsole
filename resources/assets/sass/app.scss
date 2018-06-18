@@ -68,6 +68,9 @@ a  {text-decoration:none;}
 	}
 }
 .entry {
+	@include themify($themes){
+		color:themed('textColor');
+	}
 	h2 {@include font-size(16px); @include line-height(22px); @extend .button; }
 	p {@include font-size(14px); @include line-height(18px);}
 }
@@ -75,7 +78,7 @@ a  {text-decoration:none;}
 	@include themify($themes) {
 		background:themed('entryActiveBackground');
 	}
-	h2 {font-weight:700;}
+	h2, p {font-weight:700;}
 }
 
 .transition {transition:.2s ease;}
@@ -110,7 +113,7 @@ a  {text-decoration:none;}
 	}
 }
 
-.noEntries {margin:20px 0;}
+.noEntries {margin:20px 0; @extend .textCenter;}
 
 /* Input Styles */
 form {box-sizing:border-box;}
@@ -185,7 +188,7 @@ header#navigation {width:250px; min-width:250px; max-width:250px; @extend .flexC
 		}
 		ul {@extend .flex; flex: 0 0 100%; margin-top:20px; justify-content:space-between;
 			li {
-				a {
+				a, span {
 					@include themify($themes) {
 						color:themed('bottomNavIconColor');
 					}
@@ -193,7 +196,7 @@ header#navigation {width:250px; min-width:250px; max-width:250px; @extend .flexC
 				.fas, .far, .fal {font-size:25px;}
 			}
 			li.active {
-				a {
+				a, span {
 					@include themify($themes) {
 						color:themed('bottomNavIconActiveColor');
 					}

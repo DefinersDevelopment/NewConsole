@@ -37,6 +37,11 @@ class Post extends Model
         return $posts;       
     }
 
+
+    private static function selectSQL(){
+    	return  'select p.id, p.title,p.slug,p.author,p.author_bio,p.publication,p.url, p.short_description,
+    	p.updated_at,p.created_at, up.type as favorite, " " as unread ';
+    }
     /*********************************
     	The standard func call that will be used, 
     	returns all posts in a cat
@@ -57,10 +62,9 @@ class Post extends Model
     			for unreads.  I didnt want to get duplicates;
     	*/
 
-    	$sql = 'select p.id, p.title,p.slug,p.author,p.author_bio,p.publication,p.url, ';
-    	$sql .= 'p.updated_at,p.created_at, up.type as favorite, " " as unread ';
-    	$sql .= "from posts p inner join category_post cp on p.id = cp.post_id and cp.category_id = $cat_id ";
-    	$sql .= "left join user_posts up on p.id = up.post_id and up.user_id = $user_id and up.type = 'F'";
+    	$sql = Post::selectSQL() .  "from posts p inner join category_post cp on p.id = cp.post_id and cp.category_id = $cat_id ";
+    	$sql .= "left join user_posts up on p.id = up.post_id and up.user_id = $user_id and up.type = 'F' ";
+    	$sql .= " where p.deleted_at IS NULL and p.status = 'A' ";
     	
 
     	LogIt("this is sql $sql");
@@ -101,6 +105,24 @@ class Post extends Model
         return $posts;       
     }
 
+    public static function getUserFavoritesWithUnreads($user_id, $type){
+
+	    /*******************
+	    Tried the eloquent way, the SQL was awful, and the 
+	    return was total bloat 
+	    ******************/
+	    // TODO need to chunk this in groups of ~50?? 100??
+	    $sql = Post::selectSQL();
+	    $sql .= "from posts p, user_posts up where p.status = 'A' and deleted_at IS NULL and p.id = up.post_id and up.user_id = $user_id and up.type = $type";
+
+	    $posts = DB::select($sql);
+
+
+
+	    return $posts;       
+
+	}
+
     // made this a function in case we want to 
 
     public static function getPost($id){
@@ -109,6 +131,9 @@ class Post extends Model
 
     	return $post;
     }
+
+
+
 
     public function validate(){
     	

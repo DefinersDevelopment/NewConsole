@@ -16,15 +16,20 @@
 Auth::routes();
 
 Route::get('/', 'MasterController@index')->name('index');
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
+
+// testing
 Route::get('/ben', 'BenTestController@test')->name('benTest');
 
+// calls that load whole page
 Route::get('/browse/{cat_id}', 'MasterController@browseByCategory')->name('browseByCategory');
-Route::get('/show/{post_id}', 'MasterController@showPost')->name('showPost');
+//Route::get('/show/{post_id}', 'MasterController@showPost')->name('showPost');
 
 /* AJAX CALLS, TODO use another file....???? */
 Route::get('/a/getMiddleByCat/{cat_id}', 'MasterController@getMiddleByCat')->name('getMiddleByCat');
 Route::get('/a/getPost/{post_id}', 'MasterController@getPost')->name('getPost');
+Route::get('/a/getFavorites/', 'MasterController@getFavorites')->name('getFavorites');
+
 
 // Post add/edit 
 Route::get('/admin/showForm/{form_type}', 'AdminController@showForm')->name('showForm');

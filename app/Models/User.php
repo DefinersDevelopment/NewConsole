@@ -44,18 +44,7 @@ class User extends Authenticatable
     *******************************/
 
 
-    public static function getUserPosts($user_id, $type){
-
-        /*******************
-        Tried the eloquent way, the SQL was awful, and the 
-        return was total bloat 
-        ******************/
-        // TODO need to chunk this in groups of ~50?? 100??
-        $posts = DB::select('select p.id, p.title, p.slug, p.author, p.url, p.short_description, p.created_at, p.updated_at from posts p, user_posts up where p.status = "A" and deleted_at IS NULL and p.id = up.post_id and up.user_id = ? and up.type = ?', [$user_id, $type]);
-
-        return $posts;       
-
-    }
+    
 
     public static function setUserPost($user_id, $post_id, $type){
 

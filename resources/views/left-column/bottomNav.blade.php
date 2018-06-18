@@ -1,24 +1,24 @@
                 <nav id="bottomNav">
                     <ul>
                         <li class="active" title="Approve Posts">
-                            <a href="">
+                            <span>
                                 <i class="far fa-thumbs-up"></i>
-                            </a>
+                            </span>
                         </li>
                         <li title="See the Posts you have created">
-                            <a href="">
+                            <span>
                                 <i class="fas fa-sticky-note"></i>
-                            </a>
+                            </span>
                         </li>
                         <li title="View your Favorite alerts">
-                            <a href="">
-                                <i class="fas fa-heart" aria-hidden="true"></i>
-                            </a>
+                            <span>
+                                <i class="fas fa-heart getFavsClick" aria-hidden="true"></i>
+                            </span>
                         </li>
                         <li title="Log out">
-                            <a href="">
+                            <span>
                                 <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
-                            </a>
+                            </span>
                         </li>
                     </ul>
                 </nav>
