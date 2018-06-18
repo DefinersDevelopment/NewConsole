@@ -15,6 +15,14 @@ Event Listeners
                                    
 
 **********************************/
+// Scroll the view back to the top -- can be used for when content changes to show the user the first items
+function scrollToTop(topDiv) {
+	$('#content').animate({
+	    scrollTop: $(topDiv).offset().top
+	}, '500');
+}
+
+
 function addViewPostClick(){
 	// TODO should i add a class/id hiearchy here??
 	$(".isPost").on('click', viewPostClick);
@@ -209,7 +217,8 @@ NAVIGATION STUFF
 	}
 
 	function formSaveClick(){
-		logIt('form save click');
+		logIt('form save click ' + this.getAttribute('name'));
+		//dump(this);
 		// TODO, make this dynamic not hard coded form
 		// name
 		data = new Object;
@@ -273,9 +282,11 @@ NAVIGATION STUFF
  */
 
 	// Success callback for loading posts in middle col
+
 	function loadMiddleHTML(response){
 		if (response.data){
 			document.getElementById("entries").innerHTML = response.data;
+			scrollToTop('#search');
 			logIt('trying to add post clicks'); 
 			addViewPostClick();
 			addEditPostClick();
@@ -283,12 +294,18 @@ NAVIGATION STUFF
 		}
 	}
 
+
 	// Success callback for loading a post in right main area
+
 	function loadRightHTML(response){
+		scrollToTop('#topBar'); 
 		if (response.data){
-			document.getElementById("mainContent").innerHTML = response.data;
+
+			document.getElementById("contentWrapper").innerHTML = response.data;
+		
 			// HACK Alert! this is for FORMS not posts
 			// there is no saveClick class for posts!
+			logIt('adding formSaveClick listener from load right')
 			addFormSaveClick();
 		}
 	}
@@ -341,6 +358,14 @@ function logIt(msg,status){
 	}
 }
 
+function dump(obj) {
+    var out = '';
+    for (var i in obj) {
+        out += i + ": " + obj[i] + "\n";
+    }
+    logIt("This is Obect Dump!!");
+    logIt(out);
+}
 
 	$(document).ready(function() { 
 

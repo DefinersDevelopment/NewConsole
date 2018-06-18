@@ -358,6 +358,7 @@ section#rightColumn {width:100%; background:#fff; @extend .flexColumn; @extend .
 	}
 	#mainContent {width:100%; height:auto; flex:1; background:#fff; position:relative;
 		#content {width:100%; height:100%; position:absolute; top:0; left:0; box-sizing:border-box; overflow-y:scroll; padding:25px 20px 20px 20px;
+			
 			.inputContainer {@extend .flex; flex-wrap:wrap; margin-bottom:20px;
 				label {flex: 0 0 100%; padding-bottom:10px; text-transform:uppercase; @include font-size(16px); @include line-height(19px); font-weight:400;
 					span {text-transform:none;}
@@ -371,6 +372,16 @@ section#rightColumn {width:100%; background:#fff; @extend .flexColumn; @extend .
 						background:themed('light');
 					}
 				}
+			}
+			.columns { @extend .flex; flex-wrap:wrap;
+				.inputContainer	{min-width:33.33%; max-width:33.33%; align-items:center; flex-wrap:none; overflow:hidden; text-overflow:ellipsis;
+					label, input {flex:none;}
+					label {padding-bottom:0; min-width:100%; @extend .flex; align-items:center; overflow:hidden; text-overflow:ellipsis;
+						span {max-width:calc(100% - 40px); width:100%; overflow:hidden; text-overflow:ellipsis;}
+					}
+					input {margin-right:20px;}
+				}
+				
 			}
 		}
 		.circle {position:absolute; bottom:20px; right:20px; opacity:.5;

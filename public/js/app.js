@@ -76,31 +76,9 @@ module.exports = __webpack_require__(5);
 /***/ (function(module, exports, __webpack_require__) {
 
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
 
-//require('./bootstrap');
-
-__webpack_require__(2);
-__webpack_require__(3);
 __webpack_require__(4);
-
-//window.Vue = require('vue');
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-// Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
-// const app = new Vue({
-//     el: '#app'
-// });
+__webpack_require__(2);
 
 /***/ }),
 /* 2 */
@@ -139,6 +117,32 @@ function closeOpenMiddleColumn() {
 }
 closeOpenMiddleColumn();
 
+//Scroll To Top
+function scrollToTop() {
+	$('#content').animate({
+		scrollTop: $('#topBar').offset().top
+	}, '500');
+}
+
+//Scroll Bar
+function scroller() {
+	$('#content').scroll(function () {
+		var scrollPercent = $(this).scrollTop() / ($('#contentWrapper').height() - $(this).height()) * 100;
+		$('#color').css('width', scrollPercent + '%');
+
+		if ($(this).scrollTop() < 500) {
+			$('#rightColumn .circle').css({ 'opacity': '.5' });
+		} else {
+			$('#rightColumn .circle').css({ 'opacity': '1' });
+		}
+	});
+
+	$('#rightColumn .circle').click(function () {
+		scrollToTop();
+	});
+}
+scroller();
+
 // Advanced Search
 function advancedSearch() {
 	$('#openAdvancedSearch').click(function () {
@@ -153,51 +157,8 @@ function advancedSearch() {
 }
 advancedSearch();
 
-//Scroll To Top
-
-$('#content').scroll(function () {
-	var scroll = $(this).scrollTop();
-	if (scroll < 500) {
-		$('#rightColumn .circle').css({ 'opacity': '.5' });
-	} else {
-		$('#rightColumn .circle').css({ 'opacity': '1' });
-	}
-});
-$('#rightColumn .circle').click(function () {
-	$('#content').animate({
-		scrollTop: $($.attr(this, 'top')).offset().top
-	}, '500');
-});
-
-// Scroll Bar
-function scrollBar() {
-	$('#color').show().css('width', 0);
-	var d = $('#content').prop('scrollHeight');
-	$('#content').on('scroll', function () {
-		var h = $(window).innerHeight() - 75;
-		var scroll = $(this).scrollTop();
-		var output = scroll / (d - h) * 100;
-		$('#color').css({ 'width': output + '%' });
-	});
-}
-scrollBar();
-
 /***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-
-/**********************
-	This file contains all event listeners for the app
-***********************/
-
-// function addPostClick(){
-// 	console.log('add post click events');
-// 	// TODO should i add a class/id hiearchy here??
-// 	$(".postClick").on('click', getPost);
-// }
-
-/***/ }),
+/* 3 */,
 /* 4 */
 /***/ (function(module, exports) {
 
@@ -218,6 +179,13 @@ Event Listeners
                                    
 
 **********************************/
+// Scroll the view back to the top -- can be used for when content changes to show the user the first items
+function scrollToTop(topDiv) {
+	$('#content').animate({
+		scrollTop: $(topDiv).offset().top
+	}, '500');
+}
+
 function addViewPostClick() {
 	// TODO should i add a class/id hiearchy here??
 	$(".isPost").on('click', viewPostClick);
@@ -407,7 +375,8 @@ function showPostCreateFormClick() {
 }
 
 function formSaveClick() {
-	logIt('form save click');
+	logIt('form save click ' + this.getAttribute('name'));
+	//dump(this);
 	// TODO, make this dynamic not hard coded form
 	// name
 	data = new Object();
@@ -468,9 +437,11 @@ function toggleFavPostClick() {
  */
 
 // Success callback for loading posts in middle col
+
 function loadMiddleHTML(response) {
 	if (response.data) {
 		document.getElementById("entries").innerHTML = response.data;
+		scrollToTop('#search');
 		logIt('trying to add post clicks');
 		addViewPostClick();
 		addEditPostClick();
@@ -479,11 +450,16 @@ function loadMiddleHTML(response) {
 }
 
 // Success callback for loading a post in right main area
+
 function loadRightHTML(response) {
+	scrollToTop('#topBar');
 	if (response.data) {
-		document.getElementById("mainContent").innerHTML = response.data;
+
+		document.getElementById("contentWrapper").innerHTML = response.data;
+
 		// HACK Alert! this is for FORMS not posts
 		// there is no saveClick class for posts!
+		logIt('adding formSaveClick listener from load right');
 		addFormSaveClick();
 	}
 }
@@ -532,6 +508,15 @@ function logIt(msg, status) {
 	if (_log == 'dev' || status == 'prod') {
 		console.log(msg);
 	}
+}
+
+function dump(obj) {
+	var out = '';
+	for (var i in obj) {
+		out += i + ": " + obj[i] + "\n";
+	}
+	logIt("This is Obect Dump!!");
+	logIt(out);
 }
 
 $(document).ready(function () {

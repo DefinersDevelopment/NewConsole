@@ -40,7 +40,7 @@
 		@if (!isset($postCats))
 			<?php $postCats = []; ?>
 		@endif
-		
+
 		@if (isset($allCats))
 			@foreach ($allCats as $cat)
 				@if ($cat->postable == 1)
@@ -67,7 +67,7 @@
 		@endif
 	</div>
 
-	<div class='formSaveClick'>
-		push this thing over -----><i class="fas fa-save"></i>
+	<div>
+		push this thing over -----><i class="fas fa-save formSaveClick"></i>
 	</div>
 </form>

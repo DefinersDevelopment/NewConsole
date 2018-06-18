@@ -58,7 +58,7 @@ class Post extends Model
     	*/
 
     	$sql = 'select p.id, p.title,p.slug,p.author,p.author_bio,p.publication,p.url, ';
-    	$sql .= 'p.updated_at,p.created_at, up.type as favorite ';
+    	$sql .= 'p.updated_at,p.created_at, up.type as favorite, " " as unread ';
     	$sql .= "from posts p inner join category_post cp on p.id = cp.post_id and cp.category_id = $cat_id ";
     	$sql .= "left join user_posts up on p.id = up.post_id and up.user_id = $user_id and up.type = 'F'";
     	
@@ -66,6 +66,10 @@ class Post extends Model
     	LogIt("this is sql $sql");
 
     	$posts = DB::select($sql);
+
+    	if (count($posts) < 1){
+    		return $posts;
+    	}
 
 
     	/**********************
@@ -78,7 +82,6 @@ class Post extends Model
     	foreach ($posts as $p){
     		$ids .= $p->id . ',';
     		$id_map[$p->id] = $p;
-    		$p->unread = ''; // make sure something is always there
     	}
 
     	$ids = rtrim($ids,',');
