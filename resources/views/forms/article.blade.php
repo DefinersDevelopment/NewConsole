@@ -38,6 +38,10 @@
 		<label for="category">Categories:</label><br>
 	</div>
 
+		@if (!isset($postCats))
+			<?php $postCats = []; ?>
+		@endif
+		
 		@if (isset($allCats))
 			@foreach ($allCats as $cat)
 				@if ($cat->postable == 1)

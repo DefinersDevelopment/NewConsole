@@ -34,6 +34,18 @@ class Post extends Model
         return $posts;       
     }
 
+    public static function getByCategoryWithFavorites($cat_id,$user_id){
+
+    	/*
+    	This can be done with eloquent relations, I am pretty sure
+    	but it was more straight forward to do this IMO
+    	*/
+    	$posts = DB::select("select p.title,p.slug,p.author,p.author_bio,p.publication,p.url, up.type 
+    							from posts p join category_post cp on (p.id=cp.post_id and cp.category_id = $cat_id) left join user_posts up on (p.id = up.post_id and up.type='F' and up.user_id = $user_id) ");
+
+        return $posts;       
+    }
+
     // made this a function in case we want to 
 
     public static function getPost($id){
