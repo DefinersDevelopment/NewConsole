@@ -34,11 +34,11 @@ closeOpenMiddleColumn();
 
 
 //Scroll To Top
-function scrollToTop() {
-	$('#content').animate({
-	    scrollTop: $('#topBar').offset().top
-	}, '500');
-}
+// function scrollToTop() {
+// 	$('#content').animate({
+// 	    scrollTop: $('#topBar').offset().top
+// 	}, '500');
+// }
 
 //Scroll Bar
 function scroller() {
@@ -54,7 +54,7 @@ function scroller() {
 	});
 
 	$('#rightColumn .circle').click(function() {
-		scrollToTop();
+		scrollToTop('#topBar');
 	});
 }
 scroller();
