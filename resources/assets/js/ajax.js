@@ -25,35 +25,39 @@ function scrollToTop(topDiv) {
 
 function addViewPostClick(){
 	// TODO should i add a class/id hiearchy here??
-	$(".isPost").on('click', viewPostClick);
+	addUniqueEvent(".isPost", viewPostClick);
 }	
 function addCatClick(){
 	// TODO should i add a class/id hiearchy here??
-	$(".isCat").on('click', categoryClick);
+	addUniqueEvent(".isCat", categoryClick);
+	
 }
 function addPrevClick(){
 	// TODO should i add a class/id hiearchy here??
-	$(".prevClick").on('click', prevClick);
+	addUniqueEvent(".prevClick", prevClick);
+	
 }
 function addNextClick(){
 	// TODO should i add a class/id hiearchy here??
-	$(".nextClick").on('click', nextClick);
+	addUniqueEvent(".nextClick", nextClick);
+	
 }
 function addShowPostCreateFormClick(){
 	// TODO should i add a class/id hiearchy here??
-	$(".showPostCreateFormClick").on('click', showPostCreateFormClick);
+	addUniqueEvent(".showPostCreateFormClick", showPostCreateFormClick);
 }
 function addFormSaveClick(){
 	// TODO should i add a class/id hiearchy here??
-	$(".formSaveClick").on('click', formSaveClick);
+	addUniqueEvent(".formSaveClick", formSaveClick);
 }
 function addEditPostClick(){
 	// TODO should i add a class/id hiearchy here??
-	$(".editPostClick").on('click', editPostClick);
+	addUniqueEvent(".editPostClick", editPostClick);
+	
 }
 function addToggleFavPostClick(){
 	// TODO should i add a class/id hiearchy here??
-	$(".toggleFavPostClick").on('click', toggleFavPostClick);
+	addUniqueEvent(".toggleFavPostClick", toggleFavPostClick);
 }
   
 /******** END EVENT LISTNER SECTION ******************/
@@ -132,9 +136,9 @@ NAVIGATION STUFF
 		data = new Object;
 		postId = this.getAttribute('postId');
 		endPoint = '/a/getPost/' + postId;
-		logIt("this is endpoint " + endPoint)	
-		makeAjaxCall(endPoint, 'GET',data, loadRightHTML);
-		setCurrentPostId(postId);
+		logIt("this is endpoint " + endPoint);
+		//setCurrentPostId(postId);	
+		makeAjaxCall(endPoint, 'GET',data, loadRightHTML);	
 	}
 	
 
@@ -234,11 +238,22 @@ NAVIGATION STUFF
 		// name
 		data = new Object;
 		//logIt(data); return;
-		endpoint = '/admin/editPost/' + this.getAttribute('postId');
+		postId = this.getAttribute('postId'); // edit button in middle col
+		
+		logIt('this is post id in edit ' + postId);
+
+		if (! postId) {
+			postId = getCurrentPostId(); // edit bttn on top bar
+		}
+
+		if (! postId) { logIt('edit could not find any post ID'); return; }
+
+		endpoint = '/admin/editPost/' + postId;
 		logIt("endpoint " + endpoint);
 		makeAjaxCall(endpoint, 'GET',data, loadRightHTML);
 
 	}
+
 	function toggleFavPostClick(){
 		logIt('edit post click');
 		data= new Object;
@@ -300,13 +315,15 @@ NAVIGATION STUFF
 	function loadRightHTML(response){
 		scrollToTop('#topBar'); 
 		if (response.data){
-
 			document.getElementById("contentWrapper").innerHTML = response.data;
-		
 			// HACK Alert! this is for FORMS not posts
 			// there is no saveClick class for posts!
 			logIt('adding formSaveClick listener from load right')
 			addFormSaveClick();
+		} 
+		if (response.postId){
+			logIt('load right setting cur post id ' + response.postId);
+			setCurrentPostId(response.postId);
 		}
 	}
 
@@ -349,8 +366,10 @@ function getCurrentPostId(){
 }
 
 function setCurrentPostId(postId){
+	logIt('IN FUNC  set cur post =  ' + postId);
 	document.getElementById('currentPost').setAttribute('value', postId);	
 }
+
 function logIt(msg,status){
 	// status not null means log in prod
 	if (_log == 'dev' || status == 'prod'){
@@ -367,6 +386,20 @@ function dump(obj) {
     logIt(out);
 }
 
+function addUniqueEvent(className,func){
+		temps = $(className);
+	for (i = 0; i < temps.length; i++) {
+
+		if ($(temps[i]).hasClass('hasClickEvent')){
+			// do nothing
+		} else {
+			$(temps[i]).on('click', func);
+			$(temps[i]).addClass('hasClickEvent');
+		}
+	}
+
+}
+
 	$(document).ready(function() { 
 
 		// register the nav links to show cats
@@ -378,6 +411,7 @@ function dump(obj) {
 		addPrevClick();
 		addNextClick();
 		addShowPostCreateFormClick();
+		addEditPostClick();
 
 	 });
 

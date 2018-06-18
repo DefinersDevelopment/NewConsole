@@ -1,167 +1,3 @@
-/******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(1);
-module.exports = __webpack_require__(5);
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-
-__webpack_require__(4);
-__webpack_require__(2);
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-// Open SubNavigation
-function openSubNavigation() {
-	$('#mainNav span.toggleNav').click(function () {
-		$('#mainNav li ul').slideUp();
-		if ($(this).parent().find('ul').is(':hidden') == true) {
-			$(this).parent().find('ul').slideDown();
-		}
-	});
-	$('#mainNav li ul li').click(function () {
-		$(this).parent().css('display', 'block');
-	});
-}
-openSubNavigation();
-
-// Close/Open Middle Column
-function closeOpenMiddleColumn() {
-	$('#toggleMiddle').click(function () {
-		$('#middleColumn').toggleClass('closed');
-	});
-	if ($(window).width() < 1170) {
-		$('#middleColumn').addClass('closed');
-	}
-	$(window).resize(function () {
-		console.log($(window).width());
-		if ($(window).width() < 1170) {
-			$('#middleColumn').addClass('closed');
-		} else {
-			$('#middleColumn').removeClass('closed');
-		}
-	});
-}
-closeOpenMiddleColumn();
-
-//Scroll To Top
-function scrollToTop() {
-	$('#content').animate({
-		scrollTop: $('#topBar').offset().top
-	}, '500');
-}
-
-//Scroll Bar
-function scroller() {
-	$('#content').scroll(function () {
-		var scrollPercent = $(this).scrollTop() / ($('#contentWrapper').height() - $(this).height()) * 100;
-		$('#color').css('width', scrollPercent + '%');
-
-		if ($(this).scrollTop() < 500) {
-			$('#rightColumn .circle').css({ 'opacity': '.5' });
-		} else {
-			$('#rightColumn .circle').css({ 'opacity': '1' });
-		}
-	});
-
-	$('#rightColumn .circle').click(function () {
-		scrollToTop();
-	});
-}
-scroller();
-
-// Advanced Search
-function advancedSearch() {
-	$('#openAdvancedSearch').click(function () {
-		$('#advancedSearch').slideToggle();
-		$(this).toggleClass('active');
-		if ($('.advanced').hasClass('fa-chevron-circle-down')) {
-			$('.advanced').removeClass('fa-chevron-circle-down').addClass('fa-chevron-circle-up');
-		} else {
-			$('.advanced').removeClass('fa-chevron-circle-up').addClass('fa-chevron-circle-down');
-		}
-	});
-}
-advancedSearch();
-
-/***/ }),
-/* 3 */,
-/* 4 */
-/***/ (function(module, exports) {
-
 /********************************
 Globals
 
@@ -182,43 +18,48 @@ Event Listeners
 // Scroll the view back to the top -- can be used for when content changes to show the user the first items
 function scrollToTop(topDiv) {
 	$('#content').animate({
-		scrollTop: $(topDiv).offset().top
+	    scrollTop: $(topDiv).offset().top
 	}, '500');
 }
 
-function addViewPostClick() {
-	// TODO should i add a class/id hiearchy here??
-	$(".isPost").on('click', viewPostClick);
-}
-function addCatClick() {
-	// TODO should i add a class/id hiearchy here??
-	$(".isCat").on('click', categoryClick);
-}
-function addPrevClick() {
-	// TODO should i add a class/id hiearchy here??
-	$(".prevClick").on('click', prevClick);
-}
-function addNextClick() {
-	// TODO should i add a class/id hiearchy here??
-	$(".nextClick").on('click', nextClick);
-}
-function addShowPostCreateFormClick() {
-	// TODO should i add a class/id hiearchy here??
-	$(".showPostCreateFormClick").on('click', showPostCreateFormClick);
-}
-function addFormSaveClick() {
-	// TODO should i add a class/id hiearchy here??
-	$(".formSaveClick").on('click', formSaveClick);
-}
-function addEditPostClick() {
-	// TODO should i add a class/id hiearchy here??
-	$(".editPostClick").on('click', editPostClick);
-}
-function addToggleFavPostClick() {
-	// TODO should i add a class/id hiearchy here??
-	$(".toggleFavPostClick").on('click', toggleFavPostClick);
-}
 
+function addViewPostClick(){
+	// TODO should i add a class/id hiearchy here??
+	addUniqueEvent(".isPost", viewPostClick);
+}	
+function addCatClick(){
+	// TODO should i add a class/id hiearchy here??
+	addUniqueEvent(".isCat", categoryClick);
+	
+}
+function addPrevClick(){
+	// TODO should i add a class/id hiearchy here??
+	addUniqueEvent(".prevClick", prevClick);
+	
+}
+function addNextClick(){
+	// TODO should i add a class/id hiearchy here??
+	addUniqueEvent(".nextClick", nextClick);
+	
+}
+function addShowPostCreateFormClick(){
+	// TODO should i add a class/id hiearchy here??
+	addUniqueEvent(".showPostCreateFormClick", showPostCreateFormClick);
+}
+function addFormSaveClick(){
+	// TODO should i add a class/id hiearchy here??
+	addUniqueEvent(".formSaveClick", formSaveClick);
+}
+function addEditPostClick(){
+	// TODO should i add a class/id hiearchy here??
+	addUniqueEvent(".editPostClick", editPostClick);
+	
+}
+function addToggleFavPostClick(){
+	// TODO should i add a class/id hiearchy here??
+	addUniqueEvent(".toggleFavPostClick", toggleFavPostClick);
+}
+  
 /******** END EVENT LISTNER SECTION ******************/
 
 /*
@@ -228,39 +69,44 @@ data is a JS object
 successFunc is a call back function
 */
 
-function makeAjaxCall(endPoint, method, data, successFunc) {
+	function makeAjaxCall(endPoint, method, data, successFunc){
+		
+		data._token = document.getElementById("token").getAttribute('value');
 
-	data._token = document.getElementById("token").getAttribute('value');
+		$.ajax({
+			method: method,
+			url:    endPoint,
+			data: data,
+			beforeSend: function(){	
+				
+			},
+			complete: function(){
+				
+			},
+			success: function(response){
 
-	$.ajax({
-		method: method,
-		url: endPoint,
-		data: data,
-		beforeSend: function beforeSend() {},
-		complete: function complete() {},
-		success: function success(response) {
+				// TODO check error code here!
+				temp = JSON.parse(response);
+				
+				if (temp.error > 0){
+					// TODO handle this better
+					logIt('we got a graceful error from the system');
+					if (temp.message){
+						logIt(temp.message);
+					}
 
-			// TODO check error code here!
-			temp = JSON.parse(response);
-
-			if (temp.error > 0) {
-				// TODO handle this better
-				logIt('we got a graceful error from the system');
-				if (temp.message) {
-					logIt(temp.message);
 				}
-			}
 
-			successFunc(temp);
-		},
-		error: function error(jqXHR, textStatus, errorThrown) {
-			console.log("Ajax Error");
-			console.log(JSON.stringify(jqXHR));
-			console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-			/* TODO show user a nice error code somewhere */
-		}
-	});
-}
+				successFunc(temp);
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				console.log("Ajax Error");
+				console.log(JSON.stringify(jqXHR));
+				console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+				/* TODO show user a nice error code somewhere */
+			}
+		});
+	}
 
 /********************************************************
 NAVIGATION STUFF
@@ -274,142 +120,156 @@ NAVIGATION STUFF
                       |___/                         
 *********************************************************/
 
-// Function that is run when a category is clicked
-function categoryClick() {
-	data = new Object();
-	//console.log("my object: %o", this);
-	endPoint = '/a/getMiddleByCat/' + this.getAttribute('catId');
-	console.log("this is endpoint " + endPoint);
-	makeAjaxCall(endPoint, 'GET', data, loadMiddleHTML);
-	document.getElementById('currentContext').setAttribute('value', 'categoryBrowse');
-}
-
-// Function that is run when a post is clicked in middle col
-// to populate the right area
-function viewPostClick() {
-	data = new Object();
-	postId = this.getAttribute('postId');
-	endPoint = '/a/getPost/' + postId;
-	logIt("this is endpoint " + endPoint);
-	makeAjaxCall(endPoint, 'GET', data, loadRightHTML);
-	setCurrentPostId(postId);
-}
-
-/*
-finds current active post and loads the next one in the div of entries
-*/
-function nextClick() {
-
-	logIt('next clicked');
-
-	// TODO make this a function getCurPostId();
-	curPostId = getCurrentPostId();
-
-	// if there is no active post, do nothing
-	// TODO, is this good logic
-	if (!curPostId) {
-		return;
+	// Function that is run when a category is clicked
+	function categoryClick(){		
+		data = new Object;
+		//console.log("my object: %o", this);
+		endPoint = '/a/getMiddleByCat/' + this.getAttribute('catId');
+		console.log("this is endpoint " + endPoint)
+		makeAjaxCall(endPoint,'GET',data, loadMiddleHTML);
+		document.getElementById('currentContext').setAttribute('value', 'categoryBrowse');
 	}
 
-	allPosts = $('.isPost');
+	// Function that is run when a post is clicked in middle col
+	// to populate the right area
+	function viewPostClick(){
+		data = new Object;
+		postId = this.getAttribute('postId');
+		endPoint = '/a/getPost/' + postId;
+		logIt("this is endpoint " + endPoint);
+		//setCurrentPostId(postId);	
+		makeAjaxCall(endPoint, 'GET',data, loadRightHTML);	
+	}
+	
 
-	foundIndex = -1;
-	for (i = 0; i < allPosts.length; i++) {
-		if (curPostId == allPosts[i].getAttribute('postId')) {
-			foundIndex = i;
-			break;
+	/*
+	finds current active post and loads the next one in the div of entries
+	*/
+	function nextClick(){
+
+		logIt('next clicked');
+		
+		// TODO make this a function getCurPostId();
+		curPostId = getCurrentPostId();
+
+		// if there is no active post, do nothing
+		// TODO, is this good logic
+		if (! curPostId){ return; }
+
+		allPosts = $('.isPost');
+
+		foundIndex = -1;
+		for (i = 0; i < allPosts.length; i++) { 
+  			if (curPostId == allPosts[i].getAttribute('postId')){
+  				foundIndex = i;
+  				break;
+  			}
 		}
-	}
-	// if cur not found (technically not possible)
-	// or cur value is last in array
-	// then there is no next, do nothing
-	if (foundIndex == -1 || foundIndex == allPosts.length) {
-		return;
-	} else {
-		nextPost = allPosts[foundIndex + 1];
-	}
-
-	nextPost.click();
-}
-
-function prevClick() {
-
-	logIt('prev clicked');
-
-	// TODO make this a function getCurPostId();
-	curPostId = getCurrentPostId();
-
-	// if there is no active post, do nothing
-	// TODO, is this good logic
-	if (!curPostId) {
-		return;
-	}
-
-	allPosts = $('.isPost');
-
-	foundIndex = -1;
-	for (i = 0; i < allPosts.length; i++) {
-		if (curPostId == allPosts[i].getAttribute('postId')) {
-			foundIndex = i;
-			break;
+		// if cur not found (technically not possible)
+		// or cur value is last in array
+		// then there is no next, do nothing
+		if (foundIndex == -1 || foundIndex == allPosts.length){
+			return;
+		} else {
+			nextPost = allPosts[foundIndex +1];
 		}
-	}
-	// if cur not found (technically not possible)
-	// or cur value is index 0
-	// then there is no previous, do nothing
-	if (foundIndex == -1 || foundIndex == 0) {
-		return;
-	} else {
-		prevPost = allPosts[foundIndex - 1];
+
+		nextPost.click();
+
 	}
 
-	prevPost.click();
-}
 
-function showPostCreateFormClick() {
-	logIt('show form clicked');
-	data = new Object();
-	endPoint = '/admin/showForm/article';
-	logIt("this is endpoint " + endPoint);
-	makeAjaxCall(endPoint, 'GET', data, loadRightHTML);
-}
+	function prevClick(){
 
-function formSaveClick() {
-	logIt('form save click ' + this.getAttribute('name'));
-	//dump(this);
-	// TODO, make this dynamic not hard coded form
-	// name
-	data = new Object();
-	data.formData = $("#theForm").serializeArray();
-	//logIt(data); return;
-	makeAjaxCall('/admin/savePost', 'POST', data, loadRightHTML);
-}
+		logIt('prev clicked');
+		
+		// TODO make this a function getCurPostId();
+		curPostId = getCurrentPostId();
 
-function editPostClick() {
-	logIt('edit post click');
-	// TODO, make this dynamic not hard coded form
-	// name
-	data = new Object();
-	//logIt(data); return;
-	endpoint = '/admin/editPost/' + this.getAttribute('postId');
-	logIt("endpoint " + endpoint);
-	makeAjaxCall(endpoint, 'GET', data, loadRightHTML);
-}
-function toggleFavPostClick() {
-	logIt('edit post click');
-	data = new Object();
+		// if there is no active post, do nothing
+		// TODO, is this good logic
+		if (! curPostId){ return; }
 
-	if ($(this).hasClass('far')) {
-		onOff = 'on';
-	} else {
-		onOff = 'off';
+		allPosts = $('.isPost');
+
+		foundIndex = -1;
+		for (i = 0; i < allPosts.length; i++) { 
+  			if (curPostId == allPosts[i].getAttribute('postId')){
+  				foundIndex = i;
+  				break;
+  			}
+		}
+		// if cur not found (technically not possible)
+		// or cur value is index 0
+		// then there is no previous, do nothing
+		if (foundIndex == -1 || foundIndex == 0){
+			return;
+		} else {
+			prevPost = allPosts[foundIndex -1];
+		}
+
+		prevPost.click();
+
 	}
 
-	endpoint = '/admin/toggleFavorite/' + onOff + '/' + this.getAttribute('postId');
+	function showPostCreateFormClick(){
+		logIt('show form clicked');
+		data = new Object;
+		endPoint = '/admin/showForm/article' ;
+		logIt("this is endpoint " + endPoint)	
+		makeAjaxCall(endPoint, 'GET',data, loadRightHTML);
+	}
 
-	logIt("endpoint " + endpoint);
-	makeAjaxCall(endpoint, 'GET', data, handleToggleFav);
-}
+	function formSaveClick(){
+		logIt('form save click ' + this.getAttribute('name'));
+		//dump(this);
+		// TODO, make this dynamic not hard coded form
+		// name
+		data = new Object;
+		data.formData = $("#theForm").serializeArray();
+		//logIt(data); return;
+		makeAjaxCall('/admin/savePost', 'POST',data, loadRightHTML);
+
+	}
+
+	function editPostClick(){
+		logIt('edit post click');
+		// TODO, make this dynamic not hard coded form
+		// name
+		data = new Object;
+		//logIt(data); return;
+		postId = this.getAttribute('postId'); // edit button in middle col
+		
+		logIt('this is post id in edit ' + postId);
+
+		if (! postId) {
+			postId = getCurrentPostId(); // edit bttn on top bar
+		}
+
+		if (! postId) { logIt('edit could not find any post ID'); return; }
+
+		endpoint = '/admin/editPost/' + postId;
+		logIt("endpoint " + endpoint);
+		makeAjaxCall(endpoint, 'GET',data, loadRightHTML);
+
+	}
+
+	function toggleFavPostClick(){
+		logIt('edit post click');
+		data= new Object;
+		
+		if ($(this).hasClass('far')){
+			onOff = 'on';
+		} else {
+			onOff = 'off'
+		}
+
+		endpoint = '/admin/toggleFavorite/' + onOff +'/' + this.getAttribute('postId');
+		
+		logIt("endpoint " + endpoint);
+		makeAjaxCall(endpoint, 'GET',data, handleToggleFav);
+			 
+	}
 
 /***
  *                  .---.                             
@@ -436,43 +296,48 @@ function toggleFavPostClick() {
  *                                                      
  */
 
-// Success callback for loading posts in middle col
+	// Success callback for loading posts in middle col
 
-function loadMiddleHTML(response) {
-	if (response.data) {
-		document.getElementById("entries").innerHTML = response.data;
-		scrollToTop('#search');
-		logIt('trying to add post clicks');
-		addViewPostClick();
-		addEditPostClick();
-		addToggleFavPostClick();
+	function loadMiddleHTML(response){
+		if (response.data){
+			document.getElementById("entries").innerHTML = response.data;
+			scrollToTop('#search');
+			logIt('trying to add post clicks'); 
+			addViewPostClick();
+			addEditPostClick();
+			addToggleFavPostClick();
+		}
 	}
-}
 
-// Success callback for loading a post in right main area
 
-function loadRightHTML(response) {
-	scrollToTop('#topBar');
-	if (response.data) {
+	// Success callback for loading a post in right main area
 
-		document.getElementById("contentWrapper").innerHTML = response.data;
-
-		// HACK Alert! this is for FORMS not posts
-		// there is no saveClick class for posts!
-		logIt('adding formSaveClick listener from load right');
-		addFormSaveClick();
+	function loadRightHTML(response){
+		scrollToTop('#topBar'); 
+		if (response.data){
+			document.getElementById("contentWrapper").innerHTML = response.data;
+			// HACK Alert! this is for FORMS not posts
+			// there is no saveClick class for posts!
+			logIt('adding formSaveClick listener from load right')
+			addFormSaveClick();
+		} 
+		if (response.postId){
+			logIt('load right setting cur post id ' + response.postId);
+			setCurrentPostId(response.postId);
+		}
 	}
-}
 
-function handleToggleFav(response) {
-	logIt('we got back ok, i guess ' + response.data);
-	if (response.error == 0) {
-		selector = '#fav-' + response.data;
-		toggleFontAwesome(selector);
-	} else {
-		// TODO alert user of error
+	function handleToggleFav (response){
+		logIt('we got back ok, i guess ' + response.data);
+		if (response.error == 0){
+			selector = '#fav-'+response.data;
+			toggleFontAwesome(selector);
+		} else {
+			// TODO alert user of error
+		}
 	}
-}
+
+
 
 /*********************************************
 Helpers
@@ -486,9 +351,9 @@ Helpers
 
 *********************************************/
 
-function toggleFontAwesome(selector) {
+function toggleFontAwesome(selector){
 
-	if ($(selector).hasClass('far')) {
+	if ($(selector).hasClass('far')){
 		$(selector).removeClass('far');
 		$(selector).addClass('fas');
 	} else {
@@ -496,47 +361,139 @@ function toggleFontAwesome(selector) {
 		$(selector).addClass('far');
 	}
 }
-function getCurrentPostId() {
+function getCurrentPostId(){
 	return document.getElementById('currentPost').getAttribute('value');
 }
 
-function setCurrentPostId(postId) {
-	document.getElementById('currentPost').setAttribute('value', postId);
+function setCurrentPostId(postId){
+	logIt('IN FUNC  set cur post =  ' + postId);
+	document.getElementById('currentPost').setAttribute('value', postId);	
 }
-function logIt(msg, status) {
+
+function logIt(msg,status){
 	// status not null means log in prod
-	if (_log == 'dev' || status == 'prod') {
+	if (_log == 'dev' || status == 'prod'){
 		console.log(msg);
 	}
 }
 
 function dump(obj) {
-	var out = '';
-	for (var i in obj) {
-		out += i + ": " + obj[i] + "\n";
-	}
-	logIt("This is Obect Dump!!");
-	logIt(out);
+    var out = '';
+    for (var i in obj) {
+        out += i + ": " + obj[i] + "\n";
+    }
+    logIt("This is Obect Dump!!");
+    logIt(out);
 }
 
-$(document).ready(function () {
+function addUniqueEvent(className,func){
+		temps = $(className);
+	for (i = 0; i < temps.length; i++) {
 
-	// register the nav links to show cats
-	// in middle col when clicked
-	addCatClick();
+		if ($(temps[i]).hasClass('hasClickEvent')){
+			// do nothing
+		} else {
+			$(temps[i]).on('click', func);
+			$(temps[i]).addClass('hasClickEvent');
+		}
+	}
 
-	// register the prev and next buttons
-	// that are top of right area
-	addPrevClick();
-	addNextClick();
-	addShowPostCreateFormClick();
-});
+}
 
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
+	$(document).ready(function() { 
 
-// removed by extract-text-webpack-plugin
+		// register the nav links to show cats
+		// in middle col when clicked
+		addCatClick();
 
-/***/ })
-/******/ ]);
+		// register the prev and next buttons
+		// that are top of right area
+		addPrevClick();
+		addNextClick();
+		addShowPostCreateFormClick();
+		addEditPostClick();
+
+	 });
+
+	
+
+// Open SubNavigation
+function openSubNavigation() {
+	$('#mainNav span.toggleNav').click(function(){
+		$('#mainNav li ul').slideUp();
+		if ($(this).parent().find('ul').is(':hidden') == true) {
+			$(this).parent().find('ul').slideDown();
+		}
+	});
+	$('#mainNav li ul li').click(function(){
+		$(this).parent().css('display', 'block');
+	});
+}
+openSubNavigation();
+
+
+// Close/Open Middle Column
+function closeOpenMiddleColumn() {
+	$('#toggleMiddle').click(function(){
+		$('#middleColumn').toggleClass('closed');
+	});
+	if ($(window).width() < 1170) {
+		$('#middleColumn').addClass('closed');
+	}
+	$(window).resize(function(){
+		console.log($(window).width());
+		if ($(window).width() < 1170) {
+			$('#middleColumn').addClass('closed');
+		} else {
+			$('#middleColumn').removeClass('closed');
+		}
+	});
+}
+closeOpenMiddleColumn();
+
+
+//Scroll To Top
+// function scrollToTop() {
+// 	$('#content').animate({
+// 	    scrollTop: $('#topBar').offset().top
+// 	}, '500');
+// }
+
+//Scroll Bar
+function scroller() {
+	$('#content').scroll(function(){
+		var scrollPercent = $(this).scrollTop() / ( $('#contentWrapper').height() - $(this).height() ) * 100;
+    	$('#color').css('width', scrollPercent + '%'  );
+
+		if ($(this).scrollTop() < 500) {
+			$('#rightColumn .circle').css({'opacity':'.5'});
+		} else {
+			$('#rightColumn .circle').css({'opacity':'1'});
+		}
+	});
+
+	$('#rightColumn .circle').click(function() {
+		scrollToTop('#topBar');
+	});
+}
+scroller();
+
+
+// Advanced Search
+function advancedSearch() {
+	$('#openAdvancedSearch').click(function(){
+		$('#advancedSearch').slideToggle();
+		$(this).toggleClass('active');
+		if ($('.advanced').hasClass('fa-chevron-circle-down')) {
+			$('.advanced').removeClass('fa-chevron-circle-down').addClass('fa-chevron-circle-up');
+		} else {
+			$('.advanced').removeClass('fa-chevron-circle-up').addClass('fa-chevron-circle-down');
+		}
+	});
+}
+advancedSearch();
+
+
+
+
+

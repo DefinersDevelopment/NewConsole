@@ -48,9 +48,9 @@ class MasterController extends Controller
     	$returnVal = new \stdClass;
 
     	$returnVal->error = 0;
-    	 
+    	$returnVal->postId = $post->id; 
 
-    	 $returnVal->data = View::make('right-column.mainContent')->with(['post'=>$post])->render();
+    	$returnVal->data = View::make('right-column.mainContent')->with(['post'=>$post])->render();
 
     	return json_encode($returnVal);
 

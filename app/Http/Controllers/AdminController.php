@@ -51,7 +51,8 @@ makes a post object, fills it, saves it, save category relations
 
     	$inputs = ($r->input('formData'));
     	$data;
-    	$cats;
+    	$cats = []; // empty but set.
+        
     	// parse data from ajax call,
     	// we have post data and category data
     	foreach ($inputs as $i){
