@@ -68,16 +68,14 @@ a  {text-decoration:none;}
 	}
 }
 .entry {
-	h2 {@include font-size(16px); @include line-height(22px);}
+	h2 {@include font-size(16px); @include line-height(22px); @extend .button; }
 	p {@include font-size(14px); @include line-height(18px);}
 }
 .entry.active {
 	@include themify($themes) {
 		background:themed('entryActiveBackground');
 	}
-	h2 {
-		font-weight:700;
-	}
+	h2 {font-weight:700;}
 }
 
 .transition {transition:.2s ease;}
