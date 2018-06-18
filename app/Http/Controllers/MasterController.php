@@ -60,7 +60,7 @@ class MasterController extends Controller
     	// TODO do not hard code user
     	$user_id = 1;
 
-    	$posts = User::getUserPosts($user_id, 'F');
+    	$posts = Post::getUserPosts($user_id, 'F');
     	$returnVal = new \stdClass;
     	$returnVal->error = 0;
     	 
