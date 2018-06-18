@@ -246,7 +246,7 @@ function addEditPostClick() {
 	// TODO should i add a class/id hiearchy here??
 	$(".editPostClick").on('click', editPostClick);
 }
-function toggleFavPostClick() {
+function addToggleFavPostClick() {
 	// TODO should i add a class/id hiearchy here??
 	$(".toggleFavPostClick").on('click', toggleFavPostClick);
 }
@@ -278,6 +278,9 @@ function makeAjaxCall(endPoint, method, data, successFunc) {
 			if (temp.error > 0) {
 				// TODO handle this better
 				logIt('we got a graceful error from the system');
+				if (temp.message) {
+					logIt(temp.message);
+				}
 			}
 
 			successFunc(temp.data);
@@ -427,13 +430,13 @@ function toggleFavPostClick() {
 	logIt('edit post click');
 	data = new Object();
 
-	if (this.hasClass('highlightOff')) {
+	if ($(this).hasClass('highlightOff')) {
 		onOff = 'on';
 	} else {
 		ofOff = 'off';
 	}
 
-	endpoint = 'admin/toggleFavorite/' + onOff + '/' + this.getAttribute('postId');
+	endpoint = '/admin/toggleFavorite/' + onOff + '/' + this.getAttribute('postId');
 
 	logIt("endpoint " + endpoint);
 	makeAjaxCall(endpoint, 'GET', data, handleToggleFav);
@@ -471,6 +474,7 @@ function loadMiddleHTML(html) {
 		logIt('trying to add post clicks');
 		addViewPostClick();
 		addEditPostClick();
+		addToggleFavPostClick();
 	}
 }
 
@@ -484,7 +488,17 @@ function loadRightHTML(html) {
 	}
 }
 
-function handleToggleFav(response) {}
+function handleToggleFav(response) {
+	logIt('we got back ok, i guess ' + response);
+	selector = '#fav-' + response;
+	if ($(selector).hasClass('highlightOff')) {
+		$(selector).removeClass('highlightOff');
+		$(selector).addClass('highlightOn');
+	} else {
+		$(selector).removeClass('highlightOn');
+		$(selector).addClass('highlightOff');
+	}
+}
 
 /*********************************************
 Helpers

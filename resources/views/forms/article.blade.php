@@ -37,6 +37,10 @@
 		<div class='formError'>{{$theErrors['category'] or ""}}</div>
 		<label for="category">Categories:</label><br>
 
+		@if (!isset($postCats))
+			<?php $postCats = []; ?>
+		@endif
+		
 		@if (isset($allCats))
 			@foreach ($allCats as $cat)
 				@if ($cat->postable == 1)
