@@ -15,6 +15,14 @@ Event Listeners
                                    
 
 **********************************/
+// Scroll the view back to the top -- can be used for when content changes to show the user the first items
+function scrollToTop(topDiv) {
+	$('#content').animate({
+	    scrollTop: $(topDiv).offset().top
+	}, '500');
+}
+
+
 function addViewPostClick(){
 	// TODO should i add a class/id hiearchy here??
 	$(".isPost").on('click', viewPostClick);
@@ -270,6 +278,7 @@ NAVIGATION STUFF
 
 	// Success callback for loading posts in middle col
 	function loadMiddleHTML(html){
+		scrollToTop('#search');
 		if (html){
 			document.getElementById("entries").innerHTML = html;
 			logIt('trying to add post clicks'); 
@@ -278,10 +287,12 @@ NAVIGATION STUFF
 		}
 	}
 
+
 	// Success callback for loading a post in right main area
 	function loadRightHTML(html){
+		scrollToTop('#topBar'); 
 		if (html){
-			document.getElementById("mainContent").innerHTML = html;
+			document.getElementById("contentWrapper").innerHTML = html;
 			// HACK Alert! this is for FORMS not posts
 			// there is no saveClick class for posts!
 			addFormSaveClick();

@@ -9,6 +9,9 @@
                         </span>
                     </div>
                     <div class="right">
+                        <span class="button formSaveClick" title="Save">
+                            <i class="fas fa-save"></i>
+                        </span>
                         <span class="button" title="Edit">
                             <i class="fas fa-edit"></i>
                         </span>

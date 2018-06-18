@@ -289,7 +289,9 @@ section#middleColumn #entries .entryGroup .entryGroupTitle,
 section#middleColumn #entries .entry .bar,
 section#rightColumn,
 section#rightColumn #topBar,
-section#rightColumn #mainContent #content .inputContainer {
+section#rightColumn #mainContent #content .inputContainer,
+section#rightColumn #mainContent #content .columns,
+section#rightColumn #mainContent #content .columns .inputContainer label {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1666,6 +1668,51 @@ section#rightColumn #mainContent #content .inputContainer input {
 .theme-definers section#rightColumn #mainContent #content .inputContainer input {
   border-color: #55565A;
   background: #F5F6F6;
+}
+
+section#rightColumn #mainContent #content .columns {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+section#rightColumn #mainContent #content .columns .inputContainer {
+  min-width: 33.33%;
+  max-width: 33.33%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: none;
+      flex-wrap: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+section#rightColumn #mainContent #content .columns .inputContainer label,
+section#rightColumn #mainContent #content .columns .inputContainer input {
+  -webkit-box-flex: 0;
+      -ms-flex: none;
+          flex: none;
+}
+
+section#rightColumn #mainContent #content .columns .inputContainer label {
+  padding-bottom: 0;
+  min-width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+section#rightColumn #mainContent #content .columns .inputContainer label span {
+  max-width: calc(100% - 40px);
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+section#rightColumn #mainContent #content .columns .inputContainer input {
+  margin-right: 20px;
 }
 
 section#rightColumn #mainContent .circle {

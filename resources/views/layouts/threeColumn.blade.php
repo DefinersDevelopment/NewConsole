@@ -30,7 +30,14 @@
 			<section id="rightColumn">
 				@include('right-column.topBar')
 				<div id="mainContent">
-					@include('right-column.mainContent')
+					<div id="content" class="view">
+						<div id="contentWrapper">
+							@include('right-column.mainContent')
+						</div>
+					</div>
+					<div class="circle">
+                    	<i class="fas fa-caret-up"></i>
+                    </div>
 				</div>
 			</section>
 

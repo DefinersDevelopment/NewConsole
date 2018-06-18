@@ -1,5 +1,5 @@
 
-                    <div id="content" class="view">
+                    
 
                         @if (isset($post))
                             Ben Makes Ugly Pages:
@@ -24,10 +24,8 @@
                         <p>With the forces of globalization and automation suppressing wages and with low-income men and women increasingly abandoning the labor force, the government has weakened a proven program to boost wages and improve labor-market outcomes for the working poor, in other words, and is moving to more-punitive and more-complicated initiatives to try to induce people to work. It is taking away a few highly effective carrots and turning to less-effective sticks.</p>
                         <p>Right now, with wages and employment among lower-income Americans growing, that might not seem like such a problem. But after another recession and jobless recovery, with the lower half of the earnings distribution still stagnant, it might be. “The sky is the limit here,” Neumark said, about expanding the EITC. “Is it insane to double it? If we really think because of technology and globalization, people at the bottom end of the income distribution can’t earn what they should earn, this is the way to fix it. Instead of taking money and just giving it to them, you are encouraging work and the accumulation of human capital as part of the process. I don’t see a better way to do it.”</p>
                          
-                    </div>
-                    <div class="circle" top="#topBar">
-                    	<i class="fas fa-caret-up"></i>
-                    </div>
+                    
+                    
                     
                     
 
