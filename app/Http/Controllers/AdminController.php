@@ -167,6 +167,7 @@ makes a post object, fills it, saves it, save category relations
     	LogIt('cats from post ' . print_r($post->category,TRUE));
     	$allCats = Category::getAllCategories();  // display
     	$returnVal->error = 0;
+        $returnVal->postId = $postId;
     	$returnVal->data = View::make('forms.article',['post'=>$post, 'allCats'=>$allCats, 'postCats'=>$postCats])->render();
 
     	return json_encode($returnVal);

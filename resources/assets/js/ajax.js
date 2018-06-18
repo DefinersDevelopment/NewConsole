@@ -80,6 +80,7 @@ data is a JS object
 successFunc is a call back function
 */
 
+
 function makeAjaxCall(endPoint, method, data, successFunc){
 	
 	data._token = document.getElementById("token").getAttribute('value');
@@ -97,7 +98,8 @@ function makeAjaxCall(endPoint, method, data, successFunc){
 		success: function(response){
 			// TODO check error code here!
 			temp = JSON.parse(response);
-			
+			logIt(temp.data);
+
 			if (temp.error > 0){
 				// TODO handle this better
 				logIt('we got a graceful error from the system');
@@ -105,6 +107,8 @@ function makeAjaxCall(endPoint, method, data, successFunc){
 					logIt(temp.message);
 				}
 			}
+			//logIt(temp.data);
+
 			successFunc(temp);
 		},
 		error: function(jqXHR, textStatus, errorThrown){
@@ -262,13 +266,10 @@ function editPostClick(){
 		logIt('edit could not find any post ID'); 
 		return; 
 	}
-
 	endpoint = '/admin/editPost/' + postId;
 	logIt("endpoint " + endpoint);
 	makeAjaxCall(endpoint, 'GET',data, loadRightHTML);
 }
-
-
 
 function toggleFavPostClick(){
 	logIt('edit post click');
@@ -279,12 +280,9 @@ function toggleFavPostClick(){
 	} else {
 		onOff = 'off'
 	}
-
 	endpoint = '/admin/toggleFavorite/' + onOff +'/' + this.getAttribute('postId');
-	
 	logIt("endpoint " + endpoint);
-	makeAjaxCall(endpoint, 'GET',data, handleToggleFav);
-		 
+	makeAjaxCall(endpoint, 'GET',data, handleToggleFav);		 
 }
 
 	function getFavsClick(){
@@ -321,6 +319,7 @@ function toggleFavPostClick(){
  */
 
 
+
 // Success callback for loading posts in middle col
 
 function loadMiddleHTML(response){
@@ -335,10 +334,7 @@ function loadMiddleHTML(response){
 }
 
 
-
-
 // Success callback for loading a post in right main area
-
 function loadRightHTML(response){
 	scrollToTop('#topBar'); 
 	if (response.data){
@@ -348,6 +344,7 @@ function loadRightHTML(response){
 		logIt('adding formSaveClick listener from load right')
 		addFormSaveClick();
 	} 
+
 	if (response.postId){
 		logIt('load right setting cur post id ' + response.postId);
 		setCurrentPostId(response.postId);

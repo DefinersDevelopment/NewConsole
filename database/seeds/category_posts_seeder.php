@@ -23,7 +23,7 @@ class category_posts_seeder extends Seeder
         ]);
 
         DB::table('category_post')->insert([
-        	'category_id' => 3,
+        	'category_id' => 13,
             'post_id' => 3
         ]);
 

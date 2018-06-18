@@ -108,7 +108,7 @@
                                 <span class="unreadNumber">50</span>
                             </span>
                         </li>
-                        <li class="isCat" catId='3'>
+                        <li class="" catId='3'>
                             <span class="toggleNav">
                                 <span class="icon">
                                     <i class="fas fa-circle"></i>
