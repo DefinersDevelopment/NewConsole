@@ -283,7 +283,7 @@ function makeAjaxCall(endPoint, method, data, successFunc) {
 				}
 			}
 
-			successFunc(temp.data);
+			successFunc(temp);
 		},
 		error: function error(jqXHR, textStatus, errorThrown) {
 			console.log("Ajax Error");
@@ -430,10 +430,10 @@ function toggleFavPostClick() {
 	logIt('edit post click');
 	data = new Object();
 
-	if ($(this).hasClass('highlightOff')) {
+	if ($(this).hasClass('far')) {
 		onOff = 'on';
 	} else {
-		ofOff = 'off';
+		onOff = 'off';
 	}
 
 	endpoint = '/admin/toggleFavorite/' + onOff + '/' + this.getAttribute('postId');
@@ -468,9 +468,9 @@ function toggleFavPostClick() {
  */
 
 // Success callback for loading posts in middle col
-function loadMiddleHTML(html) {
-	if (html) {
-		document.getElementById("entries").innerHTML = html;
+function loadMiddleHTML(response) {
+	if (response.data) {
+		document.getElementById("entries").innerHTML = response.data;
 		logIt('trying to add post clicks');
 		addViewPostClick();
 		addEditPostClick();
@@ -479,9 +479,9 @@ function loadMiddleHTML(html) {
 }
 
 // Success callback for loading a post in right main area
-function loadRightHTML(html) {
-	if (html) {
-		document.getElementById("mainContent").innerHTML = html;
+function loadRightHTML(response) {
+	if (response.data) {
+		document.getElementById("mainContent").innerHTML = response.data;
 		// HACK Alert! this is for FORMS not posts
 		// there is no saveClick class for posts!
 		addFormSaveClick();
@@ -489,14 +489,12 @@ function loadRightHTML(html) {
 }
 
 function handleToggleFav(response) {
-	logIt('we got back ok, i guess ' + response);
-	selector = '#fav-' + response;
-	if ($(selector).hasClass('highlightOff')) {
-		$(selector).removeClass('highlightOff');
-		$(selector).addClass('highlightOn');
+	logIt('we got back ok, i guess ' + response.data);
+	if (response.error == 0) {
+		selector = '#fav-' + response.data;
+		toggleFontAwesome(selector);
 	} else {
-		$(selector).removeClass('highlightOn');
-		$(selector).addClass('highlightOff');
+		// TODO alert user of error
 	}
 }
 
@@ -512,6 +510,16 @@ Helpers
 
 *********************************************/
 
+function toggleFontAwesome(selector) {
+
+	if ($(selector).hasClass('far')) {
+		$(selector).removeClass('far');
+		$(selector).addClass('fas');
+	} else {
+		$(selector).removeClass('fas');
+		$(selector).addClass('far');
+	}
+}
 function getCurrentPostId() {
 	return document.getElementById('currentPost').getAttribute('value');
 }
