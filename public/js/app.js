@@ -59,6 +59,9 @@ function addToggleFavPostClick(){
 	// TODO should i add a class/id hiearchy here??
 	addUniqueEvent(".toggleFavPostClick", toggleFavPostClick);
 }
+function addGetFavsClick(){
+	addUniqueEvent(".getFavsClick", getFavsClick);	
+}
   
 /******** END EVENT LISTNER SECTION ******************/
 
@@ -271,6 +274,14 @@ NAVIGATION STUFF
 			 
 	}
 
+	function getFavsClick(){
+		logIt('get favs click');
+		data= new Object;
+		endpoint = '/a/getFavorites/';
+		logIt("endpoint " + endpoint);
+		makeAjaxCall(endpoint, 'GET',data, loadMiddleHTML);
+	}
+
 /***
  *                  .---.                             
  *                  |   |                             
@@ -410,9 +421,11 @@ function addUniqueEvent(className,func){
 		// that are top of right area
 		addPrevClick();
 		addNextClick();
+
 		addShowPostCreateFormClick();
 		addEditPostClick();
-
+		// fav bttn in bottom nav
+		addGetFavsClick();
 	 });
 
 	

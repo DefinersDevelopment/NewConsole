@@ -12,7 +12,7 @@
                         </li>
                         <li title="View your Favorite alerts">
                             <a href="">
-                                <i class="fas fa-heart" aria-hidden="true"></i>
+                                <i class="fas fa-heart getFavsClick" aria-hidden="true"></i>
                             </a>
                         </li>
                         <li title="Log out">

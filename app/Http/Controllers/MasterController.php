@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\View;
 
 class MasterController extends Controller
@@ -42,9 +43,7 @@ class MasterController extends Controller
 
     	// TODO wrap in try catch?? not a ton could go wrong
     	// but......
-    	$post = Post::getPost($post_id);
-
-    	
+    	$post = Post::getPost($post_id);    	
     	$returnVal = new \stdClass;
 
     	$returnVal->error = 0;
@@ -55,4 +54,19 @@ class MasterController extends Controller
     	return json_encode($returnVal);
 
     }
+
+    public function getFavorites(){
+    	LogIt(' getting favorites ') ;
+    	// TODO do not hard code user
+    	$user_id = 1;
+
+    	$posts = User::getUserPosts($user_id, 'F');
+    	$returnVal = new \stdClass;
+    	$returnVal->error = 0;
+    	 
+    	$returnVal->data = View::make('middle-column.entries')->with(['posts'=>$posts])->render();
+
+    	return json_encode($returnVal);
+    }
+ 
 }
