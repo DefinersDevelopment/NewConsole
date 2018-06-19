@@ -1,3 +1,13 @@
+/*
+  _    _                 _____       _             __               
+ | |  | |               |_   _|     | |           / _|              
+ | |  | |___  ___ _ __    | |  _ __ | |_ ___ _ __| |_ __ _  ___ ___ 
+ | |  | / __|/ _ \ '__|   | | | '_ \| __/ _ \ '__|  _/ _` |/ __/ _ \
+ | |__| \__ \  __/ |     _| |_| | | | ||  __/ |  | || (_| | (_|  __/
+  \____/|___/\___|_|    |_____|_| |_|\__\___|_|  |_| \__,_|\___\___|
+
+*/
+
 // Open SubNavigation
 $('#mainNav span.toggleNav').click(function(){
 	$('#mainNav li ul').slideUp();
@@ -9,7 +19,7 @@ $('#mainNav li ul li').click(function(){
 	$(this).parent().css('display', 'block');
 });
 
-
+// testing
 
 // Close/Open Middle Column
 $('#toggleMiddle').click(function(){

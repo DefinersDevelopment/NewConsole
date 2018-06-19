@@ -13,7 +13,6 @@ Event Listeners
  / /___ | |/ /  __/ / / / /_(__  ) 
 /_____/ |___/\___/_/ /_/\__/____/  
                                    
-
 **********************************/
 // Scroll the view back to the top -- can be used for when content changes to show the user the first items
 function scrollToTop(topDiv) {
@@ -21,13 +20,19 @@ function scrollToTop(topDiv) {
 	    scrollTop: $(topDiv).offset().top
 	}, '500');
 }
-function setCatActive(that){
-	$('.isCat').removeClass('active');
-	$(that).closest('.isCat').addClass('active');
+function setActive(that, selector, remove){
+	$(selector).removeClass('active');
+	if (remove){
+		$(remove).removeClass('active');
+	}
+	$(that).closest(selector).addClass('active');
 }
-function setEntryActive(that){
-	$('.entry').removeClass('active');
-	$(that).closest('.entry').addClass('active');
+
+function notifier(message) {
+	$('#notifier').addClass('active').html(message);
+	setTimeout(function(){
+		$('#notifier').removeClass('active').html('');
+	}, 5000);
 }
 
 
@@ -48,7 +53,6 @@ function addPrevClick(){
 function addNextClick(){
 	// TODO should i add a class/id hiearchy here??
 	addUniqueEvent(".nextClick", nextClick);
-	
 }
 function addShowPostCreateFormClick(){
 	// TODO should i add a class/id hiearchy here??
@@ -61,7 +65,6 @@ function addFormSaveClick(){
 function addEditPostClick(){
 	// TODO should i add a class/id hiearchy here??
 	addUniqueEvent(".editPostClick", editPostClick);
-	
 }
 function addToggleFavPostClick(){
 	// TODO should i add a class/id hiearchy here??
@@ -136,7 +139,7 @@ NAVIGATION STUFF
 // Function that is run when a category is clicked
 function categoryClick(){		
 	data = new Object;
-	setCatActive(this);
+	setActive(this, '.isCat', '#bottomNav li');
 	//console.log("my object: %o", this);
 	endPoint = '/a/getMiddleByCat/' + this.getAttribute('catId');
 	console.log("this is endpoint " + endPoint)
@@ -150,7 +153,7 @@ function categoryClick(){
 function viewPostClick(){
 	data = new Object;
 	postId = this.getAttribute('postId');
-	setEntryActive(this);
+	setActive(this, '.entry');
 	endPoint = '/a/getPost/' + postId;
 	logIt("this is endpoint " + endPoint)	
 	makeAjaxCall(endPoint, 'GET',data, loadRightHTML);
@@ -248,8 +251,8 @@ function formSaveClick(){
 
 
 function editPostClick(){
-	logIt('edit post click');
-	setEntryActive(this);
+	//logIt('edit post click');
+	setActive(this, '.entry');
 	// TODO, make this dynamic not hard coded form
 	// name
 	data = new Object;
@@ -260,6 +263,7 @@ function editPostClick(){
 
 	if (! postId) {
 		postId = getCurrentPostId(); // edit bttn on top bar
+		$('.isPost#'+postId).closest('.entry').addClass('active');		
 	}
 
 	if (! postId) { 
@@ -267,9 +271,9 @@ function editPostClick(){
 		return; 
 	}
 	endpoint = '/admin/editPost/' + postId;
-	logIt("endpoint " + endpoint);
+	//logIt("endpoint " + endpoint);
 	makeAjaxCall(endpoint, 'GET',data, loadRightHTML);
-}
+}   
 
 function toggleFavPostClick(){
 	logIt('edit post click');
@@ -287,6 +291,7 @@ function toggleFavPostClick(){
 
 	function getFavsClick(){
 		logIt('get favs click');
+		setActive(this, '#bottomNav li', '.isCat');
 		data= new Object;
 		endpoint = '/a/getFavorites/';
 		logIt("endpoint " + endpoint);
@@ -344,7 +349,9 @@ function loadRightHTML(response){
 		logIt('adding formSaveClick listener from load right')
 		addFormSaveClick();
 	} 
-
+	if (response.message) {
+		notifier(response.message);
+	}
 	if (response.postId){
 		logIt('load right setting cur post id ' + response.postId);
 		setCurrentPostId(response.postId);

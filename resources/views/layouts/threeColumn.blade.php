@@ -35,6 +35,9 @@
 							@include('right-column.mainContent')
 						</div>
 					</div>
+					<div id="notifier">
+						
+					</div>
 					<div class="circle">
                     	<i class="fas fa-caret-up"></i>
                     </div>

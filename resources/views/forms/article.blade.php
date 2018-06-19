@@ -31,12 +31,12 @@
 
 	<div class="inputContainer">
 		<label for="article">Article</label>
-		<input type="textarea" name='body' value='{{$post->body or ""}}'>
+		<textarea name='body'>{{$post->body or ""}}</textarea>
 	</div>
 	<div class="inputContainer">
 		<div class='formError'>{{$theErrors['category'] or ""}}</div>
-		<label for="category">Categories:</label><br>
 	</div>
+	<h2 for="category">Categories:</h2>
 		@if (!isset($postCats))
 			<?php $postCats = []; ?>
 		@endif
@@ -44,15 +44,22 @@
 		@if (isset($allCats))
 			@foreach ($allCats as $cat)
 				@if ($cat->postable == 1)
-					<input type='checkbox' name='category' value='{{$cat->id}}' @if (in_array($cat->id,$postCats)) CHECKED @endif>
+				<h3>{{ $cat->name }}</h3>
+				<div class="columns">
+					<div class="inputContainer">
+						<label>
+							<input type='checkbox' name='category' value='{{$cat->id}}' @if (in_array($cat->id,$postCats)) CHECKED @endif>
+							<span>{{$cat->name}}</span>
+						</label>
+					</div>
+				</div>
 				@else
-					--
+					<h3>{{ $cat->name }}</h3>
 				@endif 
-					<h2>{{ $cat->name }}</h2>
 					<?php 
 					$children = $cat->getChildren(); 
 					?>
-					@if(isset($children))
+					@if(isset($children) && $cat->postable != 1)
 						<div class="columns">
 						@foreach($children as $child)
 							
@@ -73,6 +80,6 @@
 		@endif
 
 	<div>
-		push this thing over -----><i class="fas fa-save formSaveClick"></i>
+	
 	</div>
 </form>

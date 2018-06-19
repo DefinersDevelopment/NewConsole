@@ -317,6 +317,13 @@ a {
   text-decoration: none;
 }
 
+.view {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 22px;
+  line-height: 1.375rem;
+}
+
 .theme-iss .view {
   color: #55565A;
 }
@@ -446,6 +453,8 @@ section#middleColumn.closed {
 .btn,
 .circle,
 header#navigation #mainNav ul li,
+header#navigation #bottomNav ul li a,
+header#navigation #bottomNav ul li span,
 section#middleColumn #search .bottom .left {
   cursor: pointer;
 }
@@ -1267,6 +1276,10 @@ section#middleColumn #entries .entry .bar .buttons .btn,
 section#middleColumn #entries .entry .bar .buttons .circle,
 section#middleColumn #entries .entry .bar .buttons header#navigation #mainNav ul li,
 header#navigation #mainNav ul section#middleColumn #entries .entry .bar .buttons li,
+section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li a,
+header#navigation #bottomNav ul li section#middleColumn #entries .entry .bar .buttons a,
+section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li span,
+header#navigation #bottomNav ul li section#middleColumn #entries .entry .bar .buttons span,
 section#middleColumn #entries .entry .bar .buttons #search .bottom .left,
 section#middleColumn #search .bottom #entries .entry .bar .buttons .left {
   margin-left: 5px;
@@ -1278,6 +1291,10 @@ section#middleColumn #entries .entry .bar .buttons .btn .fas,
 section#middleColumn #entries .entry .bar .buttons .circle .fas,
 section#middleColumn #entries .entry .bar .buttons header#navigation #mainNav ul li .fas,
 header#navigation #mainNav ul section#middleColumn #entries .entry .bar .buttons li .fas,
+section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li a .fas,
+header#navigation #bottomNav ul li section#middleColumn #entries .entry .bar .buttons a .fas,
+section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li span .fas,
+header#navigation #bottomNav ul li section#middleColumn #entries .entry .bar .buttons span .fas,
 section#middleColumn #entries .entry .bar .buttons #search .bottom .left .fas,
 section#middleColumn #search .bottom #entries .entry .bar .buttons .left .fas,
 section#middleColumn #entries .entry .bar .buttons .button .fal,
@@ -1286,6 +1303,10 @@ section#middleColumn #entries .entry .bar .buttons .btn .fal,
 section#middleColumn #entries .entry .bar .buttons .circle .fal,
 section#middleColumn #entries .entry .bar .buttons header#navigation #mainNav ul li .fal,
 header#navigation #mainNav ul section#middleColumn #entries .entry .bar .buttons li .fal,
+section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li a .fal,
+header#navigation #bottomNav ul li section#middleColumn #entries .entry .bar .buttons a .fal,
+section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li span .fal,
+header#navigation #bottomNav ul li section#middleColumn #entries .entry .bar .buttons span .fal,
 section#middleColumn #entries .entry .bar .buttons #search .bottom .left .fal,
 section#middleColumn #search .bottom #entries .entry .bar .buttons .left .fal,
 section#middleColumn #entries .entry .bar .buttons .button .far,
@@ -1294,6 +1315,10 @@ section#middleColumn #entries .entry .bar .buttons .btn .far,
 section#middleColumn #entries .entry .bar .buttons .circle .far,
 section#middleColumn #entries .entry .bar .buttons header#navigation #mainNav ul li .far,
 header#navigation #mainNav ul section#middleColumn #entries .entry .bar .buttons li .far,
+section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li a .far,
+header#navigation #bottomNav ul li section#middleColumn #entries .entry .bar .buttons a .far,
+section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li span .far,
+header#navigation #bottomNav ul li section#middleColumn #entries .entry .bar .buttons span .far,
 section#middleColumn #entries .entry .bar .buttons #search .bottom .left .far,
 section#middleColumn #search .bottom #entries .entry .bar .buttons .left .far {
   font-size: 13px;
@@ -1305,6 +1330,10 @@ section#middleColumn #search .bottom #entries .entry .bar .buttons .left .far {
 .theme-iss section#middleColumn #entries .entry .bar .buttons .circle .fas,
 .theme-iss section#middleColumn #entries .entry .bar .buttons header#navigation #mainNav ul li .fas,
 header#navigation #mainNav ul .theme-iss section#middleColumn #entries .entry .bar .buttons li .fas,
+.theme-iss section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li a .fas,
+header#navigation #bottomNav ul li .theme-iss section#middleColumn #entries .entry .bar .buttons a .fas,
+.theme-iss section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li span .fas,
+header#navigation #bottomNav ul li .theme-iss section#middleColumn #entries .entry .bar .buttons span .fas,
 .theme-iss section#middleColumn #entries .entry .bar .buttons #search .bottom .left .fas,
 .theme-iss section#middleColumn #search .bottom #entries .entry .bar .buttons .left .fas,
 .theme-iss section#middleColumn #entries .entry .bar .buttons .button .fal,
@@ -1313,6 +1342,10 @@ header#navigation #mainNav ul .theme-iss section#middleColumn #entries .entry .b
 .theme-iss section#middleColumn #entries .entry .bar .buttons .circle .fal,
 .theme-iss section#middleColumn #entries .entry .bar .buttons header#navigation #mainNav ul li .fal,
 header#navigation #mainNav ul .theme-iss section#middleColumn #entries .entry .bar .buttons li .fal,
+.theme-iss section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li a .fal,
+header#navigation #bottomNav ul li .theme-iss section#middleColumn #entries .entry .bar .buttons a .fal,
+.theme-iss section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li span .fal,
+header#navigation #bottomNav ul li .theme-iss section#middleColumn #entries .entry .bar .buttons span .fal,
 .theme-iss section#middleColumn #entries .entry .bar .buttons #search .bottom .left .fal,
 .theme-iss section#middleColumn #search .bottom #entries .entry .bar .buttons .left .fal,
 .theme-iss section#middleColumn #entries .entry .bar .buttons .button .far,
@@ -1321,6 +1354,10 @@ header#navigation #mainNav ul .theme-iss section#middleColumn #entries .entry .b
 .theme-iss section#middleColumn #entries .entry .bar .buttons .circle .far,
 .theme-iss section#middleColumn #entries .entry .bar .buttons header#navigation #mainNav ul li .far,
 header#navigation #mainNav ul .theme-iss section#middleColumn #entries .entry .bar .buttons li .far,
+.theme-iss section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li a .far,
+header#navigation #bottomNav ul li .theme-iss section#middleColumn #entries .entry .bar .buttons a .far,
+.theme-iss section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li span .far,
+header#navigation #bottomNav ul li .theme-iss section#middleColumn #entries .entry .bar .buttons span .far,
 .theme-iss section#middleColumn #entries .entry .bar .buttons #search .bottom .left .far,
 .theme-iss section#middleColumn #search .bottom #entries .entry .bar .buttons .left .far {
   color: #55565A;
@@ -1332,6 +1369,10 @@ header#navigation #mainNav ul .theme-iss section#middleColumn #entries .entry .b
 .theme-ar section#middleColumn #entries .entry .bar .buttons .circle .fas,
 .theme-ar section#middleColumn #entries .entry .bar .buttons header#navigation #mainNav ul li .fas,
 header#navigation #mainNav ul .theme-ar section#middleColumn #entries .entry .bar .buttons li .fas,
+.theme-ar section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li a .fas,
+header#navigation #bottomNav ul li .theme-ar section#middleColumn #entries .entry .bar .buttons a .fas,
+.theme-ar section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li span .fas,
+header#navigation #bottomNav ul li .theme-ar section#middleColumn #entries .entry .bar .buttons span .fas,
 .theme-ar section#middleColumn #entries .entry .bar .buttons #search .bottom .left .fas,
 .theme-ar section#middleColumn #search .bottom #entries .entry .bar .buttons .left .fas,
 .theme-ar section#middleColumn #entries .entry .bar .buttons .button .fal,
@@ -1340,6 +1381,10 @@ header#navigation #mainNav ul .theme-ar section#middleColumn #entries .entry .ba
 .theme-ar section#middleColumn #entries .entry .bar .buttons .circle .fal,
 .theme-ar section#middleColumn #entries .entry .bar .buttons header#navigation #mainNav ul li .fal,
 header#navigation #mainNav ul .theme-ar section#middleColumn #entries .entry .bar .buttons li .fal,
+.theme-ar section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li a .fal,
+header#navigation #bottomNav ul li .theme-ar section#middleColumn #entries .entry .bar .buttons a .fal,
+.theme-ar section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li span .fal,
+header#navigation #bottomNav ul li .theme-ar section#middleColumn #entries .entry .bar .buttons span .fal,
 .theme-ar section#middleColumn #entries .entry .bar .buttons #search .bottom .left .fal,
 .theme-ar section#middleColumn #search .bottom #entries .entry .bar .buttons .left .fal,
 .theme-ar section#middleColumn #entries .entry .bar .buttons .button .far,
@@ -1348,6 +1393,10 @@ header#navigation #mainNav ul .theme-ar section#middleColumn #entries .entry .ba
 .theme-ar section#middleColumn #entries .entry .bar .buttons .circle .far,
 .theme-ar section#middleColumn #entries .entry .bar .buttons header#navigation #mainNav ul li .far,
 header#navigation #mainNav ul .theme-ar section#middleColumn #entries .entry .bar .buttons li .far,
+.theme-ar section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li a .far,
+header#navigation #bottomNav ul li .theme-ar section#middleColumn #entries .entry .bar .buttons a .far,
+.theme-ar section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li span .far,
+header#navigation #bottomNav ul li .theme-ar section#middleColumn #entries .entry .bar .buttons span .far,
 .theme-ar section#middleColumn #entries .entry .bar .buttons #search .bottom .left .far,
 .theme-ar section#middleColumn #search .bottom #entries .entry .bar .buttons .left .far {
   color: #55565A;
@@ -1359,6 +1408,10 @@ header#navigation #mainNav ul .theme-ar section#middleColumn #entries .entry .ba
 .theme-definers section#middleColumn #entries .entry .bar .buttons .circle .fas,
 .theme-definers section#middleColumn #entries .entry .bar .buttons header#navigation #mainNav ul li .fas,
 header#navigation #mainNav ul .theme-definers section#middleColumn #entries .entry .bar .buttons li .fas,
+.theme-definers section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li a .fas,
+header#navigation #bottomNav ul li .theme-definers section#middleColumn #entries .entry .bar .buttons a .fas,
+.theme-definers section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li span .fas,
+header#navigation #bottomNav ul li .theme-definers section#middleColumn #entries .entry .bar .buttons span .fas,
 .theme-definers section#middleColumn #entries .entry .bar .buttons #search .bottom .left .fas,
 .theme-definers section#middleColumn #search .bottom #entries .entry .bar .buttons .left .fas,
 .theme-definers section#middleColumn #entries .entry .bar .buttons .button .fal,
@@ -1367,6 +1420,10 @@ header#navigation #mainNav ul .theme-definers section#middleColumn #entries .ent
 .theme-definers section#middleColumn #entries .entry .bar .buttons .circle .fal,
 .theme-definers section#middleColumn #entries .entry .bar .buttons header#navigation #mainNav ul li .fal,
 header#navigation #mainNav ul .theme-definers section#middleColumn #entries .entry .bar .buttons li .fal,
+.theme-definers section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li a .fal,
+header#navigation #bottomNav ul li .theme-definers section#middleColumn #entries .entry .bar .buttons a .fal,
+.theme-definers section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li span .fal,
+header#navigation #bottomNav ul li .theme-definers section#middleColumn #entries .entry .bar .buttons span .fal,
 .theme-definers section#middleColumn #entries .entry .bar .buttons #search .bottom .left .fal,
 .theme-definers section#middleColumn #search .bottom #entries .entry .bar .buttons .left .fal,
 .theme-definers section#middleColumn #entries .entry .bar .buttons .button .far,
@@ -1375,6 +1432,10 @@ header#navigation #mainNav ul .theme-definers section#middleColumn #entries .ent
 .theme-definers section#middleColumn #entries .entry .bar .buttons .circle .far,
 .theme-definers section#middleColumn #entries .entry .bar .buttons header#navigation #mainNav ul li .far,
 header#navigation #mainNav ul .theme-definers section#middleColumn #entries .entry .bar .buttons li .far,
+.theme-definers section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li a .far,
+header#navigation #bottomNav ul li .theme-definers section#middleColumn #entries .entry .bar .buttons a .far,
+.theme-definers section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li span .far,
+header#navigation #bottomNav ul li .theme-definers section#middleColumn #entries .entry .bar .buttons span .far,
 .theme-definers section#middleColumn #entries .entry .bar .buttons #search .bottom .left .far,
 .theme-definers section#middleColumn #search .bottom #entries .entry .bar .buttons .left .far {
   color: #55565A;
@@ -1386,6 +1447,10 @@ section#middleColumn #entries .entry .bar .buttons .btn:first-child,
 section#middleColumn #entries .entry .bar .buttons .circle:first-child,
 section#middleColumn #entries .entry .bar .buttons header#navigation #mainNav ul li:first-child,
 header#navigation #mainNav ul section#middleColumn #entries .entry .bar .buttons li:first-child,
+section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li a:first-child,
+header#navigation #bottomNav ul li section#middleColumn #entries .entry .bar .buttons a:first-child,
+section#middleColumn #entries .entry .bar .buttons header#navigation #bottomNav ul li span:first-child,
+header#navigation #bottomNav ul li section#middleColumn #entries .entry .bar .buttons span:first-child,
 section#middleColumn #entries .entry .bar .buttons #search .bottom .left:first-child,
 section#middleColumn #search .bottom #entries .entry .bar .buttons .left:first-child {
   margin-left: 0;
@@ -1478,6 +1543,10 @@ section#rightColumn #topBar .left .btn,
 section#rightColumn #topBar .left .circle,
 section#rightColumn #topBar .left header#navigation #mainNav ul li,
 header#navigation #mainNav ul section#rightColumn #topBar .left li,
+section#rightColumn #topBar .left header#navigation #bottomNav ul li a,
+header#navigation #bottomNav ul li section#rightColumn #topBar .left a,
+section#rightColumn #topBar .left header#navigation #bottomNav ul li span,
+header#navigation #bottomNav ul li section#rightColumn #topBar .left span,
 section#rightColumn #topBar .left section#middleColumn #search .bottom .left,
 section#middleColumn #search .bottom section#rightColumn #topBar .left .left {
   margin-right: 15px;
@@ -1496,6 +1565,10 @@ section#rightColumn #topBar .right .btn,
 section#rightColumn #topBar .right .circle,
 section#rightColumn #topBar .right header#navigation #mainNav ul li,
 header#navigation #mainNav ul section#rightColumn #topBar .right li,
+section#rightColumn #topBar .right header#navigation #bottomNav ul li a,
+header#navigation #bottomNav ul li section#rightColumn #topBar .right a,
+section#rightColumn #topBar .right header#navigation #bottomNav ul li span,
+header#navigation #bottomNav ul li section#rightColumn #topBar .right span,
 section#rightColumn #topBar .right section#middleColumn #search .bottom .left,
 section#middleColumn #search .bottom section#rightColumn #topBar .right .left {
   margin-left: 15px;
@@ -1508,6 +1581,10 @@ section#rightColumn #topBar .btn .fal,
 section#rightColumn #topBar .circle .fal,
 section#rightColumn #topBar header#navigation #mainNav ul li .fal,
 header#navigation #mainNav ul section#rightColumn #topBar li .fal,
+section#rightColumn #topBar header#navigation #bottomNav ul li a .fal,
+header#navigation #bottomNav ul li section#rightColumn #topBar a .fal,
+section#rightColumn #topBar header#navigation #bottomNav ul li span .fal,
+header#navigation #bottomNav ul li section#rightColumn #topBar span .fal,
 section#rightColumn #topBar section#middleColumn #search .bottom .left .fal,
 section#middleColumn #search .bottom section#rightColumn #topBar .left .fal,
 section#rightColumn #topBar .button .far,
@@ -1517,6 +1594,10 @@ section#rightColumn #topBar .btn .far,
 section#rightColumn #topBar .circle .far,
 section#rightColumn #topBar header#navigation #mainNav ul li .far,
 header#navigation #mainNav ul section#rightColumn #topBar li .far,
+section#rightColumn #topBar header#navigation #bottomNav ul li a .far,
+header#navigation #bottomNav ul li section#rightColumn #topBar a .far,
+section#rightColumn #topBar header#navigation #bottomNav ul li span .far,
+header#navigation #bottomNav ul li section#rightColumn #topBar span .far,
 section#rightColumn #topBar section#middleColumn #search .bottom .left .far,
 section#middleColumn #search .bottom section#rightColumn #topBar .left .far,
 section#rightColumn #topBar .button .fas,
@@ -1526,6 +1607,10 @@ section#rightColumn #topBar .btn .fas,
 section#rightColumn #topBar .circle .fas,
 section#rightColumn #topBar header#navigation #mainNav ul li .fas,
 header#navigation #mainNav ul section#rightColumn #topBar li .fas,
+section#rightColumn #topBar header#navigation #bottomNav ul li a .fas,
+header#navigation #bottomNav ul li section#rightColumn #topBar a .fas,
+section#rightColumn #topBar header#navigation #bottomNav ul li span .fas,
+header#navigation #bottomNav ul li section#rightColumn #topBar span .fas,
 section#rightColumn #topBar section#middleColumn #search .bottom .left .fas,
 section#middleColumn #search .bottom section#rightColumn #topBar .left .fas {
   font-size: 20px;
@@ -1538,6 +1623,10 @@ section#middleColumn #search .bottom section#rightColumn #topBar .left .fas {
 .theme-iss section#rightColumn #topBar .circle .fal,
 .theme-iss section#rightColumn #topBar header#navigation #mainNav ul li .fal,
 header#navigation #mainNav ul .theme-iss section#rightColumn #topBar li .fal,
+.theme-iss section#rightColumn #topBar header#navigation #bottomNav ul li a .fal,
+header#navigation #bottomNav ul li .theme-iss section#rightColumn #topBar a .fal,
+.theme-iss section#rightColumn #topBar header#navigation #bottomNav ul li span .fal,
+header#navigation #bottomNav ul li .theme-iss section#rightColumn #topBar span .fal,
 .theme-iss section#rightColumn #topBar section#middleColumn #search .bottom .left .fal,
 section#middleColumn #search .bottom .theme-iss section#rightColumn #topBar .left .fal,
 .theme-iss section#rightColumn #topBar .button .far,
@@ -1547,6 +1636,10 @@ section#middleColumn #search .bottom .theme-iss section#rightColumn #topBar .lef
 .theme-iss section#rightColumn #topBar .circle .far,
 .theme-iss section#rightColumn #topBar header#navigation #mainNav ul li .far,
 header#navigation #mainNav ul .theme-iss section#rightColumn #topBar li .far,
+.theme-iss section#rightColumn #topBar header#navigation #bottomNav ul li a .far,
+header#navigation #bottomNav ul li .theme-iss section#rightColumn #topBar a .far,
+.theme-iss section#rightColumn #topBar header#navigation #bottomNav ul li span .far,
+header#navigation #bottomNav ul li .theme-iss section#rightColumn #topBar span .far,
 .theme-iss section#rightColumn #topBar section#middleColumn #search .bottom .left .far,
 section#middleColumn #search .bottom .theme-iss section#rightColumn #topBar .left .far,
 .theme-iss section#rightColumn #topBar .button .fas,
@@ -1556,6 +1649,10 @@ section#middleColumn #search .bottom .theme-iss section#rightColumn #topBar .lef
 .theme-iss section#rightColumn #topBar .circle .fas,
 .theme-iss section#rightColumn #topBar header#navigation #mainNav ul li .fas,
 header#navigation #mainNav ul .theme-iss section#rightColumn #topBar li .fas,
+.theme-iss section#rightColumn #topBar header#navigation #bottomNav ul li a .fas,
+header#navigation #bottomNav ul li .theme-iss section#rightColumn #topBar a .fas,
+.theme-iss section#rightColumn #topBar header#navigation #bottomNav ul li span .fas,
+header#navigation #bottomNav ul li .theme-iss section#rightColumn #topBar span .fas,
 .theme-iss section#rightColumn #topBar section#middleColumn #search .bottom .left .fas,
 section#middleColumn #search .bottom .theme-iss section#rightColumn #topBar .left .fas {
   color: #fff;
@@ -1568,6 +1665,10 @@ section#middleColumn #search .bottom .theme-iss section#rightColumn #topBar .lef
 .theme-ar section#rightColumn #topBar .circle .fal,
 .theme-ar section#rightColumn #topBar header#navigation #mainNav ul li .fal,
 header#navigation #mainNav ul .theme-ar section#rightColumn #topBar li .fal,
+.theme-ar section#rightColumn #topBar header#navigation #bottomNav ul li a .fal,
+header#navigation #bottomNav ul li .theme-ar section#rightColumn #topBar a .fal,
+.theme-ar section#rightColumn #topBar header#navigation #bottomNav ul li span .fal,
+header#navigation #bottomNav ul li .theme-ar section#rightColumn #topBar span .fal,
 .theme-ar section#rightColumn #topBar section#middleColumn #search .bottom .left .fal,
 section#middleColumn #search .bottom .theme-ar section#rightColumn #topBar .left .fal,
 .theme-ar section#rightColumn #topBar .button .far,
@@ -1577,6 +1678,10 @@ section#middleColumn #search .bottom .theme-ar section#rightColumn #topBar .left
 .theme-ar section#rightColumn #topBar .circle .far,
 .theme-ar section#rightColumn #topBar header#navigation #mainNav ul li .far,
 header#navigation #mainNav ul .theme-ar section#rightColumn #topBar li .far,
+.theme-ar section#rightColumn #topBar header#navigation #bottomNav ul li a .far,
+header#navigation #bottomNav ul li .theme-ar section#rightColumn #topBar a .far,
+.theme-ar section#rightColumn #topBar header#navigation #bottomNav ul li span .far,
+header#navigation #bottomNav ul li .theme-ar section#rightColumn #topBar span .far,
 .theme-ar section#rightColumn #topBar section#middleColumn #search .bottom .left .far,
 section#middleColumn #search .bottom .theme-ar section#rightColumn #topBar .left .far,
 .theme-ar section#rightColumn #topBar .button .fas,
@@ -1586,6 +1691,10 @@ section#middleColumn #search .bottom .theme-ar section#rightColumn #topBar .left
 .theme-ar section#rightColumn #topBar .circle .fas,
 .theme-ar section#rightColumn #topBar header#navigation #mainNav ul li .fas,
 header#navigation #mainNav ul .theme-ar section#rightColumn #topBar li .fas,
+.theme-ar section#rightColumn #topBar header#navigation #bottomNav ul li a .fas,
+header#navigation #bottomNav ul li .theme-ar section#rightColumn #topBar a .fas,
+.theme-ar section#rightColumn #topBar header#navigation #bottomNav ul li span .fas,
+header#navigation #bottomNav ul li .theme-ar section#rightColumn #topBar span .fas,
 .theme-ar section#rightColumn #topBar section#middleColumn #search .bottom .left .fas,
 section#middleColumn #search .bottom .theme-ar section#rightColumn #topBar .left .fas {
   color: #55565A;
@@ -1598,6 +1707,10 @@ section#middleColumn #search .bottom .theme-ar section#rightColumn #topBar .left
 .theme-definers section#rightColumn #topBar .circle .fal,
 .theme-definers section#rightColumn #topBar header#navigation #mainNav ul li .fal,
 header#navigation #mainNav ul .theme-definers section#rightColumn #topBar li .fal,
+.theme-definers section#rightColumn #topBar header#navigation #bottomNav ul li a .fal,
+header#navigation #bottomNav ul li .theme-definers section#rightColumn #topBar a .fal,
+.theme-definers section#rightColumn #topBar header#navigation #bottomNav ul li span .fal,
+header#navigation #bottomNav ul li .theme-definers section#rightColumn #topBar span .fal,
 .theme-definers section#rightColumn #topBar section#middleColumn #search .bottom .left .fal,
 section#middleColumn #search .bottom .theme-definers section#rightColumn #topBar .left .fal,
 .theme-definers section#rightColumn #topBar .button .far,
@@ -1607,6 +1720,10 @@ section#middleColumn #search .bottom .theme-definers section#rightColumn #topBar
 .theme-definers section#rightColumn #topBar .circle .far,
 .theme-definers section#rightColumn #topBar header#navigation #mainNav ul li .far,
 header#navigation #mainNav ul .theme-definers section#rightColumn #topBar li .far,
+.theme-definers section#rightColumn #topBar header#navigation #bottomNav ul li a .far,
+header#navigation #bottomNav ul li .theme-definers section#rightColumn #topBar a .far,
+.theme-definers section#rightColumn #topBar header#navigation #bottomNav ul li span .far,
+header#navigation #bottomNav ul li .theme-definers section#rightColumn #topBar span .far,
 .theme-definers section#rightColumn #topBar section#middleColumn #search .bottom .left .far,
 section#middleColumn #search .bottom .theme-definers section#rightColumn #topBar .left .far,
 .theme-definers section#rightColumn #topBar .button .fas,
@@ -1616,6 +1733,10 @@ section#middleColumn #search .bottom .theme-definers section#rightColumn #topBar
 .theme-definers section#rightColumn #topBar .circle .fas,
 .theme-definers section#rightColumn #topBar header#navigation #mainNav ul li .fas,
 header#navigation #mainNav ul .theme-definers section#rightColumn #topBar li .fas,
+.theme-definers section#rightColumn #topBar header#navigation #bottomNav ul li a .fas,
+header#navigation #bottomNav ul li .theme-definers section#rightColumn #topBar a .fas,
+.theme-definers section#rightColumn #topBar header#navigation #bottomNav ul li span .fas,
+header#navigation #bottomNav ul li .theme-definers section#rightColumn #topBar span .fas,
 .theme-definers section#rightColumn #topBar section#middleColumn #search .bottom .left .fas,
 section#middleColumn #search .bottom .theme-definers section#rightColumn #topBar .left .fas {
   color: #55565A;
@@ -1628,6 +1749,7 @@ section#rightColumn #topBar #scrollBar {
   width: 100%;
   height: 5px;
   z-index: 9;
+  overflow: hidden;
 }
 
 section#rightColumn #topBar #scrollBar #color {
@@ -1706,36 +1828,53 @@ section#rightColumn #mainContent #content .inputContainer label span {
   color: #55565A;
 }
 
-section#rightColumn #mainContent #content .inputContainer input {
+section#rightColumn #mainContent #content .inputContainer input,
+section#rightColumn #mainContent #content .inputContainer textarea {
   -webkit-box-flex: 0;
       -ms-flex: 0 0 100%;
           flex: 0 0 100%;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 35px;
+  line-height: 2.1875rem;
+  font-weight: 300;
   border: 1px solid;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 0 10px;
-  line-height: 35px;
   border-radius: 3px;
 }
 
-.theme-iss section#rightColumn #mainContent #content .inputContainer input {
+.theme-iss section#rightColumn #mainContent #content .inputContainer input,
+.theme-iss section#rightColumn #mainContent #content .inputContainer textarea {
   border-color: #55565A;
   background: #F5F6F6;
 }
 
-.theme-ar section#rightColumn #mainContent #content .inputContainer input {
+.theme-ar section#rightColumn #mainContent #content .inputContainer input,
+.theme-ar section#rightColumn #mainContent #content .inputContainer textarea {
   border-color: #55565A;
   background: #F5F6F6;
 }
 
-.theme-definers section#rightColumn #mainContent #content .inputContainer input {
+.theme-definers section#rightColumn #mainContent #content .inputContainer input,
+.theme-definers section#rightColumn #mainContent #content .inputContainer textarea {
   border-color: #55565A;
   background: #F5F6F6;
+}
+
+section#rightColumn #mainContent #content .inputContainer textarea {
+  min-height: 200px;
+  line-height: 25px;
+  line-height: 1.5625rem;
+  padding: 10px;
 }
 
 section#rightColumn #mainContent #content .columns {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  margin-bottom: 25px;
 }
 
 section#rightColumn #mainContent #content .columns .inputContainer {
@@ -1776,6 +1915,46 @@ section#rightColumn #mainContent #content .columns .inputContainer label span {
 
 section#rightColumn #mainContent #content .columns .inputContainer input {
   margin-right: 20px;
+}
+
+section#rightColumn #mainContent #notifier {
+  min-width: 300px;
+  max-width: 300px;
+  color: #fff;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 18px;
+  line-height: 1.125rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 20px;
+  position: absolute;
+  bottom: -100%;
+  left: -999px;
+  right: -999px;
+  margin: auto;
+  -webkit-transition: .2s ease;
+  transition: .2s ease;
+  -webkit-box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
+          box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.theme-iss section#rightColumn #mainContent #notifier {
+  background: #487CA0;
+}
+
+.theme-ar section#rightColumn #mainContent #notifier {
+  background: #55565A;
+}
+
+.theme-definers section#rightColumn #mainContent #notifier {
+  background: #05223F;
+}
+
+section#rightColumn #mainContent #notifier.active {
+  bottom: 0;
+  -webkit-transition: .2s ease;
+  transition: .2s ease;
 }
 
 section#rightColumn #mainContent .circle {

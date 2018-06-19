@@ -1,9 +1,7 @@
                 <nav id="mainNav">
                     <ul>
                         <li>
-
                             <span class="toggleNav">
-
                                 <span class="icon">
                                     <i class="fas fa-circle"></i>
                                 </span>
@@ -13,10 +11,8 @@
                                 <span class="unreadNumber">50</span>
                             </span>
                             <ul>
-
-                                <li class="active isCat" catId='4'>
+                                <li class="isCat" catId='4'>
                                     <span>
-
                                         <span class="icon">
                                             <i class="fas fa-circle"></i>
                                         </span>
@@ -24,9 +20,7 @@
                                             Politics
                                         </span>
                                         <span class="unreadNumber">50</span>
-
                                     </span>
-
                                 </li>
                                 <li class="isCat" catId='5'>
                                     <span>
@@ -94,7 +88,6 @@
                                         <span class="unreadNumber">50</span>
                                     </span>
                                 </li>
-
                             </ul>
                         </li>
                         <li class="isCat" catId='2'>

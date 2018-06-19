@@ -13,64 +13,64 @@ Event Listeners
  / /___ | |/ /  __/ / / / /_(__  ) 
 /_____/ |___/\___/_/ /_/\__/____/  
                                    
-
 **********************************/
 // Scroll the view back to the top -- can be used for when content changes to show the user the first items
 function scrollToTop(topDiv) {
 	$('#content').animate({
-	    scrollTop: $(topDiv).offset().top
+		scrollTop: $(topDiv).offset().top
 	}, '500');
 }
-function setCatActive(that){
-	$('.isCat').removeClass('active');
-	$(that).closest('.isCat').addClass('active');
-}
-function setEntryActive(that){
-	$('.entry').removeClass('active');
-	$(that).closest('.entry').addClass('active');
+function setActive(that, selector, remove) {
+	$(selector).removeClass('active');
+	if (remove) {
+		$(remove).removeClass('active');
+	}
+	$(that).closest(selector).addClass('active');
 }
 
+function notifier(message) {
+	$('#notifier').addClass('active').html(message);
+	setTimeout(function () {
+		$('#notifier').removeClass('active').html('');
+	}, 5000);
+}
 
-function addViewPostClick(){
+function addViewPostClick() {
 	// TODO should i add a class/id hiearchy here??
 	addUniqueEvent(".isPost", viewPostClick);
-}	
-function addCatClick(){
+}
+function addCatClick() {
 	// TODO should i add a class/id hiearchy here??
 	addUniqueEvent(".isCat", categoryClick);
-	
 }
-function addPrevClick(){
+function addPrevClick() {
 	// TODO should i add a class/id hiearchy here??
 	addUniqueEvent(".prevClick", prevClick);
-	
 }
-function addNextClick(){
+function addNextClick() {
 	// TODO should i add a class/id hiearchy here??
 	addUniqueEvent(".nextClick", nextClick);
-	
 }
-function addShowPostCreateFormClick(){
+function addShowPostCreateFormClick() {
 	// TODO should i add a class/id hiearchy here??
 	addUniqueEvent(".showPostCreateFormClick", showPostCreateFormClick);
 }
-function addFormSaveClick(){
+function addFormSaveClick() {
 	// TODO should i add a class/id hiearchy here??
 	addUniqueEvent(".formSaveClick", formSaveClick);
 }
-function addEditPostClick(){
+function addEditPostClick() {
 	// TODO should i add a class/id hiearchy here??
 	addUniqueEvent(".editPostClick", editPostClick);
-	
 }
-function addToggleFavPostClick(){
+function addToggleFavPostClick() {
 	// TODO should i add a class/id hiearchy here??
 	addUniqueEvent(".toggleFavPostClick", toggleFavPostClick);
 }
-function addGetFavsClick(){
-	addUniqueEvent(".getFavsClick", getFavsClick);	
+function addGetFavsClick() {
+	addUniqueEvent(".getFavsClick", getFavsClick);
 }
-  
+
 /******** END EVENT LISTNER SECTION ******************/
 
 /*
@@ -80,72 +80,33 @@ data is a JS object
 successFunc is a call back function
 */
 
-<<<<<<< HEAD
-function makeAjaxCall(endPoint, method, data, successFunc){
-	
+function makeAjaxCall(endPoint, method, data, successFunc) {
+
 	data._token = document.getElementById("token").getAttribute('value');
 
 	$.ajax({
 		method: method,
-		url:    endPoint,
+		url: endPoint,
 		data: data,
-		beforeSend: function(){	
-			
-		},
-		complete: function(){
-			
-		},
-		success: function(response){
+		beforeSend: function beforeSend() {},
+		complete: function complete() {},
+		success: function success(response) {
 			// TODO check error code here!
 			temp = JSON.parse(response);
-			
-			if (temp.error > 0){
+			logIt(temp.data);
+
+			if (temp.error > 0) {
 				// TODO handle this better
 				logIt('we got a graceful error from the system');
-				if (temp.message){
+				if (temp.message) {
 					logIt(temp.message);
 				}
-=======
-	function makeAjaxCall(endPoint, method, data, successFunc){
-		
-		data._token = document.getElementById("token").getAttribute('value');
-
-		$.ajax({
-			method: method,
-			url:    endPoint,
-			data: data,
-			beforeSend: function(){	
-				
-			},
-			complete: function(){
-				
-			},
-			success: function(response){
-				// TODO check error code here!
-				temp = JSON.parse(response);
-				logIt(temp.data);
-
-				if (temp.error > 0){
-					// TODO handle this better
-					logIt('we got a graceful error from the system');
-					if (temp.message){
-						logIt(temp.message);
-					}
-				}
-				//logIt(temp.data);
-
-				successFunc(temp);
-			},
-			error: function(jqXHR, textStatus, errorThrown){
-				console.log("Ajax Error");
-				console.log(JSON.stringify(jqXHR));
-				console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-				/* TODO show user a nice error code somewhere */
->>>>>>> ca79a2a0fa0dab00838c75169487d93aa14997f5
 			}
+			//logIt(temp.data);
+
 			successFunc(temp);
 		},
-		error: function(jqXHR, textStatus, errorThrown){
+		error: function error(jqXHR, textStatus, errorThrown) {
 			console.log("Ajax Error");
 			console.log(JSON.stringify(jqXHR));
 			console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
@@ -166,187 +127,166 @@ NAVIGATION STUFF
                       |___/                         
 *********************************************************/
 
-
 // Function that is run when a category is clicked
-function categoryClick(){		
-	data = new Object;
-	setCatActive(this);
+function categoryClick() {
+	data = new Object();
+	setActive(this, '.isCat', '#bottomNav li');
 	//console.log("my object: %o", this);
 	endPoint = '/a/getMiddleByCat/' + this.getAttribute('catId');
-	console.log("this is endpoint " + endPoint)
-	makeAjaxCall(endPoint,'GET',data, loadMiddleHTML);
+	console.log("this is endpoint " + endPoint);
+	makeAjaxCall(endPoint, 'GET', data, loadMiddleHTML);
 	document.getElementById('currentContext').setAttribute('value', 'categoryBrowse');
 }
 
-
 // Function that is run when a post is clicked in middle col
 // to populate the right area
-function viewPostClick(){
-	data = new Object;
+function viewPostClick() {
+	data = new Object();
 	postId = this.getAttribute('postId');
-	setEntryActive(this);
+	setActive(this, '.entry');
 	endPoint = '/a/getPost/' + postId;
-	logIt("this is endpoint " + endPoint)	
-	makeAjaxCall(endPoint, 'GET',data, loadRightHTML);
+	logIt("this is endpoint " + endPoint);
+	makeAjaxCall(endPoint, 'GET', data, loadRightHTML);
 	setCurrentPostId(postId);
 }
-
 
 /*
 finds current active post and loads the next one in the div of entries
 */
-function nextClick(){
+function nextClick() {
 
 	logIt('next clicked');
-	
+
 	// TODO make this a function getCurPostId();
 	curPostId = getCurrentPostId();
 
 	// if there is no active post, do nothing
 	// TODO, is this good logic
-	if (! curPostId){ return; }
+	if (!curPostId) {
+		return;
+	}
 
 	allPosts = $('.isPost');
 
 	foundIndex = -1;
-	for (i = 0; i < allPosts.length; i++) { 
-			if (curPostId == allPosts[i].getAttribute('postId')){
-				foundIndex = i;
-				break;
-			}
+	for (i = 0; i < allPosts.length; i++) {
+		if (curPostId == allPosts[i].getAttribute('postId')) {
+			foundIndex = i;
+			break;
+		}
 	}
 	// if cur not found (technically not possible)
 	// or cur value is last in array
 	// then there is no next, do nothing
-	if (foundIndex == -1 || foundIndex == allPosts.length){
+	if (foundIndex == -1 || foundIndex == allPosts.length) {
 		return;
 	} else {
-		nextPost = allPosts[foundIndex +1];
+		nextPost = allPosts[foundIndex + 1];
 	}
 
 	nextPost.click();
 }
 
-
-function prevClick(){
+function prevClick() {
 	logIt('prev clicked');
-	
+
 	// TODO make this a function getCurPostId();
 	curPostId = getCurrentPostId();
 
 	// if there is no active post, do nothing
 	// TODO, is this good logic
-	if (! curPostId){ return; }
+	if (!curPostId) {
+		return;
+	}
 
 	allPosts = $('.isPost');
 
 	foundIndex = -1;
-	for (i = 0; i < allPosts.length; i++) { 
-			if (curPostId == allPosts[i].getAttribute('postId')){
-				foundIndex = i;
-				break;
-			}
+	for (i = 0; i < allPosts.length; i++) {
+		if (curPostId == allPosts[i].getAttribute('postId')) {
+			foundIndex = i;
+			break;
+		}
 	}
 	// if cur not found (technically not possible)
 	// or cur value is index 0
 	// then there is no previous, do nothing
-	if (foundIndex == -1 || foundIndex == 0){
+	if (foundIndex == -1 || foundIndex == 0) {
 		return;
 	} else {
-		prevPost = allPosts[foundIndex -1];
+		prevPost = allPosts[foundIndex - 1];
 	}
 
 	prevPost.click();
 }
 
-function showPostCreateFormClick(){
+function showPostCreateFormClick() {
 	logIt('show form clicked');
-	data = new Object;
-	endPoint = '/admin/showForm/article' ;
-	logIt("this is endpoint " + endPoint)	
-	makeAjaxCall(endPoint, 'GET',data, loadRightHTML);
+	data = new Object();
+	endPoint = '/admin/showForm/article';
+	logIt("this is endpoint " + endPoint);
+	makeAjaxCall(endPoint, 'GET', data, loadRightHTML);
 }
 
-
-
-function formSaveClick(){
+function formSaveClick() {
 	logIt('form save click ' + this.getAttribute('name'));
 	//dump(this);
 	// TODO, make this dynamic not hard coded form
 	// name
-	data = new Object;
+	data = new Object();
 	data.formData = $("#theForm").serializeArray();
+	notifier('This form has been saved!');
 	//logIt(data); return;
-	makeAjaxCall('/admin/savePost', 'POST',data, loadRightHTML);
+	makeAjaxCall('/admin/savePost', 'POST', data, loadRightHTML);
 }
 
-
-function editPostClick(){
-	logIt('edit post click');
-	setEntryActive(this);
+function editPostClick() {
+	//logIt('edit post click');
+	setActive(this, '.entry');
 	// TODO, make this dynamic not hard coded form
 	// name
-	data = new Object;
+	data = new Object();
 	//logIt(data); return;
 	postId = this.getAttribute('postId'); // edit button in middle col
-	
+
 	logIt('this is post id in edit ' + postId);
 
-	if (! postId) {
+	if (!postId) {
 		postId = getCurrentPostId(); // edit bttn on top bar
+		$('.isPost#' + postId).closest('.entry').addClass('active');
 	}
 
-	if (! postId) { 
-		logIt('edit could not find any post ID'); 
-		return; 
+	if (!postId) {
+		logIt('edit could not find any post ID');
+		return;
 	}
-
-<<<<<<< HEAD
 	endpoint = '/admin/editPost/' + postId;
-	logIt("endpoint " + endpoint);
-	makeAjaxCall(endpoint, 'GET',data, loadRightHTML);
+	//logIt("endpoint " + endpoint);
+	makeAjaxCall(endpoint, 'GET', data, loadRightHTML);
 }
 
-
-
-function toggleFavPostClick(){
+function toggleFavPostClick() {
 	logIt('edit post click');
-	data= new Object;
-	
-	if ($(this).hasClass('far')){
+	data = new Object();
+
+	if ($(this).hasClass('far')) {
 		onOff = 'on';
 	} else {
-		onOff = 'off'
-=======
-	function toggleFavPostClick(){
-		logIt('edit post click');
-		data= new Object;
-		
-		if ($(this).hasClass('far')){
-			onOff = 'on';
-		} else {
-			onOff = 'off'
-		}
-		endpoint = '/admin/toggleFavorite/' + onOff +'/' + this.getAttribute('postId');
-		logIt("endpoint " + endpoint);
-		makeAjaxCall(endpoint, 'GET',data, handleToggleFav);
->>>>>>> ca79a2a0fa0dab00838c75169487d93aa14997f5
+		onOff = 'off';
 	}
-
-	endpoint = '/admin/toggleFavorite/' + onOff +'/' + this.getAttribute('postId');
-	
+	endpoint = '/admin/toggleFavorite/' + onOff + '/' + this.getAttribute('postId');
 	logIt("endpoint " + endpoint);
-	makeAjaxCall(endpoint, 'GET',data, handleToggleFav);
-		 
+	makeAjaxCall(endpoint, 'GET', data, handleToggleFav);
 }
 
-	function getFavsClick(){
-		logIt('get favs click');
-		data= new Object;
-		endpoint = '/a/getFavorites/';
-		logIt("endpoint " + endpoint);
-		makeAjaxCall(endpoint, 'GET',data, loadMiddleHTML);
-	}
+function getFavsClick() {
+	logIt('get favs click');
+	setActive(this, '#bottomNav li', '.isCat');
+	data = new Object();
+	endpoint = '/a/getFavorites/';
+	logIt("endpoint " + endpoint);
+	makeAjaxCall(endpoint, 'GET', data, loadMiddleHTML);
+}
 
 /***
  *                  .---.                             
@@ -373,84 +313,45 @@ function toggleFavPostClick(){
  *                                                      
  */
 
-
-<<<<<<< HEAD
 // Success callback for loading posts in middle col
 
-function loadMiddleHTML(response){
+function loadMiddleHTML(response) {
 	scrollToTop('#search');
-	if (response.data){
+	if (response.data) {
 		document.getElementById("entries").innerHTML = response.data;
-		logIt('trying to add post clicks'); 
+		logIt('trying to add post clicks');
 		addViewPostClick();
 		addEditPostClick();
 		addToggleFavPostClick();
-=======
-	function loadMiddleHTML(response){
-		scrollToTop('#search');
-		if (response.data){
-			document.getElementById("entries").innerHTML = response.data;
-			logIt('trying to add post clicks'); 
-			addViewPostClick();
-			addEditPostClick();
-			addToggleFavPostClick();
-		}
->>>>>>> ca79a2a0fa0dab00838c75169487d93aa14997f5
 	}
 }
 
-
-<<<<<<< HEAD
-
-
 // Success callback for loading a post in right main area
-
-function loadRightHTML(response){
-	scrollToTop('#topBar'); 
-	if (response.data){
+function loadRightHTML(response) {
+	scrollToTop('#topBar');
+	if (response.data) {
 		document.getElementById("contentWrapper").innerHTML = response.data;
 		// HACK Alert! this is for FORMS not posts
 		// there is no saveClick class for posts!
-		logIt('adding formSaveClick listener from load right')
+		logIt('adding formSaveClick listener from load right');
 		addFormSaveClick();
-	} 
-	if (response.postId){
+	}
+
+	if (response.postId) {
 		logIt('load right setting cur post id ' + response.postId);
 		setCurrentPostId(response.postId);
-=======
-	// Success callback for loading a post in right main area
-
-	function loadRightHTML(response){
-		scrollToTop('#topBar'); 
-		if (response.data){
-			document.getElementById("contentWrapper").innerHTML = response.data;
-			// HACK Alert! this is for FORMS not posts
-			// there is no saveClick class for posts!
-			logIt('adding formSaveClick listener from load right')
-			addFormSaveClick();
-		} 
-
-		if (response.postId){
-			logIt('load right setting cur post id ' + response.postId);
-			setCurrentPostId(response.postId);
-		}
->>>>>>> ca79a2a0fa0dab00838c75169487d93aa14997f5
 	}
 }
 
-
-
-function handleToggleFav (response){
+function handleToggleFav(response) {
 	logIt('we got back ok, i guess ' + response.data);
-	if (response.error == 0){
-		selector = '#fav-'+response.data;
+	if (response.error == 0) {
+		selector = '#fav-' + response.data;
 		toggleFontAwesome(selector);
 	} else {
 		// TODO alert user of error
 	}
 }
-
-
 
 /*********************************************
 Helpers
@@ -464,9 +365,9 @@ Helpers
 
 *********************************************/
 
-function toggleFontAwesome(selector){
+function toggleFontAwesome(selector) {
 
-	if ($(selector).hasClass('far')){
+	if ($(selector).hasClass('far')) {
 		$(selector).removeClass('far');
 		$(selector).addClass('fas');
 	} else {
@@ -474,46 +375,45 @@ function toggleFontAwesome(selector){
 		$(selector).addClass('far');
 	}
 }
-function getCurrentPostId(){
+function getCurrentPostId() {
 	return document.getElementById('currentPost').getAttribute('value');
 }
 
-function setCurrentPostId(postId){
+function setCurrentPostId(postId) {
 	logIt('IN FUNC  set cur post =  ' + postId);
-	document.getElementById('currentPost').setAttribute('value', postId);	
+	document.getElementById('currentPost').setAttribute('value', postId);
 }
 
-function logIt(msg,status){
+function logIt(msg, status) {
 	// status not null means log in prod
-	if (_log == 'dev' || status == 'prod'){
+	if (_log == 'dev' || status == 'prod') {
 		console.log(msg);
 	}
 }
 
 function dump(obj) {
-    var out = '';
-    for (var i in obj) {
-        out += i + ": " + obj[i] + "\n";
-    }
-    logIt("This is Obect Dump!!");
-    logIt(out);
+	var out = '';
+	for (var i in obj) {
+		out += i + ": " + obj[i] + "\n";
+	}
+	logIt("This is Obect Dump!!");
+	logIt(out);
 }
 
-function addUniqueEvent(className,func){
-		temps = $(className);
+function addUniqueEvent(className, func) {
+	temps = $(className);
 	for (i = 0; i < temps.length; i++) {
 
-		if ($(temps[i]).hasClass('hasClickEvent')){
+		if ($(temps[i]).hasClass('hasClickEvent')) {
 			// do nothing
 		} else {
 			$(temps[i]).on('click', func);
 			$(temps[i]).addClass('hasClickEvent');
 		}
 	}
-
 }
 
-$(document).ready(function() { 
+$(document).ready(function () {
 
 	// register the nav links to show cats
 	// in middle col when clicked
@@ -529,29 +429,38 @@ $(document).ready(function() {
 	// fav bttn in bottom nav
 	addGetFavsClick();
 });
-	
+
+/*
+  _    _                 _____       _             __               
+ | |  | |               |_   _|     | |           / _|              
+ | |  | |___  ___ _ __    | |  _ __ | |_ ___ _ __| |_ __ _  ___ ___ 
+ | |  | / __|/ _ \ '__|   | | | '_ \| __/ _ \ '__|  _/ _` |/ __/ _ \
+ | |__| \__ \  __/ |     _| |_| | | | ||  __/ |  | || (_| | (_|  __/
+  \____/|___/\___|_|    |_____|_| |_|\__\___|_|  |_| \__,_|\___\___|
+
+*/
 
 // Open SubNavigation
-$('#mainNav span.toggleNav').click(function(){
+$('#mainNav span.toggleNav').click(function () {
 	$('#mainNav li ul').slideUp();
 	if ($(this).parent().find('ul').is(':hidden') == true) {
 		$(this).parent().find('ul').slideDown();
 	}
 });
-$('#mainNav li ul li').click(function(){
+$('#mainNav li ul li').click(function () {
 	$(this).parent().css('display', 'block');
 });
 
-
+// testing
 
 // Close/Open Middle Column
-$('#toggleMiddle').click(function(){
+$('#toggleMiddle').click(function () {
 	$('#middleColumn').toggleClass('closed');
 });
 if ($(window).width() < 1170) {
 	$('#middleColumn').addClass('closed');
 }
-$(window).resize(function(){
+$(window).resize(function () {
 	console.log($(window).width());
 	if ($(window).width() < 1170) {
 		$('#middleColumn').addClass('closed');
@@ -560,27 +469,23 @@ $(window).resize(function(){
 	}
 });
 
-
-
 // Scroll Bar for Right Column
-$('#content').scroll(function(){
-	var scrollPercent = $(this).scrollTop() / ( $('#contentWrapper').height() - $(this).height() ) * 100;
-	$('#color').css('width', scrollPercent + '%'  );
+$('#content').scroll(function () {
+	var scrollPercent = $(this).scrollTop() / ($('#contentWrapper').height() - $(this).height()) * 100;
+	$('#color').css('width', scrollPercent + '%');
 
 	if ($(this).scrollTop() < 500) {
-		$('#rightColumn .circle').css({'opacity':'.5'});
+		$('#rightColumn .circle').css({ 'opacity': '.5' });
 	} else {
-		$('#rightColumn .circle').css({'opacity':'1'});
+		$('#rightColumn .circle').css({ 'opacity': '1' });
 	}
 });
-$('#rightColumn .circle').click(function() {
+$('#rightColumn .circle').click(function () {
 	scrollToTop('#topBar');
-}); 
-
-
+});
 
 // Advanced Search
-$('#openAdvancedSearch').click(function(){
+$('#openAdvancedSearch').click(function () {
 	$('#advancedSearch').slideToggle();
 	$(this).toggleClass('active');
 	if ($('.advanced').hasClass('fa-chevron-circle-down')) {
@@ -589,8 +494,3 @@ $('#openAdvancedSearch').click(function(){
 		$('.advanced').removeClass('fa-chevron-circle-up').addClass('fa-chevron-circle-down');
 	}
 });
-
-
-
-
-

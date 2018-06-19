@@ -1,6 +1,6 @@
                 <nav id="bottomNav">
                     <ul>
-                        <li class="active" title="Approve Posts">
+                        <li title="Approve Posts">
                             <span>
                                 <i class="far fa-thumbs-up"></i>
                             </span>
