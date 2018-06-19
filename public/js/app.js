@@ -93,7 +93,7 @@ function makeAjaxCall(endPoint, method, data, successFunc) {
 		success: function success(response) {
 			// TODO check error code here!
 			temp = JSON.parse(response);
-			logIt(temp.data);
+			//logIt(temp.data);
 
 			if (temp.error > 0) {
 				// TODO handle this better
@@ -235,7 +235,6 @@ function formSaveClick() {
 	// name
 	data = new Object();
 	data.formData = $("#theForm").serializeArray();
-	notifier('This form has been saved!');
 	//logIt(data); return;
 	makeAjaxCall('/admin/savePost', 'POST', data, loadRightHTML);
 }
@@ -336,7 +335,9 @@ function loadRightHTML(response) {
 		logIt('adding formSaveClick listener from load right');
 		addFormSaveClick();
 	}
-
+	if (response.message) {
+		notifier(response.message);
+	}
 	if (response.postId) {
 		logIt('load right setting cur post id ' + response.postId);
 		setCurrentPostId(response.postId);

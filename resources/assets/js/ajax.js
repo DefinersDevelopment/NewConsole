@@ -101,7 +101,7 @@ function makeAjaxCall(endPoint, method, data, successFunc){
 		success: function(response){
 			// TODO check error code here!
 			temp = JSON.parse(response);
-			logIt(temp.data);
+			//logIt(temp.data);
 
 			if (temp.error > 0){
 				// TODO handle this better
