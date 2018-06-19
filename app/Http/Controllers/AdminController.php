@@ -97,7 +97,7 @@ makes a post object, fills it, saves it, save category relations
     	
     	if (isset($errors) && count($errors) > 0){
     		$returnVal->error = 1;
-            $returnVal->message = 'There were errors during submission.'
+            $returnVal->message = 'There were errors during submission.';
     		$returnVal->data = View::make('forms.article',['post'=>$post,'theErrors'=>$errors, 
     			'postCats'=>$cats, 'allCats'=>$allCats])->render();
     		return json_encode($returnVal);
@@ -124,7 +124,7 @@ makes a post object, fills it, saves it, save category relations
             // });
             $errors['topMessage'] = "Error " . $e->getMessage();
             $returnVal->error = 1;
-            $returnVal->message = 'There were errors during submission.'
+            $returnVal->message = 'There were errors during submission.';
     		$returnVal->data = View::make('forms.article',['post'=>$post,
     			'theErrors'=>$errors, 'postCats'=>$cats, 'allCats'=>$allCats])->render();
     		return json_encode($returnVal);
@@ -138,7 +138,7 @@ makes a post object, fills it, saves it, save category relations
             // });
             $errors['topMessage'] = "Error " . $e->getMessage();
             $returnVal->error = 1;
-            $returnVal->message = 'There were errors during submission.'
+            $returnVal->message = 'There were errors during submission.';
     		$returnVal->data = View::make('forms.article',['post'=>$post,
     			'theErrors'=>$errors, 'postCats'=>$cats, 'allCats'=>$allCats])->render();
     		return json_encode($returnVal);
@@ -152,7 +152,7 @@ makes a post object, fills it, saves it, save category relations
     	$errors['topMessage'] = 'Post Created/Updated as Post ID ' . $post->id;
     	LogIt('Post Created as Post ID ' . $post->id, 'end');
     	$returnVal->error = 0;
-        $returnVal->message = 'POST $post->id was Created/Updated successfully.'
+        $returnVal->message = 'POST $post->id was Created/Updated successfully.';
     	$returnVal->data = View::make('forms.article',['post'=>$post,
     		'theErrors'=>$errors, 'postCats'=>$cats, 'allCats'=>$allCats])->render();
     	//$returnVal->data = print_r($data,TRUE);
