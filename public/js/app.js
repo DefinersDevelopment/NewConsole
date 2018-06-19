@@ -80,7 +80,7 @@ data is a JS object
 successFunc is a call back function
 */
 
-<<<<<<< HEAD
+
 function makeAjaxCall(endPoint, method, data, successFunc){
 	
 	data._token = document.getElementById("token").getAttribute('value');
@@ -98,51 +98,17 @@ function makeAjaxCall(endPoint, method, data, successFunc){
 		success: function(response){
 			// TODO check error code here!
 			temp = JSON.parse(response);
-			
+			//logIt(temp.data);
+
 			if (temp.error > 0){
 				// TODO handle this better
 				logIt('we got a graceful error from the system');
 				if (temp.message){
 					logIt(temp.message);
 				}
-=======
-	function makeAjaxCall(endPoint, method, data, successFunc){
-		
-		data._token = document.getElementById("token").getAttribute('value');
-
-		$.ajax({
-			method: method,
-			url:    endPoint,
-			data: data,
-			beforeSend: function(){	
-				
-			},
-			complete: function(){
-				
-			},
-			success: function(response){
-				// TODO check error code here!
-				temp = JSON.parse(response);
-				logIt(temp.data);
-
-				if (temp.error > 0){
-					// TODO handle this better
-					logIt('we got a graceful error from the system');
-					if (temp.message){
-						logIt(temp.message);
-					}
-				}
-				//logIt(temp.data);
-
-				successFunc(temp);
-			},
-			error: function(jqXHR, textStatus, errorThrown){
-				console.log("Ajax Error");
-				console.log(JSON.stringify(jqXHR));
-				console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-				/* TODO show user a nice error code somewhere */
->>>>>>> ca79a2a0fa0dab00838c75169487d93aa14997f5
 			}
+			//logIt(temp.data);
+
 			successFunc(temp);
 		},
 		error: function(jqXHR, textStatus, errorThrown){
@@ -300,14 +266,10 @@ function editPostClick(){
 		logIt('edit could not find any post ID'); 
 		return; 
 	}
-
-<<<<<<< HEAD
 	endpoint = '/admin/editPost/' + postId;
 	logIt("endpoint " + endpoint);
 	makeAjaxCall(endpoint, 'GET',data, loadRightHTML);
 }
-
-
 
 function toggleFavPostClick(){
 	logIt('edit post click');
@@ -317,27 +279,10 @@ function toggleFavPostClick(){
 		onOff = 'on';
 	} else {
 		onOff = 'off'
-=======
-	function toggleFavPostClick(){
-		logIt('edit post click');
-		data= new Object;
-		
-		if ($(this).hasClass('far')){
-			onOff = 'on';
-		} else {
-			onOff = 'off'
-		}
-		endpoint = '/admin/toggleFavorite/' + onOff +'/' + this.getAttribute('postId');
-		logIt("endpoint " + endpoint);
-		makeAjaxCall(endpoint, 'GET',data, handleToggleFav);
->>>>>>> ca79a2a0fa0dab00838c75169487d93aa14997f5
 	}
-
 	endpoint = '/admin/toggleFavorite/' + onOff +'/' + this.getAttribute('postId');
-	
 	logIt("endpoint " + endpoint);
-	makeAjaxCall(endpoint, 'GET',data, handleToggleFav);
-		 
+	makeAjaxCall(endpoint, 'GET',data, handleToggleFav);		 
 }
 
 	function getFavsClick(){
@@ -374,7 +319,7 @@ function toggleFavPostClick(){
  */
 
 
-<<<<<<< HEAD
+
 // Success callback for loading posts in middle col
 
 function loadMiddleHTML(response){
@@ -385,26 +330,11 @@ function loadMiddleHTML(response){
 		addViewPostClick();
 		addEditPostClick();
 		addToggleFavPostClick();
-=======
-	function loadMiddleHTML(response){
-		scrollToTop('#search');
-		if (response.data){
-			document.getElementById("entries").innerHTML = response.data;
-			logIt('trying to add post clicks'); 
-			addViewPostClick();
-			addEditPostClick();
-			addToggleFavPostClick();
-		}
->>>>>>> ca79a2a0fa0dab00838c75169487d93aa14997f5
 	}
 }
 
 
-<<<<<<< HEAD
-
-
 // Success callback for loading a post in right main area
-
 function loadRightHTML(response){
 	scrollToTop('#topBar'); 
 	if (response.data){
@@ -414,27 +344,10 @@ function loadRightHTML(response){
 		logIt('adding formSaveClick listener from load right')
 		addFormSaveClick();
 	} 
+
 	if (response.postId){
 		logIt('load right setting cur post id ' + response.postId);
 		setCurrentPostId(response.postId);
-=======
-	// Success callback for loading a post in right main area
-
-	function loadRightHTML(response){
-		scrollToTop('#topBar'); 
-		if (response.data){
-			document.getElementById("contentWrapper").innerHTML = response.data;
-			// HACK Alert! this is for FORMS not posts
-			// there is no saveClick class for posts!
-			logIt('adding formSaveClick listener from load right')
-			addFormSaveClick();
-		} 
-
-		if (response.postId){
-			logIt('load right setting cur post id ' + response.postId);
-			setCurrentPostId(response.postId);
-		}
->>>>>>> ca79a2a0fa0dab00838c75169487d93aa14997f5
 	}
 }
 
