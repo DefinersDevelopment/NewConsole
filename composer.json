@@ -20,7 +20,8 @@
     "autoload": {
         "classmap": [
             "database/seeds",
-            "database/factories"
+            "database/factories",
+	    "app/Models"
         ],
 	"files":["app/Helpers/Logging.php","app/Helpers/Misc.php"],
         "psr-4": {
