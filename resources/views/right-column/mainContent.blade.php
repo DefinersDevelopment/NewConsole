@@ -7,7 +7,7 @@
                                     {{$post->publication}} | {{$post->author}} | {{date_format($post->updated_at, "F j, Y - g:iA")}}
                               </p>
                               <p><a href="{{$post->url}}"><i class="fas fa-external-link-square-alt"></i> View Source</a></p>
-                              {{$post->body}}
+                              {!!$post->body!!}
                         @else
                               <h1>The Great, Overlooked Tax Policy For Getting People To Work</h1>
                               <p class="meta">The Atlantic | Annie Lowrey | January 2, 2017 - 9:52AM</p>

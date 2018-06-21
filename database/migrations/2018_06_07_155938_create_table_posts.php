@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+//use DB;
 
 class CreateTablePosts extends Migration
 {
@@ -23,6 +24,7 @@ class CreateTablePosts extends Migration
             $table->string('author_bio', 2000)->nullable(); // this should be an author ID TODO
             $table->string('publication', 2000)->nullable();
             $table->string('url', 2000)->nullable();
+            $table->string('guid', 2000)->nullable();
             $table->string('short_description',4000)->nullable();  // for ISS this is 'byline'
             $table->mediumText('body')->nullable();
             
@@ -32,6 +34,8 @@ class CreateTablePosts extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        DB::statement('ALTER TABLE posts ADD FULLTEXT idx_body (body)');
     }
 
     /**

@@ -28,8 +28,8 @@ class category_table_seeder extends Seeder
 				$cat = new Category;
 				$cat->id = 4;
 				$cat->parent_id = 1;
-				$cat->name = 'Polotics';
-				$cat->slug = 'polotics';
+				$cat->name = 'Politics';
+				$cat->slug = 'politics';
 				$cat->user_id_created = 1;
 				$cat->postable = 1;
 				$cat->order = 1;

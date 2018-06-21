@@ -33,92 +33,55 @@ function setEntryActive(that){
 
 function addViewPostClick(){
 	// TODO should i add a class/id hiearchy here??
-	addUniqueEvent(".isPost", viewPostClick);
+	addUniqueEvent(".isPost",'click',viewPostClick);
 }	
 function addCatClick(){
 	// TODO should i add a class/id hiearchy here??
-	addUniqueEvent(".isCat", categoryClick);
+	addUniqueEvent(".isCat",'click', categoryClick);
 	
 }
 function addPrevClick(){
 	// TODO should i add a class/id hiearchy here??
-	addUniqueEvent(".prevClick", prevClick);
+	addUniqueEvent(".prevClick",'click', prevClick);
 	
 }
 function addNextClick(){
 	// TODO should i add a class/id hiearchy here??
-	addUniqueEvent(".nextClick", nextClick);
+	addUniqueEvent(".nextClick",'click', nextClick);
 	
 }
 function addShowPostCreateFormClick(){
 	// TODO should i add a class/id hiearchy here??
-	addUniqueEvent(".showPostCreateFormClick", showPostCreateFormClick);
+	addUniqueEvent(".showPostCreateFormClick",'click', showPostCreateFormClick);
 }
 function addFormSaveClick(){
 	// TODO should i add a class/id hiearchy here??
-	addUniqueEvent(".formSaveClick", formSaveClick);
+	addUniqueEvent(".formSaveClick",'click', formSaveClick);
 }
 function addEditPostClick(){
 	// TODO should i add a class/id hiearchy here??
-	addUniqueEvent(".editPostClick", editPostClick);
+	addUniqueEvent(".editPostClick",'click', editPostClick);
 	
 }
 function addToggleFavPostClick(){
 	// TODO should i add a class/id hiearchy here??
-	addUniqueEvent(".toggleFavPostClick", toggleFavPostClick);
+	addUniqueEvent(".toggleFavPostClick",'click', toggleFavPostClick);
 }
 function addGetFavsClick(){
-	addUniqueEvent(".getFavsClick", getFavsClick);	
+	addUniqueEvent(".getFavsClick",'click', getFavsClick);	
+}
+function addSearchClick(){
+	addUniqueEvent(".searchClick",'click', searchClick);		
+}
+function addSearchReturnPress(){
+	addUniqueEvent("#searchBox",'keydown', searchClick);		
 }
   
 /******** END EVENT LISTNER SECTION ******************/
 
-/*
-Generic Ajax function, may not work in all cases
-endPoint is a string for the URL to be called
-data is a JS object
-successFunc is a call back function
-*/
 
 
-function makeAjaxCall(endPoint, method, data, successFunc){
-	
-	data._token = document.getElementById("token").getAttribute('value');
 
-	$.ajax({
-		method: method,
-		url:    endPoint,
-		data: data,
-		beforeSend: function(){	
-			
-		},
-		complete: function(){
-			
-		},
-		success: function(response){
-			// TODO check error code here!
-			temp = JSON.parse(response);
-			//logIt(temp.data);
-
-			if (temp.error > 0){
-				// TODO handle this better
-				logIt('we got a graceful error from the system');
-				if (temp.message){
-					logIt(temp.message);
-				}
-			}
-			//logIt(temp.data);
-
-			successFunc(temp);
-		},
-		error: function(jqXHR, textStatus, errorThrown){
-			console.log("Ajax Error");
-			console.log(JSON.stringify(jqXHR));
-			console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-			/* TODO show user a nice error code somewhere */
-		}
-	});
-}
 
 /********************************************************
 NAVIGATION STUFF
@@ -236,7 +199,7 @@ function showPostCreateFormClick(){
 
 
 function formSaveClick(){
-	logIt('form save click ' + this.getAttribute('name'));
+	logIt('form save click ');
 	//dump(this);
 	// TODO, make this dynamic not hard coded form
 	// name
@@ -285,14 +248,23 @@ function toggleFavPostClick(){
 	makeAjaxCall(endpoint, 'GET',data, handleToggleFav);		 
 }
 
-	function getFavsClick(){
-		logIt('get favs click');
-		data= new Object;
-		endpoint = '/a/getFavorites/';
-		logIt("endpoint " + endpoint);
-		makeAjaxCall(endpoint, 'GET',data, loadMiddleHTML);
+function getFavsClick(e){
+	logIt('get favs click');
+	data= new Object;
+	endpoint = '/a/getFavorites/';
+	logIt("endpoint " + endpoint);
+	makeAjaxCall(endpoint, 'GET',data, loadMiddleHTML);
+}
+function searchClick(e){ 
+	if ( ($(this).attr('id') == 'searchBox' && e.keyCode == 13) || e.event == 'click') {
+	
+	logIt('search click ' + $('#searchBox').val() );
+	data = new Object;
+	data.terms = $('#searchBox').val();
+	makeAjaxCall('/a/post/search','POST',data,loadMiddleHTML);
+	e.preventDefault()
 	}
-
+}
 /***
  *                  .---.                             
  *                  |   |                             
@@ -351,8 +323,6 @@ function loadRightHTML(response){
 	}
 }
 
-
-
 function handleToggleFav (response){
 	logIt('we got back ok, i guess ' + response.data);
 	if (response.error == 0){
@@ -376,7 +346,50 @@ Helpers
                      `--'                         
 
 *********************************************/
+/*
+Generic Ajax function, may not work in all cases
+endPoint is a string for the URL to be called
+data is a JS object
+successFunc is a call back function
+*/
+function makeAjaxCall(endPoint, method, data, successFunc){
+	
+	data._token = document.getElementById("token").getAttribute('value');
 
+	$.ajax({
+		method: method,
+		url:    endPoint,
+		data: data,
+		beforeSend: function(){	
+			
+		},
+		complete: function(){
+			
+		},
+		success: function(response){
+			// TODO check error code here!
+			temp = JSON.parse(response);
+			//logIt(temp.data);
+
+			if (temp.error > 0){
+				// TODO handle this better
+				logIt('we got a graceful error from the system');
+				if (temp.message){
+					logIt(temp.message);
+				}
+			}
+			//logIt(temp.data);
+
+			successFunc(temp);
+		},
+		error: function(jqXHR, textStatus, errorThrown){
+			console.log("Ajax Error");
+			console.log(JSON.stringify(jqXHR));
+			console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+			/* TODO show user a nice error code somewhere */
+		}
+	});
+}
 function toggleFontAwesome(selector){
 
 	if ($(selector).hasClass('far')){
@@ -412,22 +425,23 @@ function dump(obj) {
     logIt(out);
 }
 
-function addUniqueEvent(className,func){
-		temps = $(className);
+function addUniqueEvent(selector,event,func){
+		temps = $(selector);
+		indicatorClass = 'has' + event + 'Event';
+
 	for (i = 0; i < temps.length; i++) {
 
-		if ($(temps[i]).hasClass('hasClickEvent')){
+		if ($(temps[i]).hasClass(indicatorClass)){
 			// do nothing
 		} else {
-			$(temps[i]).on('click', func);
-			$(temps[i]).addClass('hasClickEvent');
+			$(temps[i]).on(event, func);
+			$(temps[i]).addClass(indicatorClass);
 		}
 	}
 
 }
 
 $(document).ready(function() { 
-
 	// register the nav links to show cats
 	// in middle col when clicked
 	addCatClick();
@@ -441,6 +455,8 @@ $(document).ready(function() {
 	addEditPostClick();
 	// fav bttn in bottom nav
 	addGetFavsClick();
+	addSearchClick();
+	addSearchReturnPress();
 });
 	
 

@@ -67,5 +67,19 @@ class MasterController extends Controller
         LogIt(' getting favorites done ', 'end') ;
     	return json_encode($returnVal);
     }
+
+    public function searchPosts(Request $r){
+
+        $returnVal = new \stdClass;
+        LogIt('in master this is terms ' . $r->input('terms') );
+        
+        // TODO try catch
+        $posts = Post::search( ['terms'=>$r->input('terms')]);
+        $returnVal->error = 0; 
+        $returnVal->data = View::make('middle-column.entries')->with(['posts'=>$posts])->render();
+
+        return json_encode($returnVal);
+
+    }
  
 }
