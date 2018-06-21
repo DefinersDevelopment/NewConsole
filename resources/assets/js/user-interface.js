@@ -19,7 +19,7 @@ $('#mainNav li ul li').click(function(){
 	$(this).parent().css('display', 'block');
 });
 
-// testing
+// testing this shit
 
 // Close/Open Middle Column
 $('#toggleMiddle').click(function(){

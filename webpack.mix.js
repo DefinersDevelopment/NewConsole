@@ -10,12 +10,11 @@ let mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-let jsArray = [
-				'resources/assets/js/ajax.js', 
-	 	 		'resources/assets/js/user-interface.js'
-	 	 	];
 
-mix.babel(jsArray, 'public/js/app.js');
+
+mix.js('resources/assets/js/ajax.js', 'public/js/app.js');
+mix.js('resources/assets/js/user-interface.js', 'public/js/app.js');
+
 
 mix.sass('resources/assets/sass/app.scss', 'public/css');
 

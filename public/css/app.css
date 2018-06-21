@@ -1779,6 +1779,7 @@ section#rightColumn #mainContent {
           flex: 1;
   background: #fff;
   position: relative;
+  overflow: hidden;
 }
 
 section#rightColumn #mainContent #content {
@@ -1915,6 +1916,11 @@ section#rightColumn #mainContent #content .columns .inputContainer label span {
 
 section#rightColumn #mainContent #content .columns .inputContainer input {
   margin-right: 20px;
+}
+
+section#rightColumn #mainContent #content .formError {
+  color: red;
+  font-style: italic;
 }
 
 section#rightColumn #mainContent #notifier {

@@ -357,7 +357,7 @@ section#rightColumn {width:100%; background:#fff; @extend .flexColumn; @extend .
 			}
 		}
 	}
-	#mainContent {width:100%; height:auto; flex:1; background:#fff; position:relative;
+	#mainContent {width:100%; height:auto; flex:1; background:#fff; position:relative; overflow:hidden;
 		#content {width:100%; height:100%; position:absolute; top:0; left:0; box-sizing:border-box; overflow-y:scroll; padding:25px 20px 20px 20px;
 			#contentWrapper {}
 			.inputContainer {@extend .flex; flex-wrap:wrap; margin-bottom:20px;
@@ -385,6 +385,7 @@ section#rightColumn {width:100%; background:#fff; @extend .flexColumn; @extend .
 				}
 				
 			}
+			.formError {color:red; font-style:italic;}
 		}
 		#notifier {min-width:300px; max-width:300px; color:#fff; @include font-size(16px); @include line-height(18px); box-sizing:border-box; padding:20px; position:absolute; bottom:-100%; left:-999px; right:-999px; margin:auto; transition:.2s ease; box-shadow:0px 3px 5px rgba(0,0,0,.3);
 			@include themify($themes){
