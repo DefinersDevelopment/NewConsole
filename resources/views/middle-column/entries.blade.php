@@ -10,7 +10,7 @@
                                 <div class="entry postContainer" >
                                     <div class="entryContent">
                                         <h2 class="isPost" postId="{{$p->id}}" id="{{$p->id}}">{{$p->title}}</h2>
-                                        <p>{{-- @if ($p->unread == 'U') Unread @endif --}}{{$p->short_description}}</p>
+                                        <p>{!!$p->short_description!!}</p>
                                     </div>
                                     <div class="bar">
                                         <span class="text">Updated: {{$p->updated_at}}</span>

@@ -1,8 +1,8 @@
                         <form action="">
                             <div id="search">
                                 <div class="top">
-                                    <input type="text">
-                                    <div class="btn search" title="Search">
+                                    <input type="text" name='searchBox' id='searchBox'>
+                                    <div class="btn search searchClick" title="Search">
                                         <i class="fas fa-search"></i>
                                     </div>
                                     <div class="btn" title="Keyword Search Assistant">

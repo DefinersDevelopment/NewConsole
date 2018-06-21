@@ -168,7 +168,7 @@ makes a post object, fills it, saves it, save category relations
     	foreach ($post->category as $cat){
     		$postCats[] = $cat->id;
     	}
-    	LogIt('cats from post ' . print_r($post->category,TRUE));
+    	//LogIt('cats from post ' . print_r($post->category,TRUE));
     	$allCats = Category::getAllCategories();  // display
     	$returnVal->error = 0;
         $returnVal->postId = $postId;

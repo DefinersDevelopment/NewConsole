@@ -36,5 +36,8 @@ Route::get('/admin/showForm/{form_type}', 'AdminController@showForm')->name('sho
 Route::post('/admin/savePost', 'AdminController@savePost')->name('savePost');
 Route::get('/admin/editPost/{post_id}', 'AdminController@editPost')->name('editPost');
 
+// Post search
+Route::post('/a/post/search/', 'MasterController@searchPosts')->name('searchPosts');
+
 // favorites
 Route::get('/admin/toggleFavorite/{onOff}/{post_id}', 'AdminController@toggleFavorite')->name('toggleFavorite');

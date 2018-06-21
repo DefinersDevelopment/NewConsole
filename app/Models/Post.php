@@ -21,6 +21,8 @@ class Post extends Model
 
     /*****************************
     	Simple Func. Probably will not be used except maybe as admin
+            b/c it does not get anything based on the user like
+            favs/unreads, etc....
     *****************************/
 
     public static function getByCategory($cat_id){
@@ -56,7 +58,7 @@ The standard that we return when getting a list of POSTS
 
     public static function getByCategoryWithFavAndUnreads($cat_id,$user_id,$limit,$last_time = ''){
 
-    	LogIt('Getting cats with suer posts');
+    	LogIt('Getting cats with Fav and Unreads');
     	
     	/*
     	This can be done with eloquent relations, I am pretty sure
@@ -114,8 +116,63 @@ The standard that we return when getting a list of POSTS
 
     	return $post;
     }
+/*
+Build dynamic search query.
+$filters can carry many things
+terms, string of word or words
+begin_date, string of a date to start search
+end_date, string of a date to end a search
+categories, string of one id or comma seperated IDs, can also be an array
+*/
+    public static function search ($filters){
+
+        $terms = isset($filters['terms']) ? $filters['terms'] : '';
+        
+        LogIt('post search terms ' . print_r($terms, TRUE));
+
+        $terms = trim($terms);
+
+        if ($terms != ''){
 
 
+            LogIt('post search terms ' . print_r($terms, TRUE));
+
+            // $termArray = preg_split('=\s=', $terms);
+
+            // LogIt("post search terms \n" . print_r($termArray, TRUE));
+
+            $where = ' where 1=1 ';
+            /*
+            If we only have one term, do like %term% searches
+            on the columns other than body
+            */
+            
+            $like_phrase = "like '%" . $terms . "%' ";
+
+            $where .= " and (p.title $like_phrase or p.author $like_phrase or p.author_bio $like_phrase or p.publication $like_phrase or p.short_description $like_phrase or match (body) against ('$terms') ) ";
+
+            
+
+        } // END if we had at least one term
+
+       
+
+        $from  = "from posts p ";
+        $from .= "left join user_posts up ON p.id = up.post_id and up.type = 'F' ";
+        $from .= "left join user_posts up2 ON p.id = up2.post_id and up2.type = 'U'";
+
+        $where .= " and p.status = 'A' and p.deleted_at IS NULL ";
+        $sql = Post::selectSQL() . $from . $where;
+
+         LogIt("\n search sql \n\n $sql" );
+        $posts = DB::select($sql);
+       
+
+        LogIt("search got posts count " . count($posts));
+
+        return $posts;
+
+    }
 
 
     public function validate(){
