@@ -134,9 +134,6 @@ categories, string of one id or comma seperated IDs, can also be an array
 
         if ($terms != ''){
 
-
-            LogIt('post search terms ' . print_r($terms, TRUE));
-
             // $termArray = preg_split('=\s=', $terms);
 
             // LogIt("post search terms \n" . print_r($termArray, TRUE));

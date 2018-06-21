@@ -9,6 +9,9 @@
                         </span>
                     </div>
                     <div class="right">
+                        <span class="button licensePostClick" title="Save">
+                            <i class="far fa-copy"></i>
+                        </span>
                         <span class="button formSaveClick" title="Save">
                             <i class="fas fa-save"></i>
                         </span>

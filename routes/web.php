@@ -28,7 +28,13 @@ Route::get('/browse/{cat_id}', 'MasterController@browseByCategory')->name('brows
 /* AJAX CALLS, TODO use another file....???? */
 Route::get('/a/getMiddleByCat/{cat_id}', 'MasterController@getMiddleByCat')->name('getMiddleByCat');
 Route::get('/a/getPost/{post_id}', 'MasterController@getPost')->name('getPost');
+// favorites
 Route::get('/a/getFavorites/', 'MasterController@getFavorites')->name('getFavorites');
+Route::get('/a/toggleFavorite/{onOff}/{post_id}', 'MasterController@toggleFavorite')->name('toggleFavorite');
+// Post search
+Route::post('/a/post/search/', 'MasterController@searchPosts')->name('searchPosts');
+// log the Licensing of an article
+Route::get('/a/post/license/{post_id}', 'MasterController@licensePost')->name('licensePost');
 
 
 // Post add/edit 
@@ -36,8 +42,4 @@ Route::get('/admin/showForm/{form_type}', 'AdminController@showForm')->name('sho
 Route::post('/admin/savePost', 'AdminController@savePost')->name('savePost');
 Route::get('/admin/editPost/{post_id}', 'AdminController@editPost')->name('editPost');
 
-// Post search
-Route::post('/a/post/search/', 'MasterController@searchPosts')->name('searchPosts');
 
-// favorites
-Route::get('/admin/toggleFavorite/{onOff}/{post_id}', 'AdminController@toggleFavorite')->name('toggleFavorite');

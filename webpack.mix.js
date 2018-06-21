@@ -11,16 +11,9 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.scripts(
-		[  // array of all js files that need compiled
-			'resources/assets/js/ajax.js', 
-	 	 	'resources/assets/js/user-interface.js'
-		],
-			'public/js/app.js'  // where the js files get compiled to
-		)
-   	.sass(
-   		'resources/assets/sass/app.scss',  // uncompiled scss file
-   		'public/css'  // where the scss file gets compiled to
-   		);
+mix.js('resources/assets/js/ajax.js', 'public/js/app.js');
+mix.js('resources/assets/js/user-interface.js', 'public/js/app.js');
 
+
+mix.sass('resources/assets/sass/app.scss', 'public/css');
 

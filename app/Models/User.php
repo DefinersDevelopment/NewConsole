@@ -78,6 +78,40 @@ class User extends Authenticatable
         
     }
 
+    public static function getUserPost($user_id, $post_id, $type){
+
+        try {
+            $up = DB::select('select user_id, post_id, type, created_at, updated_at from user_posts 
+                where user_id = ? and post_id = ? and type = ?', [$user_id, $post_id, $type]);
+        }
+
+        catch(\Throwable $e)
+        {
+            LogIt("Cant Get User Post  ".$e->getMessage());
+            //Bugsnag::notifyException($e);
+            // Bugsnag::notifyError('ALERT CREATION ERROR - Sent Back To Form', $e->getMessage(), function($report){
+            //     $report->setSeverity('info');
+            // });
+            
+            throw $e;
+        }
+        catch(\Exception $e)
+        {
+            LogIt("Cant get User Post  ".$e->getMessage());
+
+            //Bugsnag::notifyException($e);
+            // Bugsnag::notifyError('ALERT CREATION ERROR - Sent Back To Form', $e->getMessage(), function($report){
+            //     $report->setSeverity('info');
+            // });
+            
+            throw $e;
+        }
+
+        return $up;
+
+        
+    }
+
     public static function deleteUserPost($user_id, $post_id, $type){
 
         try {

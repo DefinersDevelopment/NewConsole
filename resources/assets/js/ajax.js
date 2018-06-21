@@ -76,6 +76,9 @@ function addSearchClick(){
 function addSearchReturnPress(){
 	addUniqueEvent("#searchBox",'keydown', searchClick);		
 }
+function addLicensePostClick(){
+	addUniqueEvent(".licensePostClick",'click', licensePostClick);	
+}
   
 /******** END EVENT LISTNER SECTION ******************/
 
@@ -117,7 +120,7 @@ function viewPostClick(){
 	endPoint = '/a/getPost/' + postId;
 	logIt("this is endpoint " + endPoint)	
 	makeAjaxCall(endPoint, 'GET',data, loadRightHTML);
-	setCurrentPostId(postId);
+	setCurrentPostId(postId); // load right does this too;
 }
 
 
@@ -192,11 +195,10 @@ function showPostCreateFormClick(){
 	logIt('show form clicked');
 	data = new Object;
 	endPoint = '/admin/showForm/article' ;
-	logIt("this is endpoint " + endPoint)	
+	logIt("this is endpoint " + endPoint);
+	setCurrentPostId('');	
 	makeAjaxCall(endPoint, 'GET',data, loadRightHTML);
 }
-
-
 
 function formSaveClick(){
 	logIt('form save click ');
@@ -208,7 +210,6 @@ function formSaveClick(){
 	//logIt(data); return;
 	makeAjaxCall('/admin/savePost', 'POST',data, loadRightHTML);
 }
-
 
 function editPostClick(){
 	logIt('edit post click');
@@ -243,7 +244,7 @@ function toggleFavPostClick(){
 	} else {
 		onOff = 'off'
 	}
-	endpoint = '/admin/toggleFavorite/' + onOff +'/' + this.getAttribute('postId');
+	endpoint = '/a/toggleFavorite/' + onOff +'/' + this.getAttribute('postId');
 	logIt("endpoint " + endpoint);
 	makeAjaxCall(endpoint, 'GET',data, handleToggleFav);		 
 }
@@ -257,14 +258,43 @@ function getFavsClick(e){
 }
 function searchClick(e){ 
 	if ( ($(this).attr('id') == 'searchBox' && e.keyCode == 13) || e.event == 'click') {
-	
-	logIt('search click ' + $('#searchBox').val() );
-	data = new Object;
-	data.terms = $('#searchBox').val();
-	makeAjaxCall('/a/post/search','POST',data,loadMiddleHTML);
-	e.preventDefault()
+
+		logIt('search click ' + $('#searchBox').val() );
+		data = new Object;
+		data.terms = $('#searchBox').val();
+		makeAjaxCall('/a/post/search','POST',data,loadMiddleHTML);
+		e.preventDefault();
 	}
 }
+
+function licensePostClick(e){
+	logIt('copy content click');
+	$postId = getCurrentPostId();
+	if ($postId){
+		data= new Object;
+		endpoint = '/a/post/license/' + postId;
+		logIt("endpoint " + endpoint);
+		makeAjaxCall(endpoint, 'GET',data, handleLicense);
+
+/*
+I dont like doing this here, but the copy command must
+be in an event handler
+*/
+
+		var selection = document.getSelection();
+  		var range = document.createRange();
+		//  range.selectNodeContents(textarea);
+	  	range.selectNode(document.getElementById('contentWrapper'));
+	  	selection.removeAllRanges();
+	  	selection.addRange(range);
+		
+		ok = document.execCommand('copy');
+
+	} else {
+		logIt('license has no postId');
+	}
+}
+
 /***
  *                  .---.                             
  *                  |   |                             
@@ -302,6 +332,8 @@ function loadMiddleHTML(response){
 		addViewPostClick();
 		addEditPostClick();
 		addToggleFavPostClick();
+		clearRight();
+		setCurrentPostId('');
 	}
 }
 
@@ -331,6 +363,13 @@ function handleToggleFav (response){
 	} else {
 		// TODO alert user of error
 	}
+}
+/*
+The JS to select the text I found on google
+I dont really know exactly how it works.
+*/
+function handleLicense(response){
+	alert(response.message);
 }
 
 
@@ -441,6 +480,11 @@ function addUniqueEvent(selector,event,func){
 
 }
 
+// clears the right content area
+function clearRight(){
+	document.getElementById("contentWrapper").innerHTML = '';
+}
+
 $(document).ready(function() { 
 	// register the nav links to show cats
 	// in middle col when clicked
@@ -457,5 +501,6 @@ $(document).ready(function() {
 	addGetFavsClick();
 	addSearchClick();
 	addSearchReturnPress();
+	addLicensePostClick(); 
 });
 	
