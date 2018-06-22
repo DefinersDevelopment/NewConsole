@@ -1,15 +1,19 @@
 /********************************
 Globals
+
 *********************************/
 _log = 'dev';
+
 /*********************************
 Event Listeners
+
     ______                 __      
    / _____   _____  ____  / /______
   / __/ | | / / _ \/ __ \/ __/ ___/
  / /___ | |/ /  __/ / / / /_(__  ) 
 /_____/ |___/\___/_/ /_/\__/____/  
                                    
+
 **********************************/
 // Scroll the view back to the top -- can be used for when content changes to show the user the first items
 function scrollToTop(topDiv) {
@@ -25,6 +29,8 @@ function setEntryActive(that){
     $('.entry').removeClass('active');
     $(that).closest('.entry').addClass('active');
 }
+
+
 function addViewPostClick(){
     // TODO should i add a class/id hiearchy here??
     addUniqueEvent(".isPost",'click',viewPostClick);
@@ -62,19 +68,24 @@ function addToggleFavPostClick(){
     addUniqueEvent(".toggleFavPostClick",'click', toggleFavPostClick);
 }
 function addGetFavsClick(){
-    addUniqueEvent(".getFavsClick",'click', getFavsClick);    
+    addUniqueEvent(".getFavsClick",'click', getFavsClick);  
 }
 function addSearchClick(){
-    addUniqueEvent(".searchClick",'click', searchClick);      
+    addUniqueEvent(".searchClick",'click', searchClick);        
 }
 function addSearchReturnPress(){
-    addUniqueEvent("#searchBox",'keydown', searchClick);      
+    addUniqueEvent("#searchBox",'keydown', searchClick);        
 }
 function addLicensePostClick(){
-    addUniqueEvent(".licensePostClick",'click', licensePostClick);    
+    addUniqueEvent(".licensePostClick",'click', licensePostClick);  
 }
   
 /******** END EVENT LISTNER SECTION ******************/
+
+
+
+
+
 /********************************************************
 NAVIGATION STUFF
   _   _             _             _   _             
@@ -86,6 +97,8 @@ NAVIGATION STUFF
                        __/ |                        
                       |___/                         
 *********************************************************/
+
+
 // Function that is run when a category is clicked
 function categoryClick(){       
     data = new Object;
@@ -96,6 +109,8 @@ function categoryClick(){
     makeAjaxCall(endPoint,'GET',data, loadMiddleHTML);
     document.getElementById('currentContext').setAttribute('value', 'categoryBrowse');
 }
+
+
 // Function that is run when a post is clicked in middle col
 // to populate the right area
 function viewPostClick(){
@@ -103,22 +118,28 @@ function viewPostClick(){
     postId = this.getAttribute('postId');
     setEntryActive(this);
     endPoint = '/a/getPost/' + postId;
-    logIt("this is endpoint " + endPoint) 
+    logIt("this is endpoint " + endPoint)   
     makeAjaxCall(endPoint, 'GET',data, loadRightHTML);
     setCurrentPostId(postId); // load right does this too;
 }
+
+
 /*
 finds current active post and loads the next one in the div of entries
 */
 function nextClick(){
+
     logIt('next clicked');
     
     // TODO make this a function getCurPostId();
     curPostId = getCurrentPostId();
+
     // if there is no active post, do nothing
     // TODO, is this good logic
     if (! curPostId){ return; }
+
     allPosts = $('.isPost');
+
     foundIndex = -1;
     for (i = 0; i < allPosts.length; i++) { 
             if (curPostId == allPosts[i].getAttribute('postId')){
@@ -134,17 +155,23 @@ function nextClick(){
     } else {
         nextPost = allPosts[foundIndex +1];
     }
+
     nextPost.click();
 }
+
+
 function prevClick(){
     logIt('prev clicked');
     
     // TODO make this a function getCurPostId();
     curPostId = getCurrentPostId();
+
     // if there is no active post, do nothing
     // TODO, is this good logic
     if (! curPostId){ return; }
+
     allPosts = $('.isPost');
+
     foundIndex = -1;
     for (i = 0; i < allPosts.length; i++) { 
             if (curPostId == allPosts[i].getAttribute('postId')){
@@ -160,16 +187,19 @@ function prevClick(){
     } else {
         prevPost = allPosts[foundIndex -1];
     }
+
     prevPost.click();
 }
+
 function showPostCreateFormClick(){
     logIt('show form clicked');
     data = new Object;
     endPoint = '/admin/showForm/article' ;
     logIt("this is endpoint " + endPoint);
-    setCurrentPostId = '';  
+    setCurrentPostId('');   
     makeAjaxCall(endPoint, 'GET',data, loadRightHTML);
 }
+
 function formSaveClick(){
     logIt('form save click ');
     //dump(this);
@@ -180,6 +210,7 @@ function formSaveClick(){
     //logIt(data); return;
     makeAjaxCall('/admin/savePost', 'POST',data, loadRightHTML);
 }
+
 function editPostClick(){
     logIt('edit post click');
     setEntryActive(this);
@@ -190,9 +221,11 @@ function editPostClick(){
     postId = this.getAttribute('postId'); // edit button in middle col
     
     logIt('this is post id in edit ' + postId);
+
     if (! postId) {
         postId = getCurrentPostId(); // edit bttn on top bar
     }
+
     if (! postId) { 
         logIt('edit could not find any post ID'); 
         return; 
@@ -201,6 +234,7 @@ function editPostClick(){
     logIt("endpoint " + endpoint);
     makeAjaxCall(endpoint, 'GET',data, loadRightHTML);
 }
+
 function toggleFavPostClick(){
     logIt('edit post click');
     data= new Object;
@@ -214,6 +248,7 @@ function toggleFavPostClick(){
     logIt("endpoint " + endpoint);
     makeAjaxCall(endpoint, 'GET',data, handleToggleFav);         
 }
+
 function getFavsClick(e){
     logIt('get favs click');
     data= new Object;
@@ -223,6 +258,7 @@ function getFavsClick(e){
 }
 function searchClick(e){ 
     if ( ($(this).attr('id') == 'searchBox' && e.keyCode == 13) || e.event == 'click') {
+
         logIt('search click ' + $('#searchBox').val() );
         data = new Object;
         data.terms = $('#searchBox').val();
@@ -230,6 +266,7 @@ function searchClick(e){
         e.preventDefault();
     }
 }
+
 function licensePostClick(e){
     logIt('copy content click');
     $postId = getCurrentPostId();
@@ -238,9 +275,12 @@ function licensePostClick(e){
         endpoint = '/a/post/license/' + postId;
         logIt("endpoint " + endpoint);
         makeAjaxCall(endpoint, 'GET',data, handleLicense);
-        $('#hiddenBody').val(document.getElementById('contentWrapper').innerHTML);
-        
-        //$('#hiddenBody').select();
+
+/*
+I dont like doing this here, but the copy command must
+be in an event handler
+*/
+
         var selection = document.getSelection();
         var range = document.createRange();
         //  range.selectNodeContents(textarea);
@@ -249,36 +289,12 @@ function licensePostClick(e){
         selection.addRange(range);
         
         ok = document.execCommand('copy');
-        logIt('annie are you OK? ' + ok);
-        // logIt('trying to select text');
-        
-        // var sel, range;
-  //    var el = document.getElementById('contentWrapper'); //get element id
-  //    if (window.getSelection && document.createRange) { //Browser compatibility
-  //            sel = window.getSelection();
-  //            if(sel.toString() == ''){ //no text selection
-  //                    window.setTimeout(function(){
-        //             range = document.createRange(); //range object
-        //             range.selectNodeContents(el); //sets Range
-        //             sel.removeAllRanges(); //remove all ranges from selection
-        //             sel.addRange(range);//add Range to a Selection.
-  //            },1);
-  //            }
-  //    }else if (document.selection) { //older ie
-     //        sel = document.selection.createRange();
-     //        if(sel.text == ''){ //no text selection
-     //            range = document.body.createTextRange();//Creates TextRange object
-     //            range.moveToElementText(el);//sets Range
-     //            range.select(); //make selection.
-     //        }
-  //    }
-        // // now copy to clip board
-        // ok = document.execCommand('copy');
-        // logIt ('this is ok?? ' + ok);
+
     } else {
         logIt('license has no postId');
     }
 }
+
 /***
  *                  .---.                             
  *                  |   |                             
@@ -303,7 +319,11 @@ function licensePostClick(e){
  *                                                      
  *                                                      
  */
+
+
+
 // Success callback for loading posts in middle col
+
 function loadMiddleHTML(response){
     scrollToTop('#search');
     if (response.data){
@@ -316,6 +336,8 @@ function loadMiddleHTML(response){
         setCurrentPostId('');
     }
 }
+
+
 // Success callback for loading a post in right main area
 function loadRightHTML(response){
     scrollToTop('#topBar'); 
@@ -326,11 +348,13 @@ function loadRightHTML(response){
         logIt('adding formSaveClick listener from load right')
         addFormSaveClick();
     } 
+
     if (response.postId){
         logIt('load right setting cur post id ' + response.postId);
         setCurrentPostId(response.postId);
     }
 }
+
 function handleToggleFav (response){
     logIt('we got back ok, i guess ' + response.data);
     if (response.error == 0){
@@ -346,13 +370,10 @@ I dont really know exactly how it works.
 */
 function handleLicense(response){
     alert(response.message);
-    if (response.error == 0 ){
-        // $('#hiddenBody').val($('#contentWrapper').html());
-        // $('#hiddenBody').select();
-        // ok = document.execCommand('copy');
-        // logIt('annie are you OK? ' + ok);
-    }
 }
+
+
+
 /*********************************************
 Helpers
                                                   
@@ -362,6 +383,7 @@ Helpers
 |  |  |  |\   --.|  || '-' '\   --.|  |   .-'  `) 
 `--'  `--' `----'`--'|  |-'  `----'`--'   `----'  
                      `--'                         
+
 *********************************************/
 /*
 Generic Ajax function, may not work in all cases
@@ -372,6 +394,7 @@ successFunc is a call back function
 function makeAjaxCall(endPoint, method, data, successFunc){
     
     data._token = document.getElementById("token").getAttribute('value');
+
     $.ajax({
         method: method,
         url:    endPoint,
@@ -386,6 +409,7 @@ function makeAjaxCall(endPoint, method, data, successFunc){
             // TODO check error code here!
             temp = JSON.parse(response);
             //logIt(temp.data);
+
             if (temp.error > 0){
                 // TODO handle this better
                 logIt('we got a graceful error from the system');
@@ -394,6 +418,7 @@ function makeAjaxCall(endPoint, method, data, successFunc){
                 }
             }
             //logIt(temp.data);
+
             successFunc(temp);
         },
         error: function(jqXHR, textStatus, errorThrown){
@@ -405,6 +430,7 @@ function makeAjaxCall(endPoint, method, data, successFunc){
     });
 }
 function toggleFontAwesome(selector){
+
     if ($(selector).hasClass('far')){
         $(selector).removeClass('far');
         $(selector).addClass('fas');
@@ -416,16 +442,19 @@ function toggleFontAwesome(selector){
 function getCurrentPostId(){
     return document.getElementById('currentPost').getAttribute('value');
 }
+
 function setCurrentPostId(postId){
     logIt('IN FUNC  set cur post =  ' + postId);
     document.getElementById('currentPost').setAttribute('value', postId);   
 }
+
 function logIt(msg,status){
     // status not null means log in prod
     if (_log == 'dev' || status == 'prod'){
         console.log(msg);
     }
 }
+
 function dump(obj) {
     var out = '';
     for (var i in obj) {
@@ -434,10 +463,13 @@ function dump(obj) {
     logIt("This is Obect Dump!!");
     logIt(out);
 }
+
 function addUniqueEvent(selector,event,func){
         temps = $(selector);
         indicatorClass = 'has' + event + 'Event';
+
     for (i = 0; i < temps.length; i++) {
+
         if ($(temps[i]).hasClass(indicatorClass)){
             // do nothing
         } else {
@@ -445,19 +477,24 @@ function addUniqueEvent(selector,event,func){
             $(temps[i]).addClass(indicatorClass);
         }
     }
+
 }
+
 // clears the right content area
 function clearRight(){
     document.getElementById("contentWrapper").innerHTML = '';
 }
+
 $(document).ready(function() { 
     // register the nav links to show cats
     // in middle col when clicked
     addCatClick();
+
     // register the prev and next buttons
     // that are top of right area
     addPrevClick();
     addNextClick();
+
     addShowPostCreateFormClick();
     addEditPostClick();
     // fav bttn in bottom nav
@@ -466,3 +503,4 @@ $(document).ready(function() {
     addSearchReturnPress();
     addLicensePostClick(); 
 });
+    

@@ -43,7 +43,7 @@ class getISRSSfeed extends Command
         //
         $rss = new \DOMDocument();
 
-        for ($x = 2; $x <= 5; $x++) {
+        for ($x = 1; $x <= 5; $x++) {
 
         $page = "http://www.insidesources.com/feed/?paged=" . $x;
 
@@ -78,8 +78,6 @@ class getISRSSfeed extends Command
                     case (preg_match('/republicans/i', $name) ? true : false) :
                         $cats[] = 4;
                         break;
-
-
                     case  (preg_match('/technology/i', $name) ? true : false) :
                         $cats[] = 5;
                         break;
