@@ -5,7 +5,10 @@
 @import "themes";
 
 /* Default Styles */
-html {height:100%;}
+html {height:100%;
+	::-webkit-scrollbar {display: none;} 
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+}
 body {height:100%; font-family:$mainFont;}
 .bodyWrap {min-height:100%; position:relative;}
 ::selection {
@@ -16,7 +19,6 @@ body {height:100%; font-family:$mainFont;}
 .wrap {width:$screenWidth; margin:auto;}
 .clear {clear:both;}
 .fullWidth {width:100%; min-width:$screenWidth;}
-::-webkit-scrollbar {display: none;}
 
 /* Text Align */
 .textLeft {text-align:left;}
@@ -71,7 +73,7 @@ a  {text-decoration:none;}
 	@include themify($themes){
 		color:themed('textColor');
 	}
-	h2 {@include font-size(16px); @include line-height(22px); @extend .button; }
+	h2 {@include font-size(18px); @include line-height(24px); @extend .button; margin-bottom:10px;}
 	p {@include font-size(14px); @include line-height(18px);}
 }
 .entry.active {

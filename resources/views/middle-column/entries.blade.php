@@ -1,6 +1,6 @@
-                
+                        <?php use App\Helpers\Html; ?>
+                        
                         @if (isset($posts) && count($posts) > 0)
-
 
                             {{-- <div class="entryGroup"> --}}
                                 @foreach ($posts as $p)
@@ -10,7 +10,7 @@
                                 <div class="entry postContainer" >
                                     <div class="entryContent">
                                         <h2 class="isPost" postId="{{$p->id}}" id="{{$p->id}}">{{$p->title}}</h2>
-                                        <p>{!!$p->short_description!!}</p>
+                                        <p><?php echo word_limiter($p->short_description, 15)."..."; ?></p>
                                     </div>
                                     <div class="bar">
                                         <span class="text">Updated: {{$p->updated_at}}</span>

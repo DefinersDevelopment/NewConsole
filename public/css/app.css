@@ -145,6 +145,11 @@ table {
 
 html {
   height: 100%;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+html ::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -193,10 +198,6 @@ body {
 .fullWidth {
   width: 100%;
   min-width: 1280px;
-}
-
-::-webkit-scrollbar {
-  display: none;
 }
 
 /* Text Align */
@@ -411,10 +412,11 @@ a {
 }
 
 .entry h2 {
-  font-size: 16px;
-  font-size: 1rem;
-  line-height: 22px;
-  line-height: 1.375rem;
+  font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 24px;
+  line-height: 1.5rem;
+  margin-bottom: 10px;
 }
 
 .entry p {

@@ -23,7 +23,7 @@
             "database/factories",
 	    "app/Models"
         ],
-	"files":["app/Helpers/Logging.php","app/Helpers/Misc.php"],
+	"files":["app/Helpers/Logging.php","app/Helpers/Misc.php", "app/Helpers/Html.php"],
         "psr-4": {
             "App\\": "app/"
         }
