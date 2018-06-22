@@ -31,7 +31,7 @@
 
 	<div class="inputContainer">
 		<label for="article">Article</label>
-		<input type="textarea" name='body' value='{{$post->body or ""}}'>
+		<textarea name='body' rows='20' cols='75'>{{$post->body or ""}}</textarea> 
 	</div>
 	<div class="inputContainer">
 		<div class='formError'>{{$theErrors['category'] or ""}}</div>
