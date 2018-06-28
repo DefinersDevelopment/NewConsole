@@ -11,18 +11,9 @@ let mix = require('laravel-mix');
  |
  */
 
-<<<<<<< HEAD
 
 mix.js('resources/assets/js/ajax.js', 'public/js/app.js');
 mix.js('resources/assets/js/user-interface.js', 'public/js/app.js');
-
-
-mix.sass('resources/assets/sass/app.scss', 'public/css');
-=======
-mix.js('resources/assets/js/ajax.js', 'public/js/app.js');
-mix.js('resources/assets/js/user-interface.js', 'public/js/app.js');
->>>>>>> 4305c7c17dc7c2cc2e83359fae84897686726108
-
 
 mix.sass('resources/assets/sass/app.scss', 'public/css');
 

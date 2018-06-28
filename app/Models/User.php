@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password'
     ];
 
     /**
@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token'
     ];
 
     // public function category()
@@ -46,11 +46,11 @@ class User extends Authenticatable
 
     
 
-    public static function setUserPost($user_id, $post_id, $type){
+    public static function setUserPost($user_id, $post_id, $type, $category_id = 0){
 
         try {
-            DB::insert('insert into user_posts (user_id, post_id, type, created_at, updated_at) values (?, ?, ?, NOW(), NOW() )', 
-                [$user_id, $post_id, $type]);
+            DB::insert('insert into user_posts (user_id, post_id, type, category_id, created_at, updated_at) values (?, ?, ?, ?, NOW(), NOW() )', 
+                [$user_id, $post_id, $type, $category_id]);
         }
 
         catch(\Throwable $e)
@@ -130,7 +130,7 @@ class User extends Authenticatable
         }
         catch(\Exception $e)
         {
-            LogIt("Cant Delete User Post  ".$e->getMessage());
+            LogIt("Cant Delete User Post  ". $e->getMessage());
 
             //Bugsnag::notifyException($e);
             // Bugsnag::notifyError('ALERT CREATION ERROR - Sent Back To Form', $e->getMessage(), function($report){
@@ -141,6 +141,23 @@ class User extends Authenticatable
         }
 
         
+    }
+/**********
+Get a list of users that 'subscribe' to the given 
+category
+***********/
+
+    public static function getUsersWithCategory($cat_id){
+        LogIt('In get users with category ' . $cat_id);  
+        $returnUsers = [];
+        
+        $users = DB::table('category_user')->where('category_id', $cat_id)->get();
+
+        foreach ($users as $u){
+            $returnUsers[] = $u->user_id;
+        }
+        //LogIt('these are the users that have thiis cat ' . print_r($returnUsers, TRUE));
+        return $returnUsers;
     }
 
 }

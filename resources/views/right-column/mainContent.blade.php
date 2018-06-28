@@ -5,7 +5,13 @@
                               <h1>{{$post->title}}</h1>
                               <p class="meta">
                                     {{$post->publication}} | {{$post->author}} | {{date_format($post->updated_at, "F j, Y - g:iA")}}
+                                    <br>
+                                    {{-- TODO this is shit --}}
+                                    Posted in Categories<br> @foreach($post->getCatIds() as $cat) {{$cat->name}}<br> @endforeach
                               </p>
+                             
+                             
+                             
                               <p><a href="{{$post->url}}"><i class="fas fa-external-link-square-alt"></i> View Source</a></p>
                               {!!$post->body!!}
                               

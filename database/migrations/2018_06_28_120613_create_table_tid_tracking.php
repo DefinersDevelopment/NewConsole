@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTablePostsCategory extends Migration
+class CreateTableTidTracking extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +14,15 @@ class CreateTablePostsCategory extends Migration
     public function up()
     {
         //
-        //
-        Schema::create('posts_category', function (Blueprint $table) {
-            $table->integer('post_id');
-            $table->integer('category_id');
-     
+         Schema::create('tid_tracking', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id'); 
+            $table->integer('post_id'); 
+            $table->string('referer', 2000);
+            $table->string('user_agent', 1000);
             $table->timestamps();
-            $table->softDeletes();
-            $table->primary(['post_id', 'category_id']);
+            
+            $table->primary(['post_id', 'user_id', 'type', 'category_id']);
         });
     }
 
@@ -33,6 +34,5 @@ class CreateTablePostsCategory extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('posts_category');
     }
 }

@@ -5,67 +5,80 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Support\Facades\View;
 
 class MasterController extends Controller
 {
     public function index() {
-    	return view("layouts.threeColumn");
+        // TODO do not hard code user
+        $user_id = 1;
+
+        $navCats = Category::getAllCategoriesByUser($user_id); 
+       
+        return view("layouts.threeColumn",['navCats'=>$navCats, ]);
     }
 
     public function browseByCategory($cat_id){
 
-    	// TODO should i check if this cat is valid
+        // TODO should i check if this cat is valid
 
-    	$posts = Post::getByCategory($cat_id);
+        $posts = Post::getByCategory($cat_id);
 
-    	return view("layouts.threeColumn", ['posts'=>$posts]);
+        return view("layouts.threeColumn", ['posts'=>$posts]);
 
     }
     
     public function getMiddleByCat($cat_id){
 
-    	// TODO wrap in try catch?? not a ton could go wrong
-    	// but......
-    	$posts = Post::getByCategoryWithFavAndUnreads($cat_id,1,50,null);
-    	LogIt(' did we get posts ' . print_r($posts,true));
-    	$returnVal = new \stdClass;
+        // TODO wrap in try catch?? not a ton could go wrong
+        // but......
+        $user_id = 1; // no hard code
+        $posts = Post::getByCategoryWithFavAndUnreads($cat_id,$user_id,50,null);
+        LogIt(' did we get posts ' . print_r($posts,true));
+        $returnVal = new \stdClass;
 
-    	$returnVal->error = 0;
-    	 
-    	$returnVal->data = View::make('middle-column.entries')->with(['posts'=>$posts])->render();
+        $returnVal->error = 0;
+         
+        $returnVal->data = View::make('middle-column.entries')->with(['posts'=>$posts])->render();
 
-    	return json_encode($returnVal);
+        return json_encode($returnVal);
 
     }
 
-    public function getPost($post_id){
+    public function getPost($post_id, Request $r){
 
-    	// TODO wrap in try catch?? not a ton could go wrong
-    	// but......
-    	$post = Post::getPost($post_id);    	
-    	$returnVal = new \stdClass;
+        // TODO wrap in try catch?? not a ton could go wrong
+        // but......
+        $post = Post::getPost($post_id);        
+        $returnVal = new \stdClass;
 
-    	$returnVal->error = 0;
-    	$returnVal->postId = $post->id; 
+        $returnVal->error = 0;
+        $returnVal->postId = $post->id;
+        $returnVal->cats = $post->getCatIds();
+        //TODO not hard code
+        $user_id = 1;
+        // remove unread
+        User::deleteUserPost($user_id, $post->id, 'U');
 
-    	$returnVal->data = View::make('right-column.mainContent')->with(['post'=>$post])->render();
+        $returnVal->data = View::make('right-column.mainContent')->with(['post'=>$post])->render();
+        //LogIt ('HEADER' . print_r($r->server(), TRUE));
 
-    	return json_encode($returnVal);
+        return json_encode($returnVal);
 
     }
 
     public function getFavorites(){
-    	LogIt(' getting favorites ', 'start') ;
-    	// TODO do not hard code user
-    	$user_id = 1;
+        LogIt(' getting favorites ', 'start') ;
+        // TODO do not hard code user
+        $user_id = 1;
 
-    	$posts = Post::getUserPostsOfTypeWithUnreads($user_id, 'F');
-    	$returnVal = new \stdClass;
-    	$returnVal->error = 0;
-    	$returnVal->data = View::make('middle-column.entries')->with(['posts'=>$posts])->render();
+        $posts = Post::getUserPostsOfTypeWithUnreads($user_id, 'F');
+        $returnVal = new \stdClass;
+        $returnVal->error = 0;
+        $returnVal->data = View::make('middle-column.entries')->with(['posts'=>$posts])->render();
         LogIt(' getting favorites done ', 'end') ;
-    	return json_encode($returnVal);
+        return json_encode($returnVal);
     }
 
 /*****
