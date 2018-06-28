@@ -43,5 +43,7 @@ Route::post('/admin/savePost', 'AdminController@savePost')->name('savePost');
 Route::get('/admin/editPost/{post_id}', 'AdminController@editPost')->name('editPost');
 Route::get('/admin/post/delete/{post_id}', 'AdminController@deletePost')->name('deletePost');
 
+// tracking 
+Route::get('/t/image', 'AdminController@trackTid')->name('trackTid');
 
 

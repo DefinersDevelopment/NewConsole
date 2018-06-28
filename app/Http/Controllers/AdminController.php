@@ -9,6 +9,7 @@ use App\Helpers\Misc;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\TidTracking;
 //use DB;
 
 class AdminController extends Controller
@@ -240,6 +241,62 @@ do we want to wrap the entire create in transaction and roll back if unreads fai
 
     	return json_encode($returnVal);
 
+    }
+/**************
+The way we track the viewing of our articles
+***************/
+
+    function trackTid(Request $r){
+
+        $temp = $r->input('t');
+        $temp = explode('-',$temp);
+        
+        if (!isset($temp[0]) || !isset($temp[1])){
+            LogIt('track tid could not get user and/or post ');
+            return $this->returnImage();
+        }
+
+        $ref = $r->header('referer');
+        if (!isset($ref) || $ref == ''){
+            $ref = $r->header('host');
+            if (!isset($ref) || $ref == ''){
+                $ref='unknown';
+            }
+        }
+        $foo = preg_match('/ardashtest/i', $ref);
+        LogIt('is this is match ' . $foo);
+        if ( $foo == 1){
+            return $this->returnImage();
+
+        }
+
+        $tracker = new TidTracking;
+
+        $tracker->user_id = $temp[0];
+        $tracker->post_id = $temp[1];
+        
+        $ua = $r->header('user_agent');
+        if (!isset($ua) || $ua == ''){
+            $ua = 'unknown';
+        }
+        
+
+
+        $tracker->user_agent = $ua;
+        $tracker->referer = $ref;
+
+        
+        //echo '<br>header:<br>'; 
+        //echo print_r($r->header(),TRUE);
+        //echo $r->header('referer');
+        $tracker->save();
+
+        return $this->returnImage();
+
+    }
+    function returnImage(){
+         return response(base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII='), 200)
+                  ->header('Content-Type', 'img/png');
     }
 
 

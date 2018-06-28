@@ -21,8 +21,6 @@ class CreateTableTidTracking extends Migration
             $table->string('referer', 2000);
             $table->string('user_agent', 1000);
             $table->timestamps();
-            
-            $table->primary(['post_id', 'user_id', 'type', 'category_id']);
         });
     }
 
@@ -34,5 +32,6 @@ class CreateTableTidTracking extends Migration
     public function down()
     {
         //
+        Schema::dropIfExists('tid_tracking');
     }
 }
