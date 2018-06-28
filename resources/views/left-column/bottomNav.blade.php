@@ -16,9 +16,11 @@
                             </span>
                         </li>
                         <li title="Log out">
+                            <a href='/logout'>
                             <span>
                                 <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
                             </span>
+                        </a>
                         </li>
                     </ul>
                 </nav>

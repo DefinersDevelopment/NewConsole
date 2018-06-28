@@ -15,6 +15,7 @@
 
 Auth::routes();
 
+
 Route::get('/', 'MasterController@index')->name('index');
 //Route::get('/home', 'HomeController@index')->name('home');
 
@@ -45,5 +46,6 @@ Route::get('/admin/post/delete/{post_id}', 'AdminController@deletePost')->name('
 
 // tracking 
 Route::get('/t/image', 'AdminController@trackTid')->name('trackTid');
+
 
 
