@@ -41,5 +41,7 @@ Route::get('/a/post/license/{post_id}', 'MasterController@licensePost')->name('l
 Route::get('/admin/showForm/{form_type}', 'AdminController@showForm')->name('showForm');
 Route::post('/admin/savePost', 'AdminController@savePost')->name('savePost');
 Route::get('/admin/editPost/{post_id}', 'AdminController@editPost')->name('editPost');
+Route::get('/admin/post/delete/{post_id}', 'AdminController@deletePost')->name('deletePost');
+
 
 

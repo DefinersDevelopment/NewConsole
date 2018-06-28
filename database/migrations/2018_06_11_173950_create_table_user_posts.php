@@ -17,10 +17,11 @@ class CreateTableUserPosts extends Migration
          Schema::create('user_posts', function (Blueprint $table) {
             $table->integer('post_id');
             $table->integer('user_id'); 
+            $table->integer('category_id')->default(0); 
             $table->char('type', 2);
             $table->timestamps();
             
-            $table->primary(['post_id', 'user_id', 'type']);
+            $table->primary(['post_id', 'user_id', 'type', 'category_id']);
         });
     }
 

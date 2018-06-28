@@ -79,6 +79,10 @@ function addSearchReturnPress(){
 function addLicensePostClick(){
     addUniqueEvent(".licensePostClick",'click', licensePostClick);  
 }
+
+function addDeletePostClick(){
+    addUniqueEvent(".deletePostClick",'click', deletePostClick);  
+}
   
 /******** END EVENT LISTNER SECTION ******************/
 
@@ -223,7 +227,7 @@ function editPostClick(){
     logIt('this is post id in edit ' + postId);
 
     if (! postId) {
-        postId = getCurrentPostId(); // edit bttn on top bar
+        postId = getCurrentPostId(); // for edit bttn on top bar
     }
 
     if (! postId) { 
@@ -274,7 +278,7 @@ function licensePostClick(e){
         data= new Object;
         endpoint = '/a/post/license/' + postId;
         logIt("endpoint " + endpoint);
-        makeAjaxCall(endpoint, 'GET',data, handleLicense);
+        makeAjaxCall(endpoint, 'GET',data, notifyUser);
 
 /*
 I dont like doing this here, but the copy command must
@@ -293,6 +297,26 @@ be in an event handler
     } else {
         logIt('license has no postId');
     }
+}
+
+function deletePostClick(){
+
+    // name
+    data = new Object;
+    //logIt(data); return;
+    postId = this.getAttribute('postId'); // edit button in middle col
+    
+    logIt('this is post id in edit ' + postId);
+
+    if (! postId) { 
+        logIt('edit could not find any post ID'); 
+        return; 
+    }
+
+    endpoint = '/admin/post/delete/' + postId;
+    logIt("endpoint " + endpoint);
+    makeAjaxCall(endpoint, 'GET',data, notifyUser);
+
 }
 
 /***
@@ -334,6 +358,7 @@ function loadMiddleHTML(response){
         addToggleFavPostClick();
         clearRight();
         setCurrentPostId('');
+        addDeletePostClick();
     }
 }
 
@@ -348,10 +373,15 @@ function loadRightHTML(response){
         logIt('adding formSaveClick listener from load right')
         addFormSaveClick();
     } 
-
+// if we have loaded a post, set the global var
     if (response.postId){
         logIt('load right setting cur post id ' + response.postId);
         setCurrentPostId(response.postId);
+    }
+
+// if we have loaded a post decrement unreads everywhere
+    if (response.cats){
+        handleUnreads(response.cats, response.postId);
     }
 }
 
@@ -368,7 +398,7 @@ function handleToggleFav (response){
 The JS to select the text I found on google
 I dont really know exactly how it works.
 */
-function handleLicense(response){
+function notifyUser(response){
     alert(response.message);
 }
 
@@ -478,6 +508,58 @@ function addUniqueEvent(selector,event,func){
         }
     }
 
+}
+
+function handleUnreads(cats,postId){
+
+    logIt ('handling unreads');
+// first, see if this post was previosuly unread
+    post = $('#unreadPost-' + postId);
+
+    if (post.length > 0) { // we found the post
+        isUnread = post.attr('isUnread');
+        logIt ('this is unread status ' + isUnread);
+        if (! isUnread){
+            logIt ('was previously read');
+            return;
+        }
+
+        // TODO, this display will change
+        post.html('');
+        post.attr('isUnread', '');
+
+        // post could be in multiple categories
+        for (i=0;i<cats.length;i++){
+            logIt('loop: cat id is ' + cats[i].category_id);
+
+            unreadCat = $('#unreadCat-' + cats[i].category_id);
+            
+            if (unreadCat.length > 0){
+                curNum = unreadCat.html();
+                curNum = curNum.trim();
+                curNum = parseInt(curNum,10);
+
+                logIt ('found unreadCat with unread number of >' + curNum +'<');
+                if (! Number.isInteger(curNum)){
+                    logIt ('unread number not an INT. Boo!');
+                    return;
+                }
+                if (curNum == 0){
+                    return;
+                }
+                newNum = curNum - 1;
+                unreadCat.html(newNum);
+            }
+        
+        }
+
+    } else {
+        logIt('error could not find a post ');
+        return;
+    }
+
+    
+    
 }
 
 // clears the right content area

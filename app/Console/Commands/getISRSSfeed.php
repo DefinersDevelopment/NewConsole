@@ -43,7 +43,7 @@ class getISRSSfeed extends Command
         //
         $rss = new \DOMDocument();
 
-        for ($x = 1; $x <= 5; $x++) {
+        for ($x = 1; $x <= 3; $x++) {
 
         $page = "http://www.insidesources.com/feed/?paged=" . $x;
 

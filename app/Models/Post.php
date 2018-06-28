@@ -12,18 +12,32 @@ class Post extends Model
     protected $table = 'posts';
     protected $fillable = ['title','slug','author','author_bio','publication',
     					'url','short_description','body','user_id_created','status'];
+    protected $cat_ids;
 
      public function category()
     {
         return $this->belongsToMany('App\Models\Category', 'category_post');
     }
 
+    public function getCatIds(){
+        if (isset($this->cat_ids)){
+            
+        } else {
+            $cats = DB::select('select cp.category_id, c.name 
+                                from category_post cp, category c 
+                                where cp.post_id = ? and c.id=cp.category_id',[$this->id]);
+            
+            $this->cat_ids = (array)$cats;
+        }
+        LogIt('this is cats ' . print_r($this->cat_ids,TRUE));
+        return $this->cat_ids;
+    }
 
-    /*****************************
-    	Simple Func. Probably will not be used except maybe as admin
-            b/c it does not get anything based on the user like
-            favs/unreads, etc....
-    *****************************/
+/*****************************
+	Simple Func. Probably will not be used except maybe as admin
+        b/c it does not get anything based on the user like
+        favs/unreads, etc....
+*****************************/
 
     public static function getByCategory($cat_id){
 
@@ -72,7 +86,7 @@ The standard that we return when getting a list of POSTS
     	$sql = Post::selectSQL() .  'from posts p ';
         $sql .=  " inner join category_post cp on p.id = cp.post_id and cp.category_id = $cat_id ";
     	$sql .= "left join user_posts up on p.id = up.post_id and up.user_id = $user_id and up.type = 'F' ";
-        $sql .= "left join user_posts up2 on p.id = up2.post_id and up.user_id = $user_id and up2.type = 'U' ";
+        $sql .= "left join user_posts up2 on p.id = up2.post_id and up2.user_id = $user_id and up2.type = 'U' and up2.category_id = $cat_id ";
     	$sql .= " where p.deleted_at IS NULL and p.status = 'A' ";
     	
 
@@ -112,9 +126,11 @@ The standard that we return when getting a list of POSTS
 
     public static function getPost($id){
 
-    	$post = Post::find($id);
+    	$post = Post::with('category')->where('id', $id)->get();
 
-    	return $post;
+        // TODO use Auth
+
+    	return $post[0];
     }
 /*
 Build dynamic search query.
@@ -158,7 +174,7 @@ categories, string of one id or comma seperated IDs, can also be an array
         $from .= "left join user_posts up ON p.id = up.post_id and up.type = 'F' ";
         $from .= "left join user_posts up2 ON p.id = up2.post_id and up2.type = 'U'";
 
-        $where .= " and p.status = 'A' and p.deleted_at IS NULL ";
+        $where .= " and p.status = 'A' and p.deleted_at IS NULL order by p.updated_at";
         $sql = Post::selectSQL() . $from . $where;
 
          LogIt("\n search sql \n\n $sql" );
@@ -169,6 +185,64 @@ categories, string of one id or comma seperated IDs, can also be an array
 
         return $posts;
 
+    }
+
+    public static function deletePost($post_id){
+
+        try {
+
+            DB::table('posts')
+                ->where('id', $post_id)
+                ->update(['updated_at' => DB::raw('now()'), 'deleted_at'=> DB::raw('now()'), 'status'=>'D']);
+
+        } catch(\Throwable $e) {
+            LogIt("Cant Delete  Post  ".$e->getMessage());
+            //Bugsnag::notifyException($e);
+            // Bugsnag::notifyError('ALERT CREATION ERROR - Sent Back To Form', $e->getMessage(), function($report){
+            //     $report->setSeverity('info');
+            // });
+            
+            throw $e;
+        }
+        catch(\Exception $e){
+            LogIt("Cant Delete  Post  ".$e->getMessage());
+
+            //Bugsnag::notifyException($e);
+            // Bugsnag::notifyError('ALERT CREATION ERROR - Sent Back To Form', $e->getMessage(), function($report){
+            //     $report->setSeverity('info');
+            // });
+            
+            throw $e;
+        }
+
+        return 0;
+    }
+
+    public static function deleteUnreads($post_id) {
+        try {
+            LogIt("deleting unreads for post -> $post_id");
+
+            DB::table('user_posts')->where('post_id', $post_id)->where('type','U')->delete();
+
+        } catch(\Throwable $e) {
+            LogIt("Cant update  Unreads $post_id  ".$e->getMessage());
+            //Bugsnag::notifyException($e);
+            // Bugsnag::notifyError('ALERT CREATION ERROR - Sent Back To Form', $e->getMessage(), function($report){
+            //     $report->setSeverity('info');
+            // });
+            
+            throw $e;
+        }
+        catch(\Exception $e){
+            LogIt("Cant Update  Unreads $post_id  ". $e->getMessage());
+
+            //Bugsnag::notifyException($e);
+            // Bugsnag::notifyError('ALERT CREATION ERROR - Sent Back To Form', $e->getMessage(), function($report){
+            //     $report->setSeverity('info');
+            // });
+            
+            throw $e;   
+        }
     }
 
 

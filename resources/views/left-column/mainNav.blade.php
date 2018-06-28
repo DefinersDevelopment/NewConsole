@@ -1,5 +1,40 @@
-                <nav id="mainNav">
+
+                 <nav id="mainNav">
                     <ul>
+
+                    @foreach ($navCats as $parent)
+                        <li>
+                            <span class="toggleNav">
+                                <span class="icon">
+                                    <i class="fas fa-circle"></i>
+                                </span>
+                                <span class="text">
+                                    {{$parent->name}}
+                                </span>
+                                <span class="unreadNumber">50</span>
+                            </span>
+                            <?php $children = $parent->getChildren(); ?>
+                            <ul>
+                        @foreach ($children as $child)
+                            <li class="isCat" catId='{{$child->id}}'>
+                                    <span>
+                                        <span class="icon">
+                                            <i class="fas fa-circle"></i>
+                                        </span>
+                                        <span class="text">
+                                            {{$child->name}}
+                                        </span>
+                                        <span  id='unreadCat-{{$child->id}}'>{{$child->unread_count}}</span>
+                                    </span>
+                            </li>
+                        @endforeach {{-- end child loop--}}
+                            </ul> {{-- end child loop UL--}}
+                        </li>{{-- end parent loop --}}            
+
+                    @endforeach {{-- end parent loop --}}
+                    </ul>{{-- end parent loop --}}
+
+                    {{--
                         <li>
                             <span class="toggleNav">
                                 <span class="icon">
@@ -149,4 +184,5 @@
                             </ul>
                         </li>
                     </ul>
-                </nav>
+                    --}}
+                </nav> 

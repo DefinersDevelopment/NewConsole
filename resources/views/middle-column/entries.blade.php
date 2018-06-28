@@ -14,8 +14,11 @@
                                     </div>
                                     <div class="bar">
                                         <span class="text">Updated: {{$p->updated_at}}</span>
+                                        <span class="text" id='unreadPost-{{$p->id}}' isUnread='@if($p->unread == 'U')1 @endif'>
+                                            @if ($p->unread == 'U') unread @endif </span>
+
                                         <span class="buttons">
-                                            <span class="button" title="">
+                                            <span class="button deletePostClick" postId='{{$p->id}}' title="">
                                                 <i class="fas fa-trash"></i>
                                             </span>
                                             {{-- 

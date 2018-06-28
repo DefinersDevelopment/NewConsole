@@ -63,14 +63,16 @@ makes a post object, fills it, saves it, save category relations
     		}
     	}
         
-
+        // TODO not hard code
 		$data['user_id_created'] = 1;
     	$data['status'] = 'A';
     	$data['slug'] = makeSlug($data['title']);
 
+        $isUpdate = FALSE;
     	// If this is an update, get the old post
     	if (isset($data['id']) && $data['id'] != ''){
     		$post = Post::find($data['id']);
+            $isUpdate = TRUE;
     	} else { // or create a new one.
     		$post = new Post;	
     	}
@@ -115,6 +117,30 @@ makes a post object, fills it, saves it, save category relations
 	    		$post->category()->attach($cats);
 	    	}
 
+/*******
+HANDLE UNREADS
+TODO:
+do we want to wrap the entire create in transaction and roll back if unreads fail??
+********/
+
+            if ($isUpdate == TRUE){
+                    // delete all the previous unread entries for this
+                    // post
+                    Post::deleteUnreads($post->id);
+            }
+
+            // get ALL the users who 'subscribe' to ALL the 
+            // categories of this post
+            foreach ($cats as $cat){
+                LogIt("Cat loop $cat");
+                foreach (User::getUsersWithCategory($cat) as $user_id){ // each user subscribed to cat
+                    // TODO catch errors!
+                    User::setUserPost($user_id, $post->id, 'U', $cat); // add unread
+                }
+                
+            }
+        
+
 	    }catch(\Throwable $e)
         {
             LogIt("ERR:: Cant Create Post In Post Table - ".$e->getMessage(), 'end');
@@ -144,6 +170,7 @@ makes a post object, fills it, saves it, save category relations
     		return json_encode($returnVal);
         }
 
+
         /******************
         If we are here, everything went OK
         *******************/
@@ -158,6 +185,43 @@ makes a post object, fills it, saves it, save category relations
     	//$returnVal->data = print_r($data,TRUE);
     	return json_encode($returnVal);
 	
+    }
+
+    function deletePost($post_id){
+
+        $returnVal = new \stdClass;
+
+        try {
+            Post::deletePost($post_id);
+        }
+
+        catch(\Throwable $e){
+            LogIt("Cant Delete  Post  ".$e->getMessage());
+            //Bugsnag::notifyException($e);
+            // Bugsnag::notifyError('ALERT CREATION ERROR - Sent Back To Form', $e->getMessage(), function($report){
+            //     $report->setSeverity('info');
+            // });
+            
+            $returnVal->error = 1;
+            $returnVal->message = 'Could not delete post';
+            return json_encode($returnVal);
+        }
+        catch(\Exception $e){
+            
+            LogIt("Cant Delete  Post  ".$e->getMessage());
+            //Bugsnag::notifyException($e);
+            // Bugsnag::notifyError('ALERT CREATION ERROR - Sent Back To Form', $e->getMessage(), function($report){
+            //     $report->setSeverity('info');
+            // });
+            
+            $returnVal->error = 1;
+            $returnVal->message = 'Could not delete post';
+            return json_encode($returnVal);
+        }
+
+        $returnVal->error = 0;
+        $returnVal->message = 'Post Deleted';
+        return json_encode($returnVal);
     }
 
     function editPost($postId){

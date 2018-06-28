@@ -12,13 +12,8 @@ let mix = require('laravel-mix');
  */
 
 
-
 mix.js('resources/assets/js/ajax.js', 'public/js/app.js');
 mix.js('resources/assets/js/user-interface.js', 'public/js/app.js');
-
-let jsArray = ['resources/assets/js/ajax.js','resources/assets/js/user-interface.js'];
-mix.scripts(jsArray,'public/js/app.js');
-
 
 mix.sass('resources/assets/sass/app.scss', 'public/css');
 
