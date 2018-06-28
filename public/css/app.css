@@ -1978,6 +1978,109 @@ section#rightColumn #mainContent .circle .fas {
   top: -2px;
 }
 
+.userLoginRegister {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.theme-iss .userLoginRegister {
+  background: #487CA0;
+}
+
+.theme-ar .userLoginRegister {
+  background: #55565A;
+}
+
+.theme-definers .userLoginRegister {
+  background: #05223F;
+}
+
+.userLoginRegister .interface {
+  width: 350px;
+  text-align: center;
+  border-radius: 5px;
+  background: #fff;
+  -webkit-box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.4);
+          box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.4);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 50px;
+}
+
+.userLoginRegister .interface #logo {
+  margin-bottom: 30px;
+}
+
+.userLoginRegister .interface h1 {
+  margin-bottom: 30px;
+  font-size: 30px;
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+.theme-iss .userLoginRegister .interface h1 {
+  color: #55565A;
+}
+
+.theme-ar .userLoginRegister .interface h1 {
+  color: #55565A;
+}
+
+.theme-definers .userLoginRegister .interface h1 {
+  color: #55565A;
+}
+
+.userLoginRegister .interface form input[type="text"],
+.userLoginRegister .interface input input[type="text"],
+.userLoginRegister .interface form input[type="email"],
+.userLoginRegister .interface input input[type="email"],
+.userLoginRegister .interface form input[type="password"],
+.userLoginRegister .interface input input[type="password"] {
+  width: 100%;
+  height: 35px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 1px solid #000;
+  margin-bottom: 10px;
+  padding: 0 10px;
+  border-radius: 3px;
+}
+
+.userLoginRegister .interface form button,
+.userLoginRegister .interface input button {
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  color: #fff;
+  font-size: 14px;
+  font-size: 0.875rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.theme-iss .userLoginRegister .interface form a,
+.theme-iss .userLoginRegister .interface input a {
+  color: #487CA0;
+}
+
+.theme-ar .userLoginRegister .interface form a,
+.theme-ar .userLoginRegister .interface input a {
+  color: #2D8CEB;
+}
+
+.theme-definers .userLoginRegister .interface form a,
+.theme-definers .userLoginRegister .interface input a {
+  color: #2D8CEB;
+}
+
 /* Mobile Styles */
 
 @media screen and (max-width: 730px) {
