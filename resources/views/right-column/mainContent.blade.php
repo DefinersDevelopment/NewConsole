@@ -15,7 +15,7 @@
                               <p><a href="{{$post->url}}"><i class="fas fa-external-link-square-alt"></i> View Source</a></p>
                               {!!$post->body!!}
                               {{-- TODO do not hard code --}}
-                              <?php $url = env('APP_URL'); $user_id=1;?>
+                              <?php $url = env('APP_URL'); $user_id=Auth::user()->id;?>
                               <span style='display:none;'><img src ="{{$url}}/t/image?t={{$user_id}}-{{$post->id}}"></span>
                         @else
                               {{-- TODO john please remove --}}

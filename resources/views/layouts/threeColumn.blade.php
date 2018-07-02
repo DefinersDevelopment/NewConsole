@@ -20,7 +20,7 @@
 
 						@include('middle-column.search')
 						<div id='entries'>
-							@include('middle-column.entries')
+							@include('middle-column.entries', ['posts'=>$posts])
 						</div>
 
 					</div>

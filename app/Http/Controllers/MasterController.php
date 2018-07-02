@@ -7,16 +7,21 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\View;
+use Auth;
 
 class MasterController extends Controller
 {
     public function index() {
-        // TODO do not hard code user
-        $user_id = 1;
+        
+        $user_id = Auth::user()->id;
 
-        $navCats = Category::getAllCategoriesByUser($user_id); 
+        $navCats = Category::getAllCategoriesByUser($user_id);
+        // start the user off with their unreads
+        $posts = Post::getUserPostsOfTypeWithUnreads($user_id, 'U');
+
+        LogIt('number of unreads for user in index function ' . count($posts));
        
-        return view("layouts.threeColumn",['navCats'=>$navCats, ]);
+        return view("layouts.threeColumn",['navCats'=>$navCats, 'posts'=>$posts]);
     }
 
     public function browseByCategory($cat_id){
@@ -33,7 +38,7 @@ class MasterController extends Controller
 
         // TODO wrap in try catch?? not a ton could go wrong
         // but......
-        $user_id = 1; // no hard code
+        $user_id = Auth::user()->id; // no hard code
         $posts = Post::getByCategoryWithFavAndUnreads($cat_id,$user_id,50,null);
         LogIt(' did we get posts ' . print_r($posts,true));
         $returnVal = new \stdClass;
@@ -56,8 +61,8 @@ class MasterController extends Controller
         $returnVal->error = 0;
         $returnVal->postId = $post->id;
         $returnVal->cats = $post->getCatIds();
-        //TODO not hard code
-        $user_id = 1;
+        
+        $user_id = Auth::user()->id;
         // remove unread
         User::deleteUserPost($user_id, $post->id, 'U');
 
@@ -70,8 +75,8 @@ class MasterController extends Controller
 
     public function getFavorites(){
         LogIt(' getting favorites ', 'start') ;
-        // TODO do not hard code user
-        $user_id = 1;
+        
+        $user_id = Auth::user()->id;
 
         $posts = Post::getUserPostsOfTypeWithUnreads($user_id, 'F');
         $returnVal = new \stdClass;
@@ -98,10 +103,10 @@ and more in the future so be careful of having the right type
 
             case 'on':
                 // add record to DB
-                // TODO add real Auth::user id here
+               
                 try{
                     
-                    User::setUserPost(1,$postId,'F');
+                    User::setUserPost(Auth::user()->id,$postId,'F');
                 
                 } catch(\Throwable $e){
                     $emsg = "ERR:: cant create favorite  - ".$e->getMessage();
@@ -140,10 +145,10 @@ and more in the future so be careful of having the right type
                 break;
             case 'off':
                 // remove record from DB
-                // TODO add real Auth::user id here
+               
                 try{
                     
-                    User::deleteUserPost(1,$postId,'F');
+                    User::deleteUserPost(Auth::user()->id,$postId,'F');
 
                 } catch(\Throwable $e){
                     $emsg = "ERR:: cant delete favorite  - ".$e->getMessage();
@@ -208,7 +213,7 @@ and more in the future so be careful of having the right type
 
     public function licensePost($post_id){
 
-        $user_id = 1;
+        $user_id = Auth::user()->id;
         // the return object
         $returnVal = new \stdClass;
 

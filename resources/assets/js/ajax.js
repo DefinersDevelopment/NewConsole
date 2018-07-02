@@ -15,20 +15,6 @@ Event Listeners
                                    
 
 **********************************/
-// Scroll the view back to the top -- can be used for when content changes to show the user the first items
-function scrollToTop(topDiv) {
-    $('#content').animate({
-        scrollTop: $(topDiv).offset().top
-    }, '500');
-}
-function setCatActive(that){
-    $('.isCat').removeClass('active');
-    $(that).closest('.isCat').addClass('active');
-}
-function setEntryActive(that){
-    $('.entry').removeClass('active');
-    $(that).closest('.entry').addClass('active');
-}
 
 
 function addViewPostClick(){
@@ -83,6 +69,9 @@ function addLicensePostClick(){
 function addDeletePostClick(){
     addUniqueEvent(".deletePostClick",'click', deletePostClick);  
 }
+function addLogoutClick(){
+    addUniqueEvent(".logoutClick",'click', logoutClick);  
+}
   
 /******** END EVENT LISTNER SECTION ******************/
 
@@ -111,7 +100,7 @@ function categoryClick(){
     endPoint = '/a/getMiddleByCat/' + this.getAttribute('catId');
     console.log("this is endpoint " + endPoint)
     makeAjaxCall(endPoint,'GET',data, loadMiddleHTML);
-    document.getElementById('currentContext').setAttribute('value', 'categoryBrowse');
+    setContext('browseCat');
 }
 
 
@@ -125,6 +114,7 @@ function viewPostClick(){
     logIt("this is endpoint " + endPoint)   
     makeAjaxCall(endPoint, 'GET',data, loadRightHTML);
     setCurrentPostId(postId); // load right does this too;
+    setContext('viewPost');
 }
 
 
@@ -137,12 +127,19 @@ function nextClick(){
     
     // TODO make this a function getCurPostId();
     curPostId = getCurrentPostId();
+    allPosts = $('.isPost');
 
     // if there is no active post, do nothing
     // TODO, is this good logic
-    if (! curPostId){ return; }
+    if (! curPostId){ 
+        // if we dont have any posts, return
+        if ( allPosts.length < 1){ return;}
+        // there are some posts!
+        allPosts[0].click(); 
+        return;
+    }
 
-    allPosts = $('.isPost');
+    
 
     foundIndex = -1;
     for (i = 0; i < allPosts.length; i++) { 
@@ -154,7 +151,7 @@ function nextClick(){
     // if cur not found (technically not possible)
     // or cur value is last in array
     // then there is no next, do nothing
-    if (foundIndex == -1 || foundIndex == allPosts.length){
+    if (foundIndex == -1 || foundIndex == allPosts.length - 1 ){
         return;
     } else {
         nextPost = allPosts[foundIndex +1];
@@ -169,12 +166,18 @@ function prevClick(){
     
     // TODO make this a function getCurPostId();
     curPostId = getCurrentPostId();
+    allPosts = $('.isPost');
 
     // if there is no active post, do nothing
     // TODO, is this good logic
-    if (! curPostId){ return; }
-
-    allPosts = $('.isPost');
+    if (! curPostId){ 
+        // if we dont have any posts, return
+        if ( allPosts.length < 1){ return;}
+        // there are some posts!
+        last=allPosts.length - 1;
+        allPosts[last].click(); 
+        return;
+    }
 
     foundIndex = -1;
     for (i = 0; i < allPosts.length; i++) { 
@@ -202,6 +205,7 @@ function showPostCreateFormClick(){
     logIt("this is endpoint " + endPoint);
     setCurrentPostId('');   
     makeAjaxCall(endPoint, 'GET',data, loadRightHTML);
+    setContext('createPost');
 }
 
 function formSaveClick(){
@@ -237,6 +241,7 @@ function editPostClick(){
     endpoint = '/admin/editPost/' + postId;
     logIt("endpoint " + endpoint);
     makeAjaxCall(endpoint, 'GET',data, loadRightHTML);
+    setContext('editPost');
 }
 
 function toggleFavPostClick(){
@@ -268,6 +273,7 @@ function searchClick(e){
         data.terms = $('#searchBox').val();
         makeAjaxCall('/a/post/search','POST',data,loadMiddleHTML);
         e.preventDefault();
+        setContext('searchPost');
     }
 }
 
@@ -317,6 +323,10 @@ function deletePostClick(){
     logIt("endpoint " + endpoint);
     makeAjaxCall(endpoint, 'GET',data, notifyUser);
 
+}
+function logoutClick(e){
+    e.preventDefault();
+    document.getElementById('logout-form').submit();
 }
 
 /***
@@ -386,7 +396,7 @@ function loadRightHTML(response){
 }
 
 function handleToggleFav (response){
-    logIt('we got back ok, i guess ' + response.data);
+    logIt('we got back ok, i guess this is post' + response.data);
     if (response.error == 0){
         selector = '#fav-'+response.data;
         toggleFontAwesome(selector);
@@ -459,6 +469,26 @@ function makeAjaxCall(endPoint, method, data, successFunc){
         }
     });
 }
+
+function setContext(context){
+    document.getElementById('currentContext').setAttribute('value', context);
+}
+
+// Scroll the view back to the top -- can be used for when content changes to show the user the first items
+function scrollToTop(topDiv) {
+    $('#content').animate({
+        scrollTop: $(topDiv).offset().top
+    }, '500');
+}
+function setCatActive(that){
+    $('.isCat').removeClass('active');
+    $(that).closest('.isCat').addClass('active');
+}
+function setEntryActive(that){
+    $('.entry').removeClass('active');
+    $(that).closest('.entry').addClass('active');
+}
+
 function toggleFontAwesome(selector){
 
     if ($(selector).hasClass('far')){
@@ -577,12 +607,19 @@ $(document).ready(function() {
     addPrevClick();
     addNextClick();
 
+    // on login, we load the middle so we
+    // need these:
     addShowPostCreateFormClick();
     addEditPostClick();
+    addToggleFavPostClick();
+    addViewPostClick();
+    addDeletePostClick();
+
     // fav bttn in bottom nav
     addGetFavsClick();
     addSearchClick();
     addSearchReturnPress();
     addLicensePostClick(); 
+    addLogoutClick();
 });
     

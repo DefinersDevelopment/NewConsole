@@ -10,10 +10,12 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\TidTracking;
+use Auth;
 //use DB;
 
 class AdminController extends Controller
 {
+
     //
     public function showForm($formType) {
 
@@ -65,7 +67,7 @@ makes a post object, fills it, saves it, save category relations
     	}
         
         // TODO not hard code
-		$data['user_id_created'] = 1;
+		$data['user_id_created'] = Auth::user()->id;
     	$data['status'] = 'A';
     	$data['slug'] = makeSlug($data['title']);
 
@@ -142,8 +144,8 @@ do we want to wrap the entire create in transaction and roll back if unreads fai
             }
         
 
-	    }catch(\Throwable $e)
-        {
+	    }
+        catch(\Throwable $e){
             LogIt("ERR:: Cant Create Post In Post Table - ".$e->getMessage(), 'end');
             //Bugsnag::notifyException($e);
             // Bugsnag::notifyError('ALERT CREATION ERROR - Sent Back To Form', $e->getMessage(), function($report){
@@ -297,6 +299,14 @@ The way we track the viewing of our articles
     function returnImage(){
          return response(base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII='), 200)
                   ->header('Content-Type', 'img/png');
+    }
+
+    function makePostFromBrowserExt(Request $r){
+        LogIt('fuck yeah ' . $r->input('url'));
+        $returnVal = new \stdClass; 
+        $returnVal->error = 0;
+        $returnVal->data = "fuck yeah";
+        return json_encode($returnVal);
     }
 
 

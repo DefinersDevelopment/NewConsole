@@ -15,12 +15,14 @@
 
 Auth::routes();
 
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/', 'MasterController@index')->name('index');
+});
 
-Route::get('/', 'MasterController@index')->name('index');
-//Route::get('/home', 'HomeController@index')->name('home');
+
 
 // testing
-Route::get('/ben', 'BenTestController@test')->name('benTest');
+//Route::get('/ben', 'BenTestController@test')->name('benTest');
 
 // calls that load whole page
 Route::get('/browse/{cat_id}', 'MasterController@browseByCategory')->name('browseByCategory');
@@ -43,6 +45,9 @@ Route::get('/admin/showForm/{form_type}', 'AdminController@showForm')->name('sho
 Route::post('/admin/savePost', 'AdminController@savePost')->name('savePost');
 Route::get('/admin/editPost/{post_id}', 'AdminController@editPost')->name('editPost');
 Route::get('/admin/post/delete/{post_id}', 'AdminController@deletePost')->name('deletePost');
+
+// currently in testing
+//Route::post('/admin/chromePost', 'AdminController@makePostFromBrowserExt')->name('chromePost');
 
 // tracking 
 Route::get('/t/image', 'AdminController@trackTid')->name('trackTid');

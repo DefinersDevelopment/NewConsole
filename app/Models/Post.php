@@ -107,9 +107,9 @@ The standard that we return when getting a list of POSTS
 	    // TODO need to chunk this in groups of ~50?? 100??
 	    $sql = Post::selectSQL();
 	    $sql .= "from posts p ";
-        $sql .= "inner join user_posts up ON p.id = up.post_id and up.type = '$type' ";
-
-        $sql .= "left join user_posts up2 ON p.id = up2.post_id and up2.type = 'U'";
+        $sql .= "inner join user_posts up3 ON p.id = up3.post_id and up3.type = '$type' and up3.user_id = $user_id ";
+        $sql .= "left join user_posts up ON p.id = up.post_id and up.type = 'F' and up.user_id = $user_id ";
+        $sql .= "left join user_posts up2 ON p.id = up2.post_id and up2.type = 'U' and up2.user_id = $user_id ";
         $sql .= " where p.status = 'A' and p.deleted_at IS NULL ";
 
         LogIt("this is sql $sql");
