@@ -34,6 +34,7 @@ Route::get('/a/getPost/{post_id}', 'MasterController@getPost')->name('getPost');
 // favorites
 Route::get('/a/getFavorites/', 'MasterController@getFavorites')->name('getFavorites');
 Route::get('/a/toggleFavorite/{onOff}/{post_id}', 'MasterController@toggleFavorite')->name('toggleFavorite');
+
 // Post search
 Route::post('/a/post/search/', 'MasterController@searchPosts')->name('searchPosts');
 // log the Licensing of an article

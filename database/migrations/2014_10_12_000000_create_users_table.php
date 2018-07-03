@@ -25,7 +25,11 @@ class CreateUsersTable extends Migration
             $table->string('state');
             $table->string('phone');
             $table->string('email')->unique();
+            $table->string('token',200)->unique();
             $table->string('password');
+            $table->string('status', 5);
+            $table->boolean('agreedTC')->nullable();
+            $table->dateTime('agreedTC_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
