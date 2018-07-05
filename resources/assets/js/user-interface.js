@@ -55,6 +55,32 @@ $('#rightColumn .circle').click(function() {
 }); 
 
 
+// Terms & Conditions Scrollable
+function preventClick(sel, foo){
+	if (foo == true) {
+		$(sel).on('click', function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			return false;
+		});
+		$('#submitForm').css('opacity', '.5');
+	}
+}
+preventClick('#tccRead, #submitForm', true);
+$('#verifyUserForm .terms').scroll(function(){
+	var scroll = $(this).scrollTop();
+	var height = $(this).outerHeight();
+	var calculated = scroll + height - 40;
+	var innerHeight = $(this).find('.inner').outerHeight();
+	if (calculated == innerHeight) {
+		preventClick('#tccRead, #submitForm', false);
+		$('#submitForm').css('opacity', '1');
+		$('#tccRead').prop('checked', true).unbind();
+		$('#submitForm').unbind();
+
+	}
+});
+
 
 // Advanced Search
 $('#openAdvancedSearch').click(function(){
