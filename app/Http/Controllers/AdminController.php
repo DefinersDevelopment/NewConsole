@@ -9,10 +9,13 @@ use App\Helpers\Misc;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\TidTracking;
+use Auth;
 //use DB;
 
 class AdminController extends Controller
 {
+
     //
     public function showForm($formType) {
 
@@ -64,7 +67,7 @@ makes a post object, fills it, saves it, save category relations
     	}
         
         // TODO not hard code
-		$data['user_id_created'] = 1;
+		$data['user_id_created'] = Auth::user()->id;
     	$data['status'] = 'A';
     	$data['slug'] = makeSlug($data['title']);
 
@@ -141,8 +144,8 @@ do we want to wrap the entire create in transaction and roll back if unreads fai
             }
         
 
-	    }catch(\Throwable $e)
-        {
+	    }
+        catch(\Throwable $e){
             LogIt("ERR:: Cant Create Post In Post Table - ".$e->getMessage(), 'end');
             //Bugsnag::notifyException($e);
             // Bugsnag::notifyError('ALERT CREATION ERROR - Sent Back To Form', $e->getMessage(), function($report){
@@ -240,6 +243,70 @@ do we want to wrap the entire create in transaction and roll back if unreads fai
 
     	return json_encode($returnVal);
 
+    }
+/**************
+The way we track the viewing of our articles
+***************/
+
+    function trackTid(Request $r){
+
+        $temp = $r->input('t');
+        $temp = explode('-',$temp);
+        
+        if (!isset($temp[0]) || !isset($temp[1])){
+            LogIt('track tid could not get user and/or post ');
+            return $this->returnImage();
+        }
+
+        $ref = $r->header('referer');
+        if (!isset($ref) || $ref == ''){
+            $ref = $r->header('host');
+            if (!isset($ref) || $ref == ''){
+                $ref='unknown';
+            }
+        }
+        $foo = preg_match('/ardashtest/i', $ref);
+        LogIt('is this is match ' . $foo);
+        if ( $foo == 1){
+            return $this->returnImage();
+
+        }
+
+        $tracker = new TidTracking;
+
+        $tracker->user_id = $temp[0];
+        $tracker->post_id = $temp[1];
+        
+        $ua = $r->header('user_agent');
+        if (!isset($ua) || $ua == ''){
+            $ua = 'unknown';
+        }
+        
+
+
+        $tracker->user_agent = $ua;
+        $tracker->referer = $ref;
+
+        
+        //echo '<br>header:<br>'; 
+        //echo print_r($r->header(),TRUE);
+        //echo $r->header('referer');
+        $tracker->save();
+
+        return $this->returnImage();
+
+    }
+    function returnImage(){
+         return response(base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII='), 200)
+                  ->header('Content-Type', 'img/png');
+    }
+
+    function makePostFromBrowserExt(Request $r){
+        LogIt('fuck yeah ' . $r->input('url'));
+        $returnVal = new \stdClass; 
+        $returnVal->error = 0;
+        $returnVal->data = "fuck yeah";
+        return json_encode($returnVal);
     }
 
 

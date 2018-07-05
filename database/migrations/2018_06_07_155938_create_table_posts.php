@@ -20,6 +20,7 @@ class CreateTablePosts extends Migration
 
             $table->string('title',500);
             $table->string('slug',550);
+            $table->string('type',10)->nullable();
             $table->string('author', 200)->nullable(); // this should be an author ID TODO
             $table->string('author_bio', 2000)->nullable(); // this should be an author ID TODO
             $table->string('publication', 2000)->nullable();

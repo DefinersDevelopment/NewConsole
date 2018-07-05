@@ -59,7 +59,7 @@ The standard that we return when getting a list of POSTS
 
     private static function selectSQL(){
     	return  'select p.id, p.title,p.slug,p.author,p.author_bio,p.publication,p.url, p.short_description,
-    	p.updated_at,p.created_at, up.type as favorite, up2.type as unread ';
+    	p.updated_at,p.created_at ';
     }
 
 
@@ -83,7 +83,7 @@ The standard that we return when getting a list of POSTS
     			for unreads.  I didnt want to get duplicates;
     	*/
 
-    	$sql = Post::selectSQL() .  'from posts p ';
+    	$sql = Post::selectSQL() .  ' , up.type as favorite, up2.type as unread from posts p ';
         $sql .=  " inner join category_post cp on p.id = cp.post_id and cp.category_id = $cat_id ";
     	$sql .= "left join user_posts up on p.id = up.post_id and up.user_id = $user_id and up.type = 'F' ";
         $sql .= "left join user_posts up2 on p.id = up2.post_id and up2.user_id = $user_id and up2.type = 'U' and up2.category_id = $cat_id ";
@@ -96,7 +96,14 @@ The standard that we return when getting a list of POSTS
  
         return $posts;       
     }
+/*******
+This needs to use seperate select SQL b/c it needs a distinct
+because it does not select on category and therefore could have 
+duplicates.
 
+The distinct might kill performance in the future
+
+********/
     public static function getUserPostsOfTypeWithUnreads($user_id, $type){
         LogIt("get posts of type with unreads");
 
@@ -104,13 +111,14 @@ The standard that we return when getting a list of POSTS
 	    Tried the eloquent way, the SQL was awful, and the 
 	    return was total bloat 
 	    ******************/
-	    // TODO need to chunk this in groups of ~50?? 100??
-	    $sql = Post::selectSQL();
-	    $sql .= "from posts p ";
-        $sql .= "inner join user_posts up ON p.id = up.post_id and up.type = '$type' ";
-
-        $sql .= "left join user_posts up2 ON p.id = up2.post_id and up2.type = 'U'";
-        $sql .= " where p.status = 'A' and p.deleted_at IS NULL ";
+	    // TODO need to chunk this in groups of ~50?? 100?? for now hardcoded limit 150
+	    $sql = 'select DISTINCT p.id, p.title,p.slug,p.author,p.author_bio,p.publication,p.url, p.short_description,
+                p.updated_at,p.created_at, up.type as favorite, up2.type as unread ' ;
+	    $sql .= " from posts p ";
+        $sql .= " inner join user_posts up3 ON p.id = up3.post_id and up3.type = '$type' and up3.user_id = $user_id ";
+        $sql .= " left join user_posts up ON p.id = up.post_id and up.type = 'F' and up.user_id = $user_id ";
+        $sql .= " left join user_posts up2 ON p.id = up2.post_id and up2.type = 'U' and up2.user_id = $user_id ";
+        $sql .= " where p.status = 'A' and p.deleted_at IS NULL LIMIT 150 ";
 
         LogIt("this is sql $sql");
 
@@ -121,6 +129,28 @@ The standard that we return when getting a list of POSTS
 	    return $posts;       
 
 	}
+
+/**********
+The function name says it all
+**********/
+
+    public static function getUnreadsByCategory($user_id, $cat_id) {
+        
+        $sql = Post::selectSQL() .  ' , ' ' as favorite, up.type as unread from posts p ';
+        $sql .= ' inner join user_posts up on p.id = up.post_id and up.user_id = $user_id and up.category_id = $cat_id ';
+        $sql .= ' where p.status = 'A' and p.deleted_at IS NULL LIMIT 150';
+
+        LogIt("this is sql $sql");
+
+        $posts = DB::select($sql);
+
+        LogIt("got posts count " . count($posts));
+
+        return $posts;       
+
+    }
+
+
 
     // made this a function in case we want to 
 
@@ -170,7 +200,7 @@ categories, string of one id or comma seperated IDs, can also be an array
 
        
 
-        $from  = "from posts p ";
+        $from  = " , up.type as favorite, up2.type as unread from posts p ";
         $from .= "left join user_posts up ON p.id = up.post_id and up.type = 'F' ";
         $from .= "left join user_posts up2 ON p.id = up2.post_id and up2.type = 'U'";
 
@@ -217,6 +247,9 @@ categories, string of one id or comma seperated IDs, can also be an array
 
         return 0;
     }
+/*************
+Deletes all unreads for a post, not just for a specific user
+**************/
 
     public static function deleteUnreads($post_id) {
         try {

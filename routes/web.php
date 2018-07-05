@@ -15,11 +15,14 @@
 
 Auth::routes();
 
-Route::get('/', 'MasterController@index')->name('index');
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/', 'MasterController@index')->name('index');
+});
+
+
 
 // testing
-Route::get('/ben', 'BenTestController@test')->name('benTest');
+//Route::get('/ben', 'BenTestController@test')->name('benTest');
 
 // calls that load whole page
 Route::get('/browse/{cat_id}', 'MasterController@browseByCategory')->name('browseByCategory');
@@ -31,6 +34,7 @@ Route::get('/a/getPost/{post_id}', 'MasterController@getPost')->name('getPost');
 // favorites
 Route::get('/a/getFavorites/', 'MasterController@getFavorites')->name('getFavorites');
 Route::get('/a/toggleFavorite/{onOff}/{post_id}', 'MasterController@toggleFavorite')->name('toggleFavorite');
+
 // Post search
 Route::post('/a/post/search/', 'MasterController@searchPosts')->name('searchPosts');
 // log the Licensing of an article
@@ -43,8 +47,16 @@ Route::post('/admin/savePost', 'AdminController@savePost')->name('savePost');
 Route::get('/admin/editPost/{post_id}', 'AdminController@editPost')->name('editPost');
 Route::get('/admin/post/delete/{post_id}', 'AdminController@deletePost')->name('deletePost');
 
+<<<<<<< HEAD
 // Terms and Conditions / Verify Email
 Route::get('/verify', 'MasterController@verifyUserForm')->name('verifyUserForm');
+=======
+// currently in testing
+//Route::post('/admin/chromePost', 'AdminController@makePostFromBrowserExt')->name('chromePost');
+
+// tracking 
+Route::get('/t/image', 'AdminController@trackTid')->name('trackTid');
+>>>>>>> d3dfc887b0e82a107b4a4b5a3ff5bcd09e59a789
 
 
 

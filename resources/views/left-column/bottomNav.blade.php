@@ -16,9 +16,14 @@
                             </span>
                         </li>
                         <li title="Log out">
-                            <span>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                            
+                            <span class='logoutClick'>
                                 <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
                             </span>
+                        
                         </li>
                     </ul>
                 </nav>
