@@ -293,7 +293,9 @@ section#rightColumn,
 section#rightColumn #topBar,
 section#rightColumn #mainContent #content .inputContainer,
 section#rightColumn #mainContent #content .columns,
-section#rightColumn #mainContent #content .columns .inputContainer label {
+section#rightColumn #mainContent #content .columns .inputContainer label,
+.userLoginRegister .interface form .submit,
+.userLoginRegister .interface input .submit {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -397,6 +399,20 @@ a {
   line-height: 22px;
   line-height: 1.375rem;
   margin-bottom: 25px;
+}
+
+.view ol {
+  list-style: decimal;
+  padding-left: 25px;
+}
+
+.view ol li {
+  margin-bottom: 5px;
+  padding-left: 5px;
+}
+
+.view ol li:last-child {
+  margin-bottom: 0;
 }
 
 .theme-iss .entry {
@@ -720,12 +736,17 @@ header#navigation #mainNav ul li .text {
   font-size: 0.875rem;
   padding-right: 10px;
   font-weight: 300;
+  margin-right: auto;
 }
 
 header#navigation #mainNav ul li .unreadNumber {
-  display: none;
   font-size: 14px;
   font-size: 0.875rem;
+  padding: 0 10px;
+  height: 20px;
+  border-radius: 3px;
+  background: #fff;
+  color: #183957;
 }
 
 .theme-iss header#navigation #mainNav ul li.active .icon .fas,
@@ -762,16 +783,20 @@ header#navigation #mainNav ul li.active .text {
   color: #87E1D1;
 }
 
+header#navigation #mainNav ul li.active .unreadNumber {
+  font-weight: 700;
+}
+
 .theme-iss header#navigation #mainNav ul li.active .unreadNumber {
-  color: #fff;
+  color: #183957;
 }
 
 .theme-ar header#navigation #mainNav ul li.active .unreadNumber {
-  color: #FFCE00;
+  color: #183957;
 }
 
 .theme-definers header#navigation #mainNav ul li.active .unreadNumber {
-  color: #87E1D1;
+  color: #183957;
 }
 
 header#navigation #mainNav ul li.active:after {
@@ -812,6 +837,24 @@ header#navigation #mainNav ul li ul {
 
 .theme-definers header#navigation #mainNav ul li ul {
   background: #303E57;
+}
+
+.theme-iss header#navigation #mainNav ul li ul li:hover .icon .fas,
+.theme-iss header#navigation #mainNav ul li ul li:hover .icon .far,
+.theme-iss header#navigation #mainNav ul li ul li:hover .icon .fal {
+  color: #fff;
+}
+
+.theme-ar header#navigation #mainNav ul li ul li:hover .icon .fas,
+.theme-ar header#navigation #mainNav ul li ul li:hover .icon .far,
+.theme-ar header#navigation #mainNav ul li ul li:hover .icon .fal {
+  color: #fff;
+}
+
+.theme-definers header#navigation #mainNav ul li ul li:hover .icon .fas,
+.theme-definers header#navigation #mainNav ul li ul li:hover .icon .far,
+.theme-definers header#navigation #mainNav ul li ul li:hover .icon .fal {
+  color: #fff;
 }
 
 header#navigation #bottomNav {
@@ -2004,7 +2047,8 @@ section#rightColumn #mainContent .circle .fas {
 }
 
 .userLoginRegister .interface {
-  width: 350px;
+  min-width: 350px;
+  max-width: 350px;
   text-align: center;
   border-radius: 5px;
   background: #fff;
@@ -2057,6 +2101,7 @@ section#rightColumn #mainContent .circle .fas {
 .userLoginRegister .interface form button,
 .userLoginRegister .interface input button {
   width: 100%;
+  border: 0;
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   color: #fff;
@@ -2064,6 +2109,21 @@ section#rightColumn #mainContent .circle .fas {
   font-size: 0.875rem;
   margin-bottom: 20px;
   text-transform: uppercase;
+}
+
+.theme-iss .userLoginRegister .interface form button:hover,
+.theme-iss .userLoginRegister .interface input button:hover {
+  background: #487CA0;
+}
+
+.theme-ar .userLoginRegister .interface form button:hover,
+.theme-ar .userLoginRegister .interface input button:hover {
+  background: #55565A;
+}
+
+.theme-definers .userLoginRegister .interface form button:hover,
+.theme-definers .userLoginRegister .interface input button:hover {
+  background: #05223F;
 }
 
 .theme-iss .userLoginRegister .interface form a,
@@ -2079,6 +2139,55 @@ section#rightColumn #mainContent .circle .fas {
 .theme-definers .userLoginRegister .interface form a,
 .theme-definers .userLoginRegister .interface input a {
   color: #2D8CEB;
+}
+
+.userLoginRegister .interface form .submit,
+.userLoginRegister .interface input .submit {
+  margin-top: 30px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.userLoginRegister .interface form .submit label,
+.userLoginRegister .interface input .submit label {
+  padding-bottom: 30px;
+  display: inline-block;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 100%;
+          flex: 0 0 100%;
+}
+
+.userLoginRegister .interface form .submit button,
+.userLoginRegister .interface input .submit button {
+  max-width: 150px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 100%;
+          flex: 0 0 100%;
+  margin: auto;
+}
+
+.userLoginRegister .interface.large {
+  max-width: 960px;
+}
+
+.userLoginRegister .interface.large #logo,
+.userLoginRegister .interface.large form .contain,
+.userLoginRegister .interface.large input .contain {
+  max-width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.userLoginRegister .interface.large .terms {
+  background: #e7e7e7;
+  width: 100%;
+  border-radius: 3px;
+  max-height: 400px;
+  overflow: scroll;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 20px;
+  margin-top: 30px;
 }
 
 /* Mobile Styles */
@@ -2125,6 +2234,11 @@ section#rightColumn #mainContent .circle .fas {
   section#middleColumn .middleButton,
   .theme-iss section#rightColumn #topBar .left #title {
     display: none;
+  }
+
+  .userLoginRegister .interface.large {
+    width: 90%;
+    padding: 20px;
   }
 }
 

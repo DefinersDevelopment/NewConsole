@@ -20,8 +20,9 @@ class MasterController extends Controller
         $posts = Post::getUserPostsOfTypeWithUnreads($user_id, 'U');
 
         LogIt('number of unreads for user in index function ' . count($posts));
-       
+
         return view("layouts.threeColumn",['navCats'=>$navCats, 'posts'=>$posts]);
+
     }
 
     public function browseByCategory($cat_id){
@@ -284,6 +285,14 @@ and more in the future so be careful of having the right type
         $returnVal->message = "License Recorded";
         return json_encode($returnVal);
 
+
+    }
+
+    public function verifyUserForm(Request $r){
+
+        $user = User::where('token', $r->input('V'))->get();        
+        //print_r($user[0]);
+        return view("forms.verifyUserForm", ['user' => $user[0]]);
 
     }
  

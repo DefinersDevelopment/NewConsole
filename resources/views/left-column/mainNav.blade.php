@@ -11,7 +11,6 @@
                                 <span class="text">
                                     {{$parent->name}}
                                 </span>
-                                <span class="unreadNumber">50</span>
                             </span>
                             <?php $children = $parent->getChildren(); ?>
                             <ul>
@@ -24,7 +23,9 @@
                                         <span class="text">
                                             {{$child->name}}
                                         </span>
-                                        <span  id='unreadCat-{{$child->id}}'>{{$child->unread_count}}</span>
+                                        <a href="test.com">
+                                            <span class="unreadNumber" title="{{$child->name}} has {{$child->unread_count}} unreads" id='unreadCat-{{$child->id}}'>{{$child->unread_count}}</span>
+                                        </a>
                                     </span>
                             </li>
                         @endforeach {{-- end child loop--}}

@@ -49,11 +49,16 @@ Route::post('/admin/savePost', 'AdminController@savePost')->name('savePost');
 Route::get('/admin/editPost/{post_id}', 'AdminController@editPost')->name('editPost');
 Route::get('/admin/post/delete/{post_id}', 'AdminController@deletePost')->name('deletePost');
 
+<<<<<<< HEAD
+// Terms and Conditions / Verify Email
+Route::get('/verify', 'MasterController@verifyUserForm')->name('verifyUserForm');
+=======
 // currently in testing
 //Route::post('/admin/chromePost', 'AdminController@makePostFromBrowserExt')->name('chromePost');
 
 // tracking 
 Route::get('/t/image', 'AdminController@trackTid')->name('trackTid');
+>>>>>>> d3dfc887b0e82a107b4a4b5a3ff5bcd09e59a789
 
 
 
