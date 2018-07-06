@@ -134,11 +134,12 @@ The distinct might kill performance in the future
 The function name says it all
 **********/
 
-    public static function getUnreadsByCategory($user_id, $cat_id) {
-        
-        $sql = Post::selectSQL() .  ' , ' ' as favorite, up.type as unread from posts p ';
-        $sql .= ' inner join user_posts up on p.id = up.post_id and up.user_id = $user_id and up.category_id = $cat_id ';
-        $sql .= ' where p.status = 'A' and p.deleted_at IS NULL LIMIT 150';
+    public static function getUnreads($user_id, $cat_id = '') {
+
+        $sql = Post::selectSQL() .  " , ' ' as favorite, up.type as unread from posts p ";
+        $sql .= " inner join user_posts up on p.id = up.post_id and up.user_id = $user_id and up.type = 'U' ";
+        if ($cat_id != '') { $sql .= ' and up.category_id = $cat_id '; }
+        $sql .= " where p.status = 'A' and p.deleted_at IS NULL LIMIT 150";
 
         LogIt("this is sql $sql");
 

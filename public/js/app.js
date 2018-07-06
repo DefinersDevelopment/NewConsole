@@ -145,6 +145,9 @@ function addDeletePostClick() {
 function addLogoutClick() {
     addUniqueEvent(".logoutClick", 'click', logoutClick);
 }
+function addAllUnreadsClick() {
+    addUniqueEvent(".getAllUnreadsClick", 'click', getAllUnreadsClick);
+}
 
 /******** END EVENT LISTNER SECTION ******************/
 
@@ -393,7 +396,14 @@ function logoutClick(e) {
     e.preventDefault();
     document.getElementById('logout-form').submit();
 }
+function getAllUnreadsClick(e) {
+    logIt('all unreads click');
+    data = new Object();
 
+    endpoint = '/a/unreads/';
+    logIt("endpoint " + endpoint);
+    makeAjaxCall(endpoint, 'GET', data, loadMiddleHTML);
+}
 /***
  *                  .---.                             
  *                  |   |                             
@@ -665,6 +675,7 @@ $(document).ready(function () {
     addToggleFavPostClick();
     addViewPostClick();
     addDeletePostClick();
+    addAllUnreadsClick();
 
     // fav bttn in bottom nav
     addGetFavsClick();

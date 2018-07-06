@@ -27,6 +27,8 @@ Route::group(['middleware' => ['auth']], function () {
 // calls that load whole page
 Route::get('/browse/{cat_id}', 'MasterController@browseByCategory')->name('browseByCategory');
 //Route::get('/show/{post_id}', 'MasterController@showPost')->name('showPost');
+Route::get('/a/unreads/{cat_id}', 'MasterController@getUnreads')->name('getUnreads');
+Route::get('/a/unreads/', 'MasterController@getUnreads')->name('allUnreads');
 
 /* AJAX CALLS, TODO use another file....???? */
 Route::get('/a/getMiddleByCat/{cat_id}', 'MasterController@getMiddleByCat')->name('getMiddleByCat');

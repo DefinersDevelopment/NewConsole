@@ -7,7 +7,7 @@
                                {{--  <div class="entryGroupTitle">
                                     <span>Alerts from 1 Days Ago</span>
                                 </div> --}}
-                                <div class="entry postContainer" >
+                                <div class="entry postContainer" id='postContainer-{{$p->id}}'>
                                     <div class="entryContent">
                                         <h2 class="isPost" postId="{{$p->id}}" id="{{$p->id}}">{{$p->title}}</h2>
                                         <p><?php echo word_limiter($p->short_description, 15)."..."; ?></p>

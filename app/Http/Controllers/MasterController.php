@@ -86,6 +86,26 @@ class MasterController extends Controller
         return json_encode($returnVal);
     }
 
+/************************
+
+NEEDS 
+
+TESTEING!
+**************************/
+
+    public function getUnreads($cat_id = ''){
+
+        $user_id = Auth::user()->id;
+        $posts = Post::getUnreads($user_id, $cat_id);
+        $returnVal = new \stdClass;
+        $returnVal->error = 0;
+        $returnVal->data = View::make('middle-column.entries')->with(['posts'=>$posts])->render();
+        LogIt(' getting favorites done ', 'end') ;
+        return json_encode($returnVal);
+
+    }
+
+
 /*****
 Function takes a onOff string which should be 'on' or 'off'
 and a post id.

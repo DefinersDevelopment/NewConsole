@@ -39,7 +39,7 @@ class users_table_seeder extends Seeder
             'state' => 'washington',
             'phone' => '999-555-5555',
             'email' => 'mhess@definerscorp.com',
-            'token' => '12345',
+            'token' => '12346',
             'status' => 'A',
             'password' => bcrypt('password'),
         ]);
@@ -54,7 +54,7 @@ class users_table_seeder extends Seeder
             'state' => 'washington',
             'phone' => '999-555-5555',
             'email' => 'jfowler@definerscorp.com',
-            'token' => '12345',
+            'token' => '12347',
             'status' => 'A',
             'password' => bcrypt('password'),
         ]);

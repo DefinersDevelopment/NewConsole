@@ -7,7 +7,7 @@
                         </li>
                         <li title="See the Posts you have created">
                             <span>
-                                <i class="fas fa-sticky-note"></i>
+                                <i class="fas fa-inbox getAllUnreadsClick"></i>
                             </span>
                         </li>
                         <li title="View your Favorite alerts">
