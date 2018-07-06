@@ -532,6 +532,9 @@ function makeAjaxCall(endPoint, method, data, successFunc) {
             console.log(JSON.stringify(jqXHR));
             console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
             /* TODO show user a nice error code somewhere */
+            response = JSON.parse(jqXHR);
+            console.log('This is status: ' + response.status);
+            // TODO if we get 401, redirect to login
         }
     });
 }
