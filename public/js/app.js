@@ -148,6 +148,9 @@ function addLogoutClick() {
 function addAllUnreadsClick() {
     addUniqueEvent(".getAllUnreadsClick", 'click', getAllUnreadsClick);
 }
+function addUnreadsByCatClick() {
+    addUniqueEvent(".getUnreadsByCat", 'click', getUnreadsByCat);
+}
 
 /******** END EVENT LISTNER SECTION ******************/
 
@@ -404,6 +407,15 @@ function getAllUnreadsClick(e) {
     logIt("endpoint " + endpoint);
     makeAjaxCall(endpoint, 'GET', data, loadMiddleHTML);
 }
+
+function getUnreadsByCat(e) {
+    logIt('category unreads click');
+    data = new Object();
+    cat_id = this.getAttribute('catId');
+    endpoint = '/a/unreadsByCat/' + cat_id;
+    logIt("endpoint " + endpoint);
+    makeAjaxCall(endpoint, 'GET', data, loadMiddleHTML);
+}
 /***
  *                  .---.                             
  *                  |   |                             
@@ -432,10 +444,11 @@ function getAllUnreadsClick(e) {
 // Success callback for loading posts in middle col
 
 function loadMiddleHTML(response) {
+
     scrollToTop('#search');
     if (response.data) {
         document.getElementById("entries").innerHTML = response.data;
-        logIt('trying to add post clicks');
+        logIt('LOAD MIDDLE adding events');
         addViewPostClick();
         addEditPostClick();
         addToggleFavPostClick();
@@ -532,8 +545,8 @@ function makeAjaxCall(endPoint, method, data, successFunc) {
             console.log(JSON.stringify(jqXHR));
             console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
             /* TODO show user a nice error code somewhere */
-            response = JSON.parse(jqXHR);
-            console.log('This is status: ' + response.status);
+            var status = $.parseJSON(jqXHR).status;
+            console.log('This is status: ' + status);
             // TODO if we get 401, redirect to login
         }
     });
@@ -573,7 +586,7 @@ function getCurrentPostId() {
 }
 
 function setCurrentPostId(postId) {
-    logIt('IN FUNC  set cur post =  ' + postId);
+    logIt('Setting current post ID  = to: ' + postId);
     document.getElementById('currentPost').setAttribute('value', postId);
 }
 
@@ -679,6 +692,7 @@ $(document).ready(function () {
     addViewPostClick();
     addDeletePostClick();
     addAllUnreadsClick();
+    addUnreadsByCatClick();
 
     // fav bttn in bottom nav
     addGetFavsClick();

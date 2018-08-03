@@ -23,9 +23,9 @@
                                         <span class="text">
                                             {{$child->name}}
                                         </span>
-                                        <a href="test.com">
-                                            <span class="unreadNumber" title="{{$child->name}} has {{$child->unread_count}} unreads" id='unreadCat-{{$child->id}}'>{{$child->unread_count}}</span>
-                                        </a>
+                                        
+                                            <span class="unreadNumber getUnreadsByCat" catId='{{$child->id}}' title="{{$child->name}} has {{$child->unread_count}} unreads" id='unreadCat-{{$child->id}}'>{{$child->unread_count}}</span>
+                                        
                                     </span>
                             </li>
                         @endforeach {{-- end child loop--}}

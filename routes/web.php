@@ -18,9 +18,6 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'MasterController@index')->name('index');
 
-
- 
-
 	// testing
 	//Route::get('/ben', 'BenTestController@test')->name('benTest');
 
@@ -28,7 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/browse/{cat_id}', 'MasterController@browseByCategory')->name('browseByCategory');
 	//Route::get('/show/{post_id}', 'MasterController@showPost')->name('showPost');
 
-	Route::get('/a/unreads/{cat_id}', 'MasterController@getUnreads')->name('getUnreads');
+	Route::get('/a/unreadsByCat/{cat_id}', 'MasterController@getUnreads')->name('getUnreads');
 	Route::get('/a/unreads/', 'MasterController@getUnreads')->name('allUnreads');
 
 	/* AJAX CALLS, TODO use another file....???? */
@@ -42,7 +39,6 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/a/post/search/', 'MasterController@searchPosts')->name('searchPosts');
 	// log the Licensing of an article
 	Route::get('/a/post/license/{post_id}', 'MasterController@licensePost')->name('licensePost');
-
 
 	// Post add/edit 
 	Route::get('/admin/showForm/{form_type}', 'AdminController@showForm')->name('showForm');
