@@ -25,21 +25,34 @@ class MasterController extends Controller
 
     }
 
+    /**
+     * @param $cat_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * this *MAY* be used if we go by URL and not an SPA Ajax based site.
+     * this is currently deprecated!
+     */
     public function browseByCategory($cat_id){
-
+ 
         // TODO should i check if this cat is valid
+        // This assumes middleware has already made sure this
+        // person can see this category.
 
         $posts = Post::getByCategory($cat_id);
 
         return view("layouts.threeColumn", ['posts'=>$posts]);
 
     }
-    
+
+    /**
+     * @param $cat_id
+     * @return string JSON obj. w/ error code and 'data' which is the HTML from the template
+     */
     public function getMiddleByCat($cat_id){
 
         // TODO wrap in try catch?? not a ton could go wrong
         // but......
-        $user_id = Auth::user()->id; // no hard code
+        $user_id = Auth::user()->id;
         $posts = Post::getByCategoryWithFavAndUnreads($cat_id,$user_id,50,null);
         LogIt(' did we get posts ' . print_r($posts,true));
         $returnVal = new \stdClass;
@@ -52,6 +65,19 @@ class MasterController extends Controller
 
     }
 
+    /**
+     * @param $post_id
+     * @param Request $r
+     * @return string JSON; HTML of the post requested.
+     * @throws \Throwable
+     *
+     * Gets the post requested.
+     * Deletes this user's unread reacord from the user_post
+     *
+     * TODO this should check that the user has permissions to see this post
+     * i.e. does this post belong to a category that is in user_category
+     *
+     */
     public function getPost($post_id, Request $r){
 
         // TODO wrap in try catch?? not a ton could go wrong
@@ -74,6 +100,9 @@ class MasterController extends Controller
 
     }
 
+    /**
+     * @return string JSON of HTML for middle col.
+     */
     public function getFavorites(){
         LogIt(' getting favorites ', 'start') ;
         
@@ -107,14 +136,16 @@ TESTEING!
     }
 
 
-/*****
-Function takes a onOff string which should be 'on' or 'off'
-and a post id.
-if on: add a record in the user_posts table
-if off: delete the record
-NOTE user_posts stores favorites as well as unreads 
-and more in the future so be careful of having the right type
-******/
+
+    /**
+     * @param $onOff - which way to 'flip' the user favorite
+     * @param $postId which post the user is flipping for
+     * @return string
+     *
+     * If turning on, add record to user_post,
+     * If turning off, delete record
+     *
+     */
     function toggleFavorite($onOff, $postId){
         // TODO error check that I got either 'on' or off
 
@@ -218,6 +249,13 @@ and more in the future so be careful of having the right type
 
     }
 
+    /**
+     * @param Request $r
+     * @return string JSON of HTML of search results
+     *
+     * All the hard work is done in the model.
+     *
+     */
     public function searchPosts(Request $r){
 
         $returnVal = new \stdClass;
@@ -232,6 +270,10 @@ and more in the future so be careful of having the right type
 
     }
 
+    /**
+     * @param $post_id
+     * @return string JSON. message of successfully licensed, or Previosuly licensed
+     */
     public function licensePost($post_id){
 
         $user_id = Auth::user()->id;
@@ -288,6 +330,16 @@ and more in the future so be careful of having the right type
 
     }
 
+    /**
+     * @param Request $r
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * John wrote this funciton.
+     *
+     * this is what is used when we send out a e-mail for user to verify email and create
+     * their own password.
+     *
+     */
     public function verifyUserForm(Request $r){
 
         $user = User::where('token', $r->input('V'))->get();        
