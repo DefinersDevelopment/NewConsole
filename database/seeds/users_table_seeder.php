@@ -31,14 +31,14 @@ class users_table_seeder extends Seeder
 
         DB::table('users')->insert([
         	'id'=> 2,
-            'first_name' => 'marc',
+            'first_name' => 'wesley',
             'last_name' => 'client',
             'title' => 'test title',
             'company' => 'awesome paper',
             'city' => 'Whalla Whalla',
             'state' => 'washington',
             'phone' => '999-555-5555',
-            'email' => 'mhess@definerscorp.com',
+            'email' => 'wroberts@definerscorp.com',
             'token' => '12346',
             'status' => 'A',
             'password' => bcrypt('password'),

@@ -56,6 +56,22 @@ class category_users_seeder extends Seeder
         	'user_id' => 2,
             'category_id' => 3
         ]);
+        DB::table('category_user')->insert([
+        	'user_id' => 2,
+            'category_id' => 4
+        ]);
+        DB::table('category_user')->insert([
+        	'user_id' => 2,
+            'category_id' => 5
+        ]);
+        DB::table('category_user')->insert([
+        	'user_id' => 2,
+            'category_id' => 6
+        ]);
+        DB::table('category_user')->insert([
+        	'user_id' => 2,
+            'category_id' => 7
+        ]);
 
 
 
