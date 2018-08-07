@@ -7,7 +7,12 @@
 
 			<h1>{{ $user->first_name }}</h1>
 
-			<form id='theForm' method="POST" action="/verifyUser">
+
+			@if ($errors->any())
+				{!! implode('', $errors->all('<div>:message</div>')) !!}
+			@endif
+
+			<form id='theForm' method="post" action="/verifyUser">
 				<input type="hidden" id="token" name="token" value="{{ csrf_token() }}">
 				<div class="contain">
 					<span></span>

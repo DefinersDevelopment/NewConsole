@@ -343,7 +343,7 @@ TESTEING!
      * their own password.
      *
      */
-    public function verifyUserForm($email_token){
+    public function verifyUserForm($email_token, Request $r){
 
         $user = User::where('token', $email_token)->get();
         //print_r($user[0]);

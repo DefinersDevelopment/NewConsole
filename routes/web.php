@@ -47,8 +47,6 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/admin/post/delete/{post_id}', 'AdminController@deletePost')->name('deletePost');
 
 
-
-
 });
 
 // Users Verifying there email address and setting a new password
