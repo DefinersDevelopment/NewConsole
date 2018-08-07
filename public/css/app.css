@@ -1274,6 +1274,7 @@ section#middleColumn #entries .entry .entryContent {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 20px;
+  cursor: pointer;
 }
 
 .theme-iss section#middleColumn #entries .entry .entryContent a {
