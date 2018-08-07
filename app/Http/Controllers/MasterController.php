@@ -19,6 +19,8 @@ class MasterController extends Controller
         // start the user off with their unreads
         $posts = Post::getUserPostsOfTypeWithUnreads($user_id, 'U');
 
+        // TODO if we have no unreads, get *SOMETHING* to display
+
         LogIt('number of unreads for user in index function ' . count($posts));
 
         return view("layouts.threeColumn",['navCats'=>$navCats, 'posts'=>$posts]);
@@ -33,7 +35,7 @@ class MasterController extends Controller
      * this is currently deprecated!
      */
     public function browseByCategory($cat_id){
- 
+
         // TODO should i check if this cat is valid
         // This assumes middleware has already made sure this
         // person can see this category.
@@ -78,6 +80,7 @@ class MasterController extends Controller
      * i.e. does this post belong to a category that is in user_category
      *
      */
+
     public function getPost($post_id, Request $r){
 
         // TODO wrap in try catch?? not a ton could go wrong
@@ -340,9 +343,37 @@ TESTEING!
      * their own password.
      *
      */
-    public function verifyUserForm(Request $r){
+    public function verifyUserForm($email_token){
 
-        $user = User::where('token', $r->input('V'))->get();        
+        $user = User::where('token', $email_token)->get();
+        //print_r($user[0]);
+        return view("forms.verifyUserForm", ['user' => $user[0]]);
+
+    }
+
+    public function verifyUser(Request $r){
+
+        $validatedData = $r->validate([
+            'pass1' => 'required',
+            'pass2' => 'required',
+        ]);
+
+
+        //verify they checked the box tccRead
+
+
+        // verify passwords match
+        if ($r->input('pass1') != $r->input('pass2')){
+
+        }
+        // get this user
+        $user = User::find($r->input('user_id'));
+
+
+        // set the user password
+
+        //update the user
+
         //print_r($user[0]);
         return view("forms.verifyUserForm", ['user' => $user[0]]);
 

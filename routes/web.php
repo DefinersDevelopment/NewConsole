@@ -21,7 +21,7 @@ Route::group(['middleware' => ['auth']], function () {
 	// testing
 	//Route::get('/ben', 'BenTestController@test')->name('benTest');
 
-	// calls that load whole page
+	// calls that load whole page #BROKEN
 	Route::get('/browse/{cat_id}', 'MasterController@browseByCategory')->name('browseByCategory');
 	//Route::get('/show/{post_id}', 'MasterController@showPost')->name('showPost');
 
@@ -45,7 +45,18 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/admin/savePost', 'AdminController@savePost')->name('savePost');
 	Route::get('/admin/editPost/{post_id}', 'AdminController@editPost')->name('editPost');
 	Route::get('/admin/post/delete/{post_id}', 'AdminController@deletePost')->name('deletePost');
+
+
+
+
 });
+
+// Users Verifying there email address and setting a new password
+Route::get('/v/{email_token}', 'MasterController@verifyUserForm')->name('verifyUserForm');
+Route::post('verifyUser', 'MasterController@verifyUser')->name('verifyUser');
+
+
+
 
 // currently in testing
 //Route::post('/admin/chromePost', 'AdminController@makePostFromBrowserExt')->name('chromePost');

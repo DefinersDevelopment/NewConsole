@@ -7,10 +7,13 @@
 
 			<h1>{{ $user->first_name }}</h1>
 
-			<form method="" action="">
+			<form id='theForm' method="POST" action="/verifyUser">
+				<input type="hidden" id="token" name="token" value="{{ csrf_token() }}">
 				<div class="contain">
-					<input type="email" placeholder="Email Address">
-					<input type="email" placeholder="Verify Email Address">
+					<span></span>
+					<input type="password" name='pass1' placeholder="Change Password">
+					<input type="password" name='pass2' placeholder="Verify Password">
+					<input type="hidden" name='user_id' value="{{$user->id}}">
 				</div>
 			
 				<div class="terms view textLeft">
@@ -49,7 +52,8 @@
 						<span>Please read the Terms & Conditions before checking this box:</span>
 						<input id="tccRead" type="checkbox">
 					</label>
-					<button id="submitForm" class="btn">Verify</button>
+					{{--<button id="verifyUsersubmitForm" class="btn">Complete Registration</button>--}}
+					<input type="submit" value="Complete Registration">
 				</div>
 			</form>
 
