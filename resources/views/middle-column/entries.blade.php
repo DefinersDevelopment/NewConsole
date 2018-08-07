@@ -8,8 +8,8 @@
                                     <span>Alerts from 1 Days Ago</span>
                                 </div> --}}
                                 <div class="entry postContainer" id='postContainer-{{$p->id}}'>
-                                    <div class="entryContent">
-                                        <h2 class="isPost" postId="{{$p->id}}" id="{{$p->id}}">{{$p->title}}</h2>
+                                    <div class="entryContent" postId="{{$p->id}}" id="{{$p->id}}">
+                                        <h2 class="isPost" >{{$p->title}}</h2>
                                         <p><?php echo word_limiter($p->short_description, 15)."..."; ?></p>
                                     </div>
                                     <div class="bar">

@@ -307,6 +307,7 @@ section#middleColumn {width:440px; min-width:440px; max-width:440px; @extend .tr
 				border-color:themed('dark');
 			}
 			.entryContent {box-sizing:border-box; padding:20px;
+				cursor: pointer;
 				a {
 					@include themify($themes) {
 						color:themed('dark');
