@@ -12,12 +12,12 @@
 				{!! implode('', $errors->all('<div>:message</div>')) !!}
 			@endif
 
-			<form id='theForm' method="post" action="/verifyUser">
+			<form id='resetPassword' method="get" action="/verifyUser" style="padding-top: 20px;">
 				<input type="hidden" id="token" name="token" value="{{ csrf_token() }}">
 				<div class="contain">
 					<span></span>
-					<input type="password" name='pass1' placeholder="Change Password">
-					<input type="password" name='pass2' placeholder="Verify Password">
+					<input type="password" name='password' placeholder="Change Password">
+					<input type="password" name='password_confirmation' placeholder="Verify Password">
 					<input type="hidden" name='user_id' value="{{$user->id}}">
 				</div>
 			

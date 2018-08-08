@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Hash;
 use Auth;
 
 class MasterController extends Controller
@@ -346,36 +347,29 @@ TESTEING!
     public function verifyUserForm($email_token, Request $r){
 
         $user = User::where('token', $email_token)->get();
-        //print_r($user[0]);
         return view("forms.verifyUserForm", ['user' => $user[0]]);
 
     }
 
-    public function verifyUser(Request $r){
+    public function verifyUser(Request $request){
 
-        $validatedData = $r->validate([
-            'pass1' => 'required',
-            'pass2' => 'required',
+        $this->validate($request, [
+            'password' => 'required|confirmed|min:6|max:16',
         ]);
 
-
-        //verify they checked the box tccRead
-
-
-        // verify passwords match
-        if ($r->input('pass1') != $r->input('pass2')){
-
-        }
         // get this user
-        $user = User::find($r->input('user_id'));
+        $user = User::find($request->input('user_id'));
+        if($user->getAttribute('id') == $request->input('user_id')) {
+            //bail out, no user found or more than one user found...
+            $user->setAttribute('password', Hash::make($request->input('password')));
+            $user->save();
+            $stop = "here";
+        } else {
+            //TODO: Fail gracefully if something went wrong...
+            return false;
+        }
 
-
-        // set the user password
-
-        //update the user
-
-        //print_r($user[0]);
-        return view("forms.verifyUserForm", ['user' => $user[0]]);
+        return redirect('/login');
 
     }
  

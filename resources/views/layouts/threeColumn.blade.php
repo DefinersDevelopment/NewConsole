@@ -31,7 +31,7 @@
 				@include('right-column.topBar')
 				<div id="mainContent">
 					<div id="content" class="view">
-						<div id="contentWrapper">
+						<div id="contentWrapper" class="preventCopy">
 							@include('right-column.mainContent')
 						</div>
 					</div>

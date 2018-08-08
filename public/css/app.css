@@ -255,6 +255,14 @@ em {
   font-style: italic;
 }
 
+.preventCopy {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 /* Responsive Iframe, Object, Embed */
 
 .videoContainer {

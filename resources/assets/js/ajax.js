@@ -231,7 +231,7 @@ function formSaveClick() {
     // TODO, make this dynamic not hard coded form
     // name
     data = new Object;
-    data.formData = $("#theForm").serializeArray();
+    data.formData = $('#'+id).serializeArray();
     //logIt(data); return;
     makeAjaxCall('/admin/savePost', 'POST', data, loadRightHTML);
 }

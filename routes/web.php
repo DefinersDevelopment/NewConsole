@@ -46,13 +46,13 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/admin/editPost/{post_id}', 'AdminController@editPost')->name('editPost');
 	Route::get('/admin/post/delete/{post_id}', 'AdminController@deletePost')->name('deletePost');
 
-
+    
 });
+
 
 // Users Verifying there email address and setting a new password
 Route::get('/v/{email_token}', 'MasterController@verifyUserForm')->name('verifyUserForm');
-Route::post('verifyUser', 'MasterController@verifyUser')->name('verifyUser');
-
+Route::get('verifyUser', 'MasterController@verifyUser')->name('verifyUser');
 
 
 
