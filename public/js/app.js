@@ -504,6 +504,7 @@ function makeAjaxCall(endPoint, method, data, successFunc) {
 
         },
         success: function (response) {
+            debugger;
             // TODO check error code here!
             temp = JSON.parse(response);
             //logIt(temp.data);
