@@ -108,6 +108,10 @@ function addUnreadsByCatClick() {
 
 // Function that is run when a category is clicked
 function categoryClick() {
+    $(".postNavigation").hide();
+    $(".editPostClick").hide();
+    $(".formSaveClick").hide();
+    $(".showPostCreateFormClick").show();
     data = new Object;
     setCatActive(this);
     //console.log("my object: %o", this);
@@ -121,6 +125,7 @@ function categoryClick() {
 // Function that is run when a post is clicked in middle col
 // to populate the right area
 function viewPostClick() {
+    $(".postNavigation").show();
     $(".editPostClick").show();
     $(".formSaveClick").hide();
     $(".showPostCreateFormClick").hide();
@@ -219,6 +224,7 @@ function prevClick() {
 }
 
 function showPostCreateFormClick() {
+    $(".postNavigation").hide();
     $(".formSaveClick").show();
     $(".editPostClick").hide();
     $(".showPostCreateFormClick").hide();
@@ -243,6 +249,7 @@ function formSaveClick() {
 }
 
 function editPostClick() {
+    $(".postNavigation").hide();
     $(".formSaveClick").show();
     $(".editPostClick").hide();
     $(".showPostCreateFormClick").hide();
