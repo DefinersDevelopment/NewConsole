@@ -121,6 +121,9 @@ function categoryClick() {
 // Function that is run when a post is clicked in middle col
 // to populate the right area
 function viewPostClick() {
+    $(".editPostClick").show();
+    $(".formSaveClick").hide();
+    $(".showPostCreateFormClick").hide();
     data = new Object;
     postId = this.getAttribute('postId');
     setEntryActive(this);
@@ -216,6 +219,9 @@ function prevClick() {
 }
 
 function showPostCreateFormClick() {
+    $(".formSaveClick").show();
+    $(".editPostClick").hide();
+    $(".showPostCreateFormClick").hide();
     logIt('show form clicked');
     data = new Object;
     endPoint = '/admin/showForm/article';
@@ -237,6 +243,9 @@ function formSaveClick() {
 }
 
 function editPostClick() {
+    $(".formSaveClick").show();
+    $(".editPostClick").hide();
+    $(".showPostCreateFormClick").hide();
     logIt('edit post click');
     setEntryActive(this);
     // TODO, make this dynamic not hard coded form
@@ -296,7 +305,6 @@ function searchClick(e) {
 }
 
 function licensePostClick(e) {
-    debugger;
     logIt('copy content click');
     $("#contentWrapper").removeClass("preventCopy");
     $postId = getCurrentPostId();

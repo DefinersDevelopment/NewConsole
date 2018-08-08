@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('token',200)->unique();
             $table->string('password');
             $table->string('status', 5);
+            $table->tinyInteger('level');
             $table->boolean('agreedTC')->nullable();
             $table->dateTime('agreedTC_at')->nullable();
             $table->rememberToken();

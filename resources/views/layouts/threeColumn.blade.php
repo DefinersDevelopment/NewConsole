@@ -36,11 +36,16 @@
 						</div>
 					</div>
 					<div id="notifier">
-						
 					</div>
-					<div class="circle">
-                    	<i class="fas fa-caret-up"></i>
-                    </div>
+					<div class="circle showPostCreateFormClick" title="Create Post">
+						<i class="fas fa-plus"></i>
+					</div>
+					{{--<div class="circle">--}}
+						{{--<i class="fas fa-caret-up"></i>--}}
+					{{--</div>--}}
+					{{--<div class="circle">--}}
+                    	{{--<i class="fas fa-caret-up"></i>--}}
+                    {{--</div>--}}
 				</div>
 			</section>
 

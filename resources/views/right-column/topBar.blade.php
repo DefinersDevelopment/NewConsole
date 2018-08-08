@@ -7,22 +7,26 @@
         <span class="button nextClick" title="Next Entry">
             <i class="fas fa-step-forward"></i>
         </span>
+        <button class="licensePostClick button far fa-copy" title="Copy Post">License & Copy</button>
     </div>
     <div class="right">
         {{--TODO: style button--}}
-        <button class="licensePostClick button far fa-copy" title="Copy Post">License & Copy</button>
-        <span class="button formSaveClick" title="Save">
-            <i class="fas fa-save"></i>
+
+        <span class="button showPostCreateFormClick" title="Create">
+            <i class="fas fa-plus"></i>
         </span>
-        <span class="button editPostClick" title="Edit">
+        <span class="button editPostClick" title="Edit" style="display:none;">
             <i class="fas fa-edit"></i>
         </span>
-        <span class="button" title="Increase Font Size">
-            <i class="fas fa-search-plus"></i>
+        <span class="button formSaveClick" title="Save" style="display:none;">
+            <i class="fas fa-save"></i>
         </span>
-        <span class="button" title="Decrease Font Size">
-            <i class="fas fa-search-minus"></i>
-        </span>
+        {{--<span class="button" title="Increase Font Size">--}}
+            {{--<i class="fas fa-search-plus"></i>--}}
+        {{--</span>--}}
+        {{--<span class="button" title="Decrease Font Size">--}}
+            {{--<i class="fas fa-search-minus"></i>--}}
+        {{--</span>--}}
     </div>
     <div id="scrollBar">
         <div id="color"></div>
