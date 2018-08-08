@@ -108,6 +108,10 @@ function addUnreadsByCatClick() {
 
 // Function that is run when a category is clicked
 function categoryClick() {
+    $(".postNavigation").hide();
+    $(".editPostClick").hide();
+    $(".formSaveClick").hide();
+    $(".showPostCreateFormClick").show();
     data = new Object;
     setCatActive(this);
     //console.log("my object: %o", this);
@@ -121,6 +125,10 @@ function categoryClick() {
 // Function that is run when a post is clicked in middle col
 // to populate the right area
 function viewPostClick() {
+    $(".postNavigation").show();
+    $(".editPostClick").show();
+    $(".formSaveClick").hide();
+    $(".showPostCreateFormClick").hide();
     data = new Object;
     postId = this.getAttribute('postId');
     setEntryActive(this);
@@ -216,6 +224,10 @@ function prevClick() {
 }
 
 function showPostCreateFormClick() {
+    $(".postNavigation").hide();
+    $(".formSaveClick").show();
+    $(".editPostClick").hide();
+    $(".showPostCreateFormClick").hide();
     logIt('show form clicked');
     data = new Object;
     endPoint = '/admin/showForm/article';
@@ -237,6 +249,10 @@ function formSaveClick() {
 }
 
 function editPostClick() {
+    $(".postNavigation").hide();
+    $(".formSaveClick").show();
+    $(".editPostClick").hide();
+    $(".showPostCreateFormClick").hide();
     logIt('edit post click');
     setEntryActive(this);
     // TODO, make this dynamic not hard coded form
@@ -297,6 +313,7 @@ function searchClick(e) {
 
 function licensePostClick(e) {
     logIt('copy content click');
+    $("#contentWrapper").removeClass("preventCopy");
     $postId = getCurrentPostId();
     if ($postId) {
         data = new Object;
@@ -321,6 +338,7 @@ function licensePostClick(e) {
     } else {
         logIt('license has no postId');
     }
+    $("#contentWrapper").addClass("preventCopy");
 }
 
 function deletePostClick() {

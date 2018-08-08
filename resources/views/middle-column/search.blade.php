@@ -9,7 +9,7 @@
                                         <i class="fas fa-question"></i>
                                     </div>
                                     <div class="btn yellow showPostCreateFormClick" title="Close Search">
-                                        <i class="fas fa-chevron-circle-left"></i>
+                                        <i class="fas fa-plus"></i>
                                     </div>
                                 </div>
                                 <div class="bottom">

@@ -26,6 +26,7 @@ class users_table_seeder extends Seeder
             'email' => 'bbrown@definerscorp.com',
             'token' => '12345',
             'status' => 'A',
+            'level' => 1,
             'password' => bcrypt('password'),
         ]);
 
@@ -41,6 +42,7 @@ class users_table_seeder extends Seeder
             'email' => 'wroberts@definerscorp.com',
             'token' => '12346',
             'status' => 'A',
+            'level' => 1,
             'password' => bcrypt('password'),
         ]);
 
@@ -56,6 +58,23 @@ class users_table_seeder extends Seeder
             'email' => 'jfowler@definerscorp.com',
             'token' => '12347',
             'status' => 'A',
+            'level' => 1,
+            'password' => bcrypt('password'),
+        ]);
+
+        DB::table('users')->insert([
+            'id'=> 4,
+            'first_name' => 'test',
+            'last_name' => 'client',
+            'title' => 'test client title',
+            'company' => 'awesome paper',
+            'city' => 'Whalla Whalla',
+            'state' => 'washington',
+            'phone' => '999-555-5555',
+            'email' => 'robertswes@gmail.com',
+            'token' => '12348',
+            'status' => 'A',
+            'level' => 0,
             'password' => bcrypt('password'),
         ]);
         //
