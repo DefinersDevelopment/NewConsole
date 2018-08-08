@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+
 use Auth;
 
 class MasterController extends Controller
@@ -362,6 +364,9 @@ TESTEING!
         if($user->getAttribute('id') == $request->input('user_id')) {
             //bail out, no user found or more than one user found...
             $user->setAttribute('password', Hash::make($request->input('password')));
+            $user->agreedTC = 1;
+            $user->agreedTC_at = Carbon::now();
+            $user->token = '';
             $user->save();
             $stop = "here";
         } else {
