@@ -5,12 +5,12 @@
                                     <div class="btn search searchClick" title="Search">
                                         <i class="fas fa-search"></i>
                                     </div>
-                                    <div class="btn" title="Keyword Search Assistant">
+                                    <div class="btn" title="Keyword Search Assistant" style="display: none;">
                                         <i class="fas fa-question"></i>
                                     </div>
                                 </div>
                                 <div class="bottom">
-                                    <div class="left" id="openAdvancedSearch" title="Open Advanced Search">
+                                    <div class="left" id="openAdvancedSearch" title="Open Advanced Search" style="display: none;">
                                         <i class="fas advanced fa-chevron-circle-down"></i><span>Advanced Search</span>
                                     </div>
                                     <div class="right">
