@@ -53,7 +53,7 @@ makes a post object, fills it, saves it, save category relations
         $returnVal = new \stdClass;
 
     	$inputs = ($r->input('formData'));
-    	$data;
+    	$data = array();
     	$cats = []; // empty but set.
         
     	// parse data from ajax call,
@@ -182,10 +182,11 @@ do we want to wrap the entire create in transaction and roll back if unreads fai
     	$errors['topMessage'] = 'Post Created/Updated as Post ID ' . $post->id;
     	LogIt('Post Created as Post ID ' . $post->id, 'end');
     	$returnVal->error = 0;
-        $returnVal->message = 'POST $post->id was Created/Updated successfully.';
-    	$returnVal->data = View::make('forms.article',['post'=>$post,
+        $returnVal->message = "POST $post->id was Created/Updated successfully.";
+        $returnVal->postId = $post->id;
+        //TODO: change to view post rather than form.
+    	$returnVal->data = View::make('right-column.mainContent',['post'=>$post,
     		'theErrors'=>$errors, 'postCats'=>$cats, 'allCats'=>$allCats])->render();
-    	//$returnVal->data = print_r($data,TRUE);
     	return json_encode($returnVal);
 	
     }

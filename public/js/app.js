@@ -238,7 +238,6 @@ function showPostCreateFormClick() {
 }
 
 function formSaveClick() {
-    debugger;
     logIt('form save click ');
     //dump(this);
     // TODO, make this dynamic not hard coded form
@@ -504,11 +503,10 @@ function makeAjaxCall(endPoint, method, data, successFunc) {
 
         },
         success: function (response) {
-            debugger;
+
             // TODO check error code here!
             temp = JSON.parse(response);
             //logIt(temp.data);
-
             if (temp.error > 0) {
                 // TODO handle this better
                 logIt('we got a graceful error from the system');
@@ -516,9 +514,24 @@ function makeAjaxCall(endPoint, method, data, successFunc) {
                     logIt(temp.message);
                 }
             }
-            //logIt(temp.data);
 
             successFunc(temp);
+            if(temp.postId > 0) {
+                //set and show success message
+                $(".actionMessage").html(temp.message);
+                $("#notificationSlider").show();
+
+                //set default admin buttons
+                $(".postNavigation").show();
+                $(".editPostClick").hide();
+                $(".formSaveClick").hide();
+                $(".showPostCreateFormClick").show();
+                //set timeout to hide message
+                setTimeout(function(){
+                    $("#notificationSlider").hide();
+                    $(".actionMessage").html('');
+                }, 5000);
+            }
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log("Ajax Error");

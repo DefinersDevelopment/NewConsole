@@ -8,9 +8,6 @@
                                     <div class="btn" title="Keyword Search Assistant">
                                         <i class="fas fa-question"></i>
                                     </div>
-                                    <div class="btn yellow showPostCreateFormClick" title="Close Search">
-                                        <i class="fas fa-plus"></i>
-                                    </div>
                                 </div>
                                 <div class="bottom">
                                     <div class="left" id="openAdvancedSearch" title="Open Advanced Search">

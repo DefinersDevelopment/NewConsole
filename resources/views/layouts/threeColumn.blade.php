@@ -30,16 +30,14 @@
 <section id="rightColumn">
 	@include('right-column.topBar')
 	<div id="mainContent">
+		<div id="notificationSlider" style="display: none; position: absolute;">{{--right: -400px;--}}
+			<div class="actionMessage">TEST Message</div>
+		</div>
 		<div id="content" class="view">
 			<div id="contentWrapper" class="preventCopy">
 				@include('right-column.mainContent')
 			</div>
 		</div>
-		<div id="notifier">
-		</div>
-		{{--<div class="circle showPostCreateFormClick" title="Create Post">--}}
-			{{--<i class="fas fa-plus"></i>--}}
-		{{--</div>--}}
 		<div class="circle">
 			<i class="fas fa-caret-up"></i>
 		</div>
