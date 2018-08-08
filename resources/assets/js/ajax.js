@@ -296,7 +296,9 @@ function searchClick(e) {
 }
 
 function licensePostClick(e) {
+    debugger;
     logIt('copy content click');
+    $("#contentWrapper").removeClass("preventCopy");
     $postId = getCurrentPostId();
     if ($postId) {
         data = new Object;
@@ -321,6 +323,7 @@ function licensePostClick(e) {
     } else {
         logIt('license has no postId');
     }
+    $("#contentWrapper").addClass("preventCopy");
 }
 
 function deletePostClick() {
