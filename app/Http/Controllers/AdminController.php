@@ -22,10 +22,11 @@ class AdminController extends Controller
     	switch ($formType) {
 	    
 		    case 'article':
-		    	$allCats = Category::getAllCategories();
+                $user_id = Auth::id();
+                $userCats = Category::getAllCategoriesByUser($user_id);
 		    	$returnVal = new \stdClass;
     			$returnVal->error = 0;
-    			$returnVal->data = View::make('forms.article', ['allCats'=>$allCats, 'bentest'=>'testing'])->render();
+    			$returnVal->data = View::make('forms.article', ['userCats'=>$userCats, 'bentest'=>'testing'])->render();
     			return json_encode($returnVal);
 		        break;
 		}
@@ -247,7 +248,7 @@ do we want to wrap the entire create in transaction and roll back if unreads fai
         $userCats = Category::getAllCategoriesByUser($user_id);
         $returnVal->error = 0;
         $returnVal->postId = $postId;
-        $returnVal->data = View::make('forms.article', ['post' => $post, 'allCats' => $userCats, 'postCats' => $postCats])->render();
+        $returnVal->data = View::make('forms.article', ['post' => $post, 'userCats' => $userCats, 'postCats' => $postCats])->render();
 
         return json_encode($returnVal);
     }

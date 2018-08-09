@@ -40,8 +40,8 @@
     @if (!isset($postCats))
         <?php $postCats = []; ?>
     @endif
-    @if (isset($allCats))
-        @foreach ($allCats as $cat)
+    @if (isset($userCats))
+        @foreach ($userCats as $cat)
             <?php
             $children = $cat->getChildren();
             ?>
