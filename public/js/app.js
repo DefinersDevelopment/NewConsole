@@ -128,12 +128,12 @@ function viewPostClick() {
     $(".postNavigation").show();
     $(".editPostClick").show();
     $(".formSaveClick").hide();
-    $(".showPostCreateFormClick").hide();
+    $(".showPostCreateFormClick").show();
     data = new Object;
     postId = this.getAttribute('postId');
     setEntryActive(this);
     endPoint = '/a/getPost/' + postId;
-    logIt("this is endpoint " + endPoint)
+    logIt("this is endpoint " + endPoint);
     makeAjaxCall(endPoint, 'GET', data, loadRightHTML);
     setCurrentPostId(postId); // load right does this too;
     setContext('viewPost');
@@ -516,16 +516,17 @@ function makeAjaxCall(endPoint, method, data, successFunc) {
             }
 
             successFunc(temp);
-            if(temp.postId > 0) {
+            if(temp.postId > 0 && temp.savedPost) {
                 //set and show success message
                 $(".actionMessage").html(temp.message);
                 $("#notificationSlider").show();
-
+debugger;
                 //set default admin buttons
                 $(".postNavigation").show();
-                $(".editPostClick").hide();
-                $(".formSaveClick").hide();
+                $(".editPostClick").show();
                 $(".showPostCreateFormClick").show();
+                $(".formSaveClick").hide();
+
                 //set timeout to hide message
                 setTimeout(function(){
                     $("#notificationSlider").hide();

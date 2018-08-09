@@ -1,5 +1,3 @@
-
-
 <div id="topBar">
     <div class="left">
         <div class="postNavigation" style="display: none;">
@@ -16,25 +14,23 @@
     <div class="right">
         {{--TODO: style button--}}
 <?php $level = Auth::user()->level; ?>
-        @if($level > 0)
-        <div class="adminControls">
-            <span class="button showPostCreateFormClick" title="Create">
-                <i class="fas fa-plus"></i>
-            </span>
-            <span class="button editPostClick" title="Edit" style="display:none;">
-                <i class="fas fa-edit"></i>
-            </span>
-            <span class="button formSaveClick" title="Save" style="display:none;">
-                <i class="fas fa-save"></i>
-            </span>
-            {{--<span class="button" title="Increase Font Size">--}}
-                {{--<i class="fas fa-search-plus"></i>--}}
-            {{--</span>--}}
-            {{--<span class="button" title="Decrease Font Size">--}}
-                {{--<i class="fas fa-search-minus"></i>--}}
-            {{--</span>--}}
-        </div>
-        @endif
+    @if($level > 0)
+        <span class="button showPostCreateFormClick" title="Create">
+            <i class="fas fa-plus"></i>
+        </span>
+        <span class="button editPostClick" title="Edit" style="display:none;">
+            <i class="fas fa-edit"></i>
+        </span>
+        <span class="button formSaveClick" title="Save" style="display:none;">
+            <i class="fas fa-save"></i>
+        </span>
+    @endif
+        {{--<span class="button" title="Increase Font Size">--}}
+        {{--<i class="fas fa-search-plus"></i>--}}
+        {{--</span>--}}
+        {{--<span class="button" title="Decrease Font Size">--}}
+        {{--<i class="fas fa-search-minus"></i>--}}
+        {{--</span>--}}
     </div>
     <div id="scrollBar">
         <div id="color"></div>

@@ -31,55 +31,51 @@
 
 	<div class="inputContainer">
 		<label for="article">Article</label>
-		<textarea name='body' rows='20' cols='75'>{{$post->body or ""}}</textarea> 
+		<textarea name='body' rows='20' cols='75'>{{$post->body or ""}}</textarea>
 	</div>
 	<div class="inputContainer">
 		<div class='formError'>{{$theErrors['category'] or ""}}</div>
 	</div>
 	<h2 for="category">Categories:</h2>
-		@if (!isset($postCats))
-			<?php $postCats = []; ?>
-		@endif
-
-		@if (isset($allCats))
-			@foreach ($allCats as $cat)
-				@if ($cat->postable == 1)
-				<h3>{{ $cat->name }}</h3>
-				<div class="columns">
-					<div class="inputContainer">
-						<label>
-							<input type='checkbox' name='category' value='{{$cat->id}}' @if (in_array($cat->id,$postCats)) CHECKED @endif>
-							<span>{{$cat->name}}</span>
-						</label>
-					</div>
-				</div>
-				@else
-					<h3>{{ $cat->name }}</h3>
-				@endif 
-					<?php 
-					$children = $cat->getChildren(); 
-					?>
-					@if(isset($children) && $cat->postable != 1)
-						<div class="columns">
-						@foreach($children as $child)
-							
-							<div class="inputContainer">
-								<label>
-							@if ($child->postable == 1)
-									<input type='checkbox' name='category' value='{{$child->id}}' @if (in_array($child->id,$postCats)) CHECKED @endif>
-							@else
-								--
-							@endif 
-									<span>{{ $child->name }}</span>
-								</label>
-							</div>
-						@endforeach
-						</div>
-					@endif
-			@endforeach
-		@endif
-
-	<div>
-	
-	</div>
+    @if (!isset($postCats))
+        <?php $postCats = []; ?>
+    @endif
+    @if (isset($allCats))
+        @foreach ($allCats as $cat)
+            <?php
+            $children = $cat->getChildren();
+            ?>
+            @if ($cat->postable == 1)
+            <h3>{{ $cat->name }}</h3>
+            <div class="columns">
+                <div class="inputContainer">
+                    <label>
+                        <input type='checkbox' name='category' value='{{$cat->id}}' @if (in_array($cat->id,$postCats)) CHECKED @endif>
+                        <span>{{$cat->name}}</span>
+                    </label>
+                </div>
+            </div>
+            @else
+                @if (count($children) > 0)
+                <h3>{{ $cat->name }}</h3>
+                @endif
+            @endif
+            @if(isset($children) && $cat->postable != 1)
+                <div class="columns">
+                @foreach($children as $child)
+                    <div class="inputContainer">
+                        <label>
+                        @if ($child->postable == 1)
+                            <input type='checkbox' name='category' value='{{$child->id}}' @if (in_array($child->id,$postCats)) CHECKED @endif>
+                        @else
+                        --
+                        @endif
+                            <span>{{ $child->name }}</span>
+                        </label>
+                    </div>
+                @endforeach
+                </div>
+            @endif
+        @endforeach
+    @endif
 </form>

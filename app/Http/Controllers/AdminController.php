@@ -74,7 +74,7 @@ makes a post object, fills it, saves it, save category relations
         $isUpdate = FALSE;
     	// If this is an update, get the old post
     	if (isset($data['id']) && $data['id'] != ''){
-    		$post = Post::find($data['id']);
+    		$post = Post::getPost($data['id']);
             $isUpdate = TRUE;
     	} else { // or create a new one.
     		$post = new Post;	
@@ -184,6 +184,7 @@ do we want to wrap the entire create in transaction and roll back if unreads fai
     	$returnVal->error = 0;
         $returnVal->message = "POST $post->id was Created/Updated successfully.";
         $returnVal->postId = $post->id;
+        $returnVal->savedPost = 1;
         //TODO: change to view post rather than form.
     	$returnVal->data = View::make('right-column.mainContent',['post'=>$post,
     		'theErrors'=>$errors, 'postCats'=>$cats, 'allCats'=>$allCats])->render();
@@ -228,22 +229,27 @@ do we want to wrap the entire create in transaction and roll back if unreads fai
         return json_encode($returnVal);
     }
 
-    function editPost($postId){
+    /**
+     * @param $postId
+     * @return string
+     */
+    function editPost($postId)
+    {
+        $returnVal = new \stdClass;
+        $post = Post::with('category')->find($postId);
+        $postCats = [];
 
-    	$returnVal = new \stdClass;
-    	$post = Post::with('category')->find($postId);
-    	$postCats = [];
-    	foreach ($post->category as $cat){
-    		$postCats[] = $cat->id;
-    	}
-    	//LogIt('cats from post ' . print_r($post->category,TRUE));
-    	$allCats = Category::getAllCategories();  // display
-    	$returnVal->error = 0;
+        foreach ($post->category as $cat) {
+            $postCats[] = $cat->id;
+        }
+
+        $user_id = Auth::id();
+        $userCats = Category::getAllCategoriesByUser($user_id);
+        $returnVal->error = 0;
         $returnVal->postId = $postId;
-    	$returnVal->data = View::make('forms.article',['post'=>$post, 'allCats'=>$allCats, 'postCats'=>$postCats])->render();
+        $returnVal->data = View::make('forms.article', ['post' => $post, 'allCats' => $userCats, 'postCats' => $postCats])->render();
 
-    	return json_encode($returnVal);
-
+        return json_encode($returnVal);
     }
 /**************
 The way we track the viewing of our articles

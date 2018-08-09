@@ -8,8 +8,6 @@ use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Hash;
-use Carbon\Carbon;
-
 use Auth;
 
 class MasterController extends Controller
@@ -359,16 +357,11 @@ TESTEING!
             'password' => 'required|confirmed|min:6|max:16',
         ]);
 
-        // get this user
         $user = User::find($request->input('user_id'));
         if($user->getAttribute('id') == $request->input('user_id')) {
             //bail out, no user found or more than one user found...
             $user->setAttribute('password', Hash::make($request->input('password')));
-            $user->agreedTC = 1;
-            $user->agreedTC_at = Carbon::now();
-            $user->token = '';
             $user->save();
-            $stop = "here";
         } else {
             //TODO: Fail gracefully if something went wrong...
             return false;
@@ -377,5 +370,9 @@ TESTEING!
         return redirect('/login');
 
     }
+
+
+    //showPost
+    //Post::with('category')->where('id',$post_id)->get();
  
 }
