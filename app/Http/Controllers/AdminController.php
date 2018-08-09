@@ -99,13 +99,13 @@ makes a post object, fills it, saves it, save category relations
     	***/
     	// returns a "tree" of categories, parents on top
     	// each parent contains their children
-    	$allCats = Category::getAllCategories();
+    	$userCats = Category::getAllCategoriesByUser(Auth::user()->id);
     	
     	if (isset($errors) && count($errors) > 0){
     		$returnVal->error = 1;
             $returnVal->message = 'There were errors during submission.';
     		$returnVal->data = View::make('forms.article',['post'=>$post,'theErrors'=>$errors, 
-    			'postCats'=>$cats, 'allCats'=>$allCats])->render();
+    			'postCats'=>$cats, 'userCats'=>$userCats])->render();
     		return json_encode($returnVal);
     	}
 
