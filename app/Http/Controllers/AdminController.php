@@ -156,7 +156,7 @@ do we want to wrap the entire create in transaction and roll back if unreads fai
             $returnVal->error = 1;
             $returnVal->message = 'There were errors during submission.';
     		$returnVal->data = View::make('forms.article',['post'=>$post,
-    			'theErrors'=>$errors, 'postCats'=>$cats, 'allCats'=>$allCats])->render();
+    			'theErrors'=>$errors, 'postCats'=>$cats, 'userCats'=>$userCats])->render();
     		return json_encode($returnVal);
         }
         catch(\Exception $e)
@@ -170,7 +170,7 @@ do we want to wrap the entire create in transaction and roll back if unreads fai
             $returnVal->error = 1;
             $returnVal->message = 'There were errors during submission.';
     		$returnVal->data = View::make('forms.article',['post'=>$post,
-    			'theErrors'=>$errors, 'postCats'=>$cats, 'allCats'=>$allCats])->render();
+    			'theErrors'=>$errors, 'postCats'=>$cats, 'userCats'=>$userCats])->render();
     		return json_encode($returnVal);
         }
 
@@ -188,7 +188,7 @@ do we want to wrap the entire create in transaction and roll back if unreads fai
         $returnVal->savedPost = 1;
         //TODO: change to view post rather than form.
     	$returnVal->data = View::make('right-column.mainContent',['post'=>$post,
-    		'theErrors'=>$errors, 'postCats'=>$cats, 'allCats'=>$allCats])->render();
+    		'theErrors'=>$errors, 'postCats'=>$cats, 'userCats'=>$userCats])->render();
     	return json_encode($returnVal);
 	
     }
