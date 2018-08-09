@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use App\Helpers\Logging;
 use DB;
 
+/**
+ * Class Category
+ * @package App\Models
+ */
 class Category extends Model
 {
     //
@@ -38,7 +42,7 @@ the left Nav.
 
         foreach ($parentArray as $parent){
             LogIt('loop');
-            $parent->loadChildrenByUser($user_id); 
+            $parent->loadChildrenByUser($user_id);
         }
 
         return $parentArray;

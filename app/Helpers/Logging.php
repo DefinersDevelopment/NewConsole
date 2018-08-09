@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * @param $message
+ * @param string $status
+ * @param string $level
+ */
 function LogIt($message, $status = '', $level = 'debug')
 {
 	$pid = getmypid();

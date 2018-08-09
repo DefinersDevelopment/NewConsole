@@ -520,9 +520,8 @@ function makeAjaxCall(endPoint, method, data, successFunc) {
                 //set and show success message
                 $(".actionMessage").html(temp.message);
                 $("#notificationSlider").show();
-debugger;
                 //set default admin buttons
-                $(".postNavigation").show();
+                $(".postNavigation").hide();
                 $(".editPostClick").show();
                 $(".showPostCreateFormClick").show();
                 $(".formSaveClick").hide();

@@ -7,6 +7,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use DB;
 use App\Helpers\Logging;
 
+/**
+ * Class User
+ * @package App\Models
+ */
 class User extends Authenticatable
 {
     use Notifiable;
@@ -158,6 +162,11 @@ category
         }
         //LogIt('these are the users that have thiis cat ' . print_r($returnUsers, TRUE));
         return $returnUsers;
+    }
+
+    public static function getAllowedCategories($user_id)
+    {
+        $stop = "here";
     }
 
 }

@@ -13,6 +13,10 @@ use App\Models\TidTracking;
 use Auth;
 //use DB;
 
+/**
+ * Class AdminController
+ * @package App\Http\Controllers
+ */
 class AdminController extends Controller
 {
 

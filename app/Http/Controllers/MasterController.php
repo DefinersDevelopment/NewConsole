@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 
+/**
+ * Class MasterController
+ * @package App\Http\Controllers
+ */
 class MasterController extends Controller
 {
     public function index() {

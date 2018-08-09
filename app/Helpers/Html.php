@@ -1,6 +1,11 @@
 <?php
 // String Limiter by word
 define("STRING_DELIMITER", " ");
+/**
+ * @param $str
+ * @param $limit
+ * @return string
+ */
 function word_limiter($str, $limit) {
     $str = strip_tags($str); // Updated from Ivan Dimov
     if (stripos($str, STRING_DELIMITER)) {

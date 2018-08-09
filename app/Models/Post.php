@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use DB;
 use App\Helpers\Logging;
 
+/**
+ * Class Post
+ * @package App\Models
+ */
 class Post extends Model
 {
     //
